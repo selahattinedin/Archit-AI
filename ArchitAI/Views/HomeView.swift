@@ -3,8 +3,11 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var viewModel: HomeViewModel
     @EnvironmentObject var authService: FirebaseAuthService
+    @EnvironmentObject var purchases: RevenueCatService
     @State private var selectedTab = 0
     @State private var showSettings = false
+    @State private var showPaywall = false
+    @State private var scrollOffset: CGFloat = 0
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -12,7 +15,9 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 VStack(spacing: 20) {
                     HStack {
-                        ProBadgeView()
+                        Button(action: { showPaywall = true }) {
+                            ProBadgeView()
+                        }
                         
                         Spacer()
                         
@@ -26,7 +31,7 @@ struct HomeView: View {
                     }
                     .padding(.top, 16)
                 }
-                .background(Constants.Colors.cardBackground)
+                .background(Constants.Colors.cardBackground.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                 .padding(.horizontal, 20)
                 
@@ -38,7 +43,11 @@ struct HomeView: View {
                             beforeImage: "old_room",
                             afterImage: "new_room"
                         ) {
-                            viewModel.isShowingPhotoUpload = true
+                            if purchases.isPro {
+                                viewModel.isShowingPhotoUpload = true
+                            } else {
+                                showPaywall = true
+                            }
                         }
                         
                         DesignOptionCard(
@@ -47,7 +56,11 @@ struct HomeView: View {
                             beforeImage: "old_bedroom",
                             afterImage: "new_bedroom"
                         ) {
-                            viewModel.isShowingPhotoUpload = true
+                            if purchases.isPro {
+                                viewModel.isShowingPhotoUpload = true
+                            } else {
+                                showPaywall = true
+                            }
                         }
                         
                         DesignOptionCard(
@@ -56,7 +69,11 @@ struct HomeView: View {
                             beforeImage: "old_balcony",
                             afterImage: "new_balcony"
                         ) {
-                            viewModel.isShowingPhotoUpload = true
+                            if purchases.isPro {
+                                viewModel.isShowingPhotoUpload = true
+                            } else {
+                                showPaywall = true
+                            }
                         }
                         
                         DesignOptionCard(
@@ -65,7 +82,11 @@ struct HomeView: View {
                             beforeImage: "old_garden",
                             afterImage: "new_garden"
                         ) {
-                            viewModel.isShowingPhotoUpload = true
+                            if purchases.isPro {
+                                viewModel.isShowingPhotoUpload = true
+                            } else {
+                                showPaywall = true
+                            }
                         }
                         
                         DesignOptionCard(
@@ -74,7 +95,11 @@ struct HomeView: View {
                             beforeImage: "old_bathroom",
                             afterImage: "new_bathroom"
                         ) {
-                            viewModel.isShowingPhotoUpload = true
+                            if purchases.isPro {
+                                viewModel.isShowingPhotoUpload = true
+                            } else {
+                                showPaywall = true
+                            }
                         }
                         
                         Rectangle()
@@ -96,6 +121,12 @@ struct HomeView: View {
                 )
             )
             .navigationBarHidden(true)
+        }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(purchasesService: purchases)
+                .onDisappear {
+                    print("🟠 HomeView: Paywall disappeared, showPaywall: \(showPaywall)")
+                }
         }
         .fullScreenCover(isPresented: $showSettings) {
             SettingsView()

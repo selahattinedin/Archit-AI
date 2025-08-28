@@ -5,11 +5,13 @@ struct CreateView: View {
     @ObservedObject var viewModel: CreateDesignViewModel
     @EnvironmentObject var authService: FirebaseAuthService
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var purchases: RevenueCatService
     @State private var currentStep = 0
     @State private var scrollOffset: CGFloat = 0
     @State private var isLoading = false
     @State private var showResult = false
     @State private var generatedDesign: Design?
+    @State private var showPaywall = false
     @Binding var tabBarHidden: Bool
     @Environment(\.colorScheme) var colorScheme
     
@@ -122,7 +124,16 @@ struct CreateView: View {
             }
             .background(colorScheme == .dark ? Color.black : Color.white)
         }
+        .fullScreenCover(isPresented: $showPaywall) {
+            PaywallView(purchasesService: purchases)
+        }
         .onAppear {
+            // Premium kontrolü - abone değilse Paywall göster
+            if !purchases.isPro {
+                showPaywall = true
+                return
+            }
+            
             // Firebase user ID'yi CreateDesignViewModel'e set et
             viewModel.currentUserID = authService.currentUserId
         }

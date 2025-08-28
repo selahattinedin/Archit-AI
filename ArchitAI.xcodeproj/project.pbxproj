@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3012807F2E4DF967005614AE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3012807E2E4DF967005614AE /* Lottie */; };
+		305B10A02E609FCD00C0F9C7 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 305B109F2E609FCD00C0F9C7 /* RevenueCat */; };
+		305B10A22E609FCD00C0F9C7 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 305B10A12E609FCD00C0F9C7 /* RevenueCatUI */; };
 		30BAA0D72E4FA4DB003A8C93 /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 30BAA0D62E4FA4DB003A8C93 /* FirebaseAI */; };
 		30BAA0D92E4FA4DB003A8C93 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 30BAA0D82E4FA4DB003A8C93 /* FirebaseAnalytics */; };
 		30BAA0DB2E4FA4DB003A8C93 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 30BAA0DA2E4FA4DB003A8C93 /* FirebaseAnalyticsCore */; };
@@ -57,12 +59,14 @@
 				3012807F2E4DF967005614AE /* Lottie in Frameworks */,
 				30BAA0DD2E4FA4DB003A8C93 /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				30BAA0F52E4FA4DB003A8C93 /* FirebaseInAppMessaging-Beta in Frameworks */,
+				305B10A02E609FCD00C0F9C7 /* RevenueCat in Frameworks */,
 				30BAA0D72E4FA4DB003A8C93 /* FirebaseAI in Frameworks */,
 				30BAA0E92E4FA4DB003A8C93 /* FirebaseCrashlytics in Frameworks */,
 				30BAA0F32E4FA4DB003A8C93 /* FirebaseFunctionsCombine-Community in Frameworks */,
 				30BAA1032E4FA4DB003A8C93 /* FirebaseStorageCombine-Community in Frameworks */,
 				30BAA0EB2E4FA4DB003A8C93 /* FirebaseDatabase in Frameworks */,
 				30BAA1012E4FA4DB003A8C93 /* FirebaseStorage in Frameworks */,
+				305B10A22E609FCD00C0F9C7 /* RevenueCatUI in Frameworks */,
 				30BAA0FF2E4FA4DB003A8C93 /* FirebaseRemoteConfig in Frameworks */,
 				30BAA0D92E4FA4DB003A8C93 /* FirebaseAnalytics in Frameworks */,
 				30BAA0FB2E4FA4DB003A8C93 /* FirebaseMessaging in Frameworks */,
@@ -140,6 +144,8 @@
 				30BAA0FE2E4FA4DB003A8C93 /* FirebaseRemoteConfig */,
 				30BAA1002E4FA4DB003A8C93 /* FirebaseStorage */,
 				30BAA1022E4FA4DB003A8C93 /* FirebaseStorageCombine-Community */,
+				305B109F2E609FCD00C0F9C7 /* RevenueCat */,
+				305B10A12E609FCD00C0F9C7 /* RevenueCatUI */,
 			);
 			productName = HomeDesignAI;
 			productReference = 3097589C2E49D7F200429B8E /* ArchitAI.app */;
@@ -172,6 +178,7 @@
 			packageReferences = (
 				3012807D2E4DF967005614AE /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				30BAA0D52E4FA4DB003A8C93 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				305B109E2E609FCD00C0F9C7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3097589D2E49D7F200429B8E /* Products */;
@@ -417,6 +424,14 @@
 				minimumVersion = 4.5.2;
 			};
 		};
+		305B109E2E609FCD00C0F9C7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.36.0;
+			};
+		};
 		30BAA0D52E4FA4DB003A8C93 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -432,6 +447,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3012807D2E4DF967005614AE /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		305B109F2E609FCD00C0F9C7 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 305B109E2E609FCD00C0F9C7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		305B10A12E609FCD00C0F9C7 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 305B109E2E609FCD00C0F9C7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
 		};
 		30BAA0D62E4FA4DB003A8C93 /* FirebaseAI */ = {
 			isa = XCSwiftPackageProductDependency;

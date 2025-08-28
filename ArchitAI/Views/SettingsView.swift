@@ -1,13 +1,44 @@
 import SwiftUI
+import RevenueCat
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authService: FirebaseAuthService
+    @EnvironmentObject var purchases: RevenueCatService
     @AppStorage("selectedTheme") private var selectedTheme: Theme = .system
     
     var body: some View {
         NavigationView {
             List {
+                Section {
+                    HStack(spacing: 12) {
+                        ProBadgeView()
+                        Spacer()
+                        Text(purchases.isPro ? "Aktif" : "Pasif")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(purchases.isPro ? .green : .secondary)
+                    }
+                    Button {
+                        // Paywall aç
+                        dismiss()
+                        // Basit yaklaşım: ana tabdan açılmıyorsa, modal sunumu üst seviye view üzerinden yapılmalı.
+                        // Burada doğrudan Settings içerisinden sunuyoruz.
+                    } label: {
+                        NavigationLink(destination: PaywallView(purchasesService: purchases)) {
+                            HStack {
+                                Image(systemName: "crown.fill")
+                                    .foregroundColor(.yellow)
+                                Text("Premium'a Geç")
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Premium")
+                        .textCase(.uppercase)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(.gray)
+                }
+                
                 Section {
                     ForEach([Theme.light, .dark, .system], id: \.self) { theme in
                         Button {
@@ -62,18 +93,6 @@ struct SettingsView: View {
                 
                 Section {
                     if authService.isAuthenticated {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("User ID")
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.primary)
-                                Text(authService.currentUserId ?? "Unknown")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.gray)
-                            }
-                            Spacer()
-                        }
-                        
                         Button {
                             authService.signOut()
                             dismiss()
@@ -85,38 +104,9 @@ struct SettingsView: View {
                                     .foregroundColor(.red)
                             }
                         }
-                        
-                        Button {
-                            // Firebase connection test
-                            Task {
-                                if let userID = authService.currentUserId {
-                                    print("🧪 Firebase Test: UserID - \(userID)")
-                                    print("🧪 Firebase Test: IsAuthenticated - \(authService.isAuthenticated)")
-                                } else {
-                                    print("🧪 Firebase Test: No UserID")
-                                }
-                            }
-                        } label: {
-                            HStack {
-                                Image(systemName: "network")
-                                    .foregroundColor(.blue)
-                                Text("Test Firebase")
-                                    .foregroundColor(.blue)
-                            }
-                        }
-                    } else {
-                        HStack {
-                            Text("Not signed in")
-                                .foregroundColor(.gray)
-                            Spacer()
-                            if authService.isLoading {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                            }
-                        }
                     }
                 } header: {
-                    Text("Authentication")
+                    Text("Account")
                         .textCase(.uppercase)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.gray)
