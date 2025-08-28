@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "20250811_1121_Büyük Pencereli Salon_simple_compose_01k2c3fysfespaw7bcwtn6stmc.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

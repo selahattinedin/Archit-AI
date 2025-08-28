@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "20250811_1110_Krem Oda Güneş Işıltısı_simple_compose_01k2c2se6ye8saxtr13rv8kenc.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

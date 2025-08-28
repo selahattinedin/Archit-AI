@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "20250813_1513_Yenilenmemiş Eski Havuz_remix_01k2hnfw0pe0a9qb40te99dse8.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
