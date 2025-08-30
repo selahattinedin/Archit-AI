@@ -54,7 +54,7 @@ struct PaywallHeroSection: View {
                         Image("old_room")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 400, height: 300)
+                            .frame(width: 380, height: 300) // Genişliği weekly/yearly kartları ile aynı yaptım
                             .clipped()
                             .cornerRadius(24)
                             .overlay(
@@ -81,12 +81,12 @@ struct PaywallHeroSection: View {
                         Image("new_room")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 400, height: 300)
+                            .frame(width: 380, height: 300) // Genişliği weekly/yearly kartları ile aynı yaptım
                             .clipped()
                             .cornerRadius(24)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 24)
-                                    .stroke(Constants.Colors.PremiumOrange.opacity(0.6), lineWidth: 2)
+                                    .stroke(Constants.Colors.PremiumOrange.opacity(0.4), lineWidth: 2)
                             )
                             .overlay(
                                 Text("After")
@@ -104,6 +104,7 @@ struct PaywallHeroSection: View {
                             .animation(.easeInOut(duration: 1.0), value: showAfterDesign)
                             .shadow(color: Constants.Colors.PremiumOrange.opacity(0.4), radius: 20, x: 0, y: 12)
                     }
+                    .padding(.horizontal, 2) // Sağdan ve soldan padding'i çok az yaptım
                     
                     // Kısa Açıklama - Daha şık
                     Text("Transform your space with AI")

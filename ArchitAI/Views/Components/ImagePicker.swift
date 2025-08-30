@@ -4,11 +4,24 @@ import UIKit
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.dismiss) private var dismiss
     let onImagePicked: (UIImage) -> Void
+    let sourceType: UIImagePickerController.SourceType
+    
+    init(sourceType: UIImagePickerController.SourceType = .photoLibrary, onImagePicked: @escaping (UIImage) -> Void) {
+        self.sourceType = sourceType
+        self.onImagePicked = onImagePicked
+    }
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
-        picker.sourceType = .photoLibrary
+        picker.sourceType = sourceType
+        
+        // Kamera için ek ayarlar
+        if sourceType == .camera {
+            picker.cameraCaptureMode = .photo
+            picker.cameraDevice = .rear
+        }
+        
         return picker
     }
     

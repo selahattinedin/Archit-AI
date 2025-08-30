@@ -1,11 +1,10 @@
 import SwiftUI
-import PhotosUI
 
 struct PhotoUploadView: View {
     @Binding var selectedImage: UIImage?
-    @State private var photosPickerItem: PhotosPickerItem?
-    @State private var isShowingPhotoPicker = false
     @State private var isShowingActionSheet = false
+    @State private var isShowingCamera = false
+    @State private var isShowingLibrary = false
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -121,10 +120,10 @@ struct PhotoUploadView: View {
         }
         .confirmationDialog("Choose Photo", isPresented: $isShowingActionSheet) {
             Button("Take Photo") {
-                isShowingPhotoPicker = true
+                isShowingCamera = true
             }
             Button("Choose from Library") {
-                isShowingPhotoPicker = true
+                isShowingLibrary = true
             }
             if selectedImage != nil {
                 Button("Remove Photo", role: .destructive) {
@@ -132,19 +131,14 @@ struct PhotoUploadView: View {
                 }
             }
         }
-        .photosPicker(
-            isPresented: $isShowingPhotoPicker,
-            selection: $photosPickerItem,
-            matching: .images
-        )
-        .onChange(of: photosPickerItem) { newItem in
-            Task {
-                if let data = try? await newItem?.loadTransferable(type: Data.self),
-                   let image = UIImage(data: data) {
-                    await MainActor.run {
-                        selectedImage = image
-                    }
-                }
+        .sheet(isPresented: $isShowingCamera) {
+            ImagePicker(sourceType: .camera) { image in
+                selectedImage = image
+            }
+        }
+        .sheet(isPresented: $isShowingLibrary) {
+            ImagePicker(sourceType: .photoLibrary) { image in
+                selectedImage = image
             }
         }
     }
