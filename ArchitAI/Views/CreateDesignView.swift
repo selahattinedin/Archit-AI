@@ -4,6 +4,7 @@ import PhotosUI
 struct CreateDesignView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = CreateDesignViewModel(onComplete: { _ in })
+    @EnvironmentObject var purchases: RevenueCatService
     
     var body: some View {
         NavigationView {
@@ -41,6 +42,14 @@ struct CreateDesignView: View {
     }
     
     private func generateDesign() {
+        // 🔒 PREMIUM KONTROLÜ - Abonelik almamış kullanıcılar image üretemez
+        guard purchases.isPro else {
+            print("🚫 CreateDesignView: User is not premium, blocking image generation")
+            // Burada paywall gösterebilirsiniz
+            return
+        }
+        
+        print("✅ CreateDesignView: User is premium, proceeding with image generation")
         // Handle design generation
         print("Generating design...")
     }

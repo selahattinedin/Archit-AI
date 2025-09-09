@@ -19,22 +19,14 @@ struct PhotoSelectionStepView: View {
             
             // Fixed Button at bottom
             VStack(spacing: 0) {
-                Button(action: onContinue) {
-                    Text("Next")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(colorScheme == .dark ? .black : .white)
-                        .frame(height: 46)
-                        .frame(maxWidth: .infinity)
-                        .background(selectedPhoto != nil ? (colorScheme == .dark ? Color.white : Color.black) : Color.gray.opacity(0.2))
-                        .clipShape(Capsule())
-                }
-                .buttonStyle(ScaleButtonStyle())
-                .disabled(selectedPhoto == nil)
-                .padding(.horizontal, 40)
-                .padding(.vertical, 12)
-                .padding(.bottom, 8)
+                ContinueButton(
+                    title: "Continue",
+                    isEnabled: selectedPhoto != nil,
+                    action: onContinue
+                )
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
             }
-            .background(Constants.Colors.cardBackground)
         }
     }
 }

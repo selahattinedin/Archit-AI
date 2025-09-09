@@ -29,16 +29,22 @@ struct HomeView: View {
                                 .foregroundColor(Constants.Colors.textPrimary)
                         }
                     }
+                    .overlay(
+                        // Centered title with stylish background between Premium and Settings
+                        Text("archit ai")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                    )
                     .padding(.top, 16)
                 }
-                .background(Constants.Colors.cardBackground.opacity(0.3))
+                .background(.clear)
                 .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                 .padding(.horizontal, 20)
                 
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 25) {
                         DesignOptionCard(
-                            title: "Interior Design",
+                            title: "Room Design",
                             subtitle: "Upload a pic, choose a style, let AI design the room!",
                             beforeImage: "old_room",
                             afterImage: "new_room"
@@ -110,16 +116,7 @@ struct HomeView: View {
                     .padding(.top, 30)
                 }
             }
-            .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Constants.Colors.cardBackground,
-                        colorScheme == .dark ? Color.black : Color.white
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
+            .background(colorScheme == .dark ? Color.black : Color.white)
             .navigationBarHidden(true)
         }
         .fullScreenCover(isPresented: $showPaywall) {

@@ -2,8 +2,8 @@ import SwiftUI
 
 struct StepsProgressView: View {
     let currentStep: Int
-    private let totalSteps = 4
-    private let steps = ["Upload Photo", "Select Room", "Choose Style", "Generate"]
+    private let totalSteps = 3
+    private let steps = ["Upload Photo", "Select Room", "Choose Style"]
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {

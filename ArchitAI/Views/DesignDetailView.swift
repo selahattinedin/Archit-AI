@@ -204,20 +204,16 @@ struct DesignDetailView: View {
                                     Text("Share")
                                         .font(.system(size: 16, weight: .medium))
                                 }
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .foregroundColor(colorScheme == .dark ? .black : .white)
                                 .frame(height: 48)
                                 .frame(maxWidth: .infinity)
-                                .background(colorScheme == .dark ? Color.black : Color.white)
+                                .background(colorScheme == .dark ? Color.white : Color.black)
                                 .cornerRadius(24)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 24)
-                                        .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 1)
-                                )
                             }
                             .disabled(design.afterImage == nil && design.afterImageData == nil && design.afterImageURL == nil)
                             .opacity((design.afterImage != nil || design.afterImageData != nil || design.afterImageURL != nil) ? 1.0 : 0.5)
                             
-                            // SAVE/DELETE Button - Sadece Create'den gelince göster
+                            // SAVE/DELETE Button - Create'den gelince göster
                             if isFromCreate {
                                 if !isDesignSaved {
                                     // Save butonu
@@ -257,9 +253,23 @@ struct DesignDetailView: View {
                                     }
                                 }
                             } else {
-                                // History'den geliyorsa Share butonu zaten yukarıda, burada boş alan
-                                Spacer()
+                                // History'den geliyorsa DELETE butonu göster
+                                Button {
+                                    homeViewModel.removeDesign(design)
+                                    dismiss()
+                                } label: {
+                                    HStack(spacing: 8) {
+                                        Image(systemName: "trash")
+                                            .font(.system(size: 16))
+                                        Text("Delete")
+                                            .font(.system(size: 16, weight: .medium))
+                                    }
+                                    .foregroundColor(.white)
+                                    .frame(height: 48)
                                     .frame(maxWidth: .infinity)
+                                    .background(Color.red)
+                                    .cornerRadius(24)
+                                }
                             }
                         }
                     }

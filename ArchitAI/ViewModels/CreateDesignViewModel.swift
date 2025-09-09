@@ -11,6 +11,7 @@ class CreateDesignViewModel: ObservableObject {
     @Published var isComplete = false
     
     private let aiService = AIDesignService()
+    private let revenueCatService = RevenueCatService.shared
     let onComplete: (Design) -> Void // private kaldırıldı
     
     // Firebase user ID'yi sakla
@@ -18,6 +19,14 @@ class CreateDesignViewModel: ObservableObject {
     
     init(onComplete: @escaping (Design) -> Void) {
         self.onComplete = onComplete
+    }
+    
+    func resetState() {
+        generatedImage = nil
+        generatedDesign = nil
+        isComplete = false
+        error = nil
+        isLoading = false
     }
     
     @MainActor
@@ -28,6 +37,17 @@ class CreateDesignViewModel: ObservableObject {
             print("Missing required information for design")
             return
         }
+        
+        // 🔒 PREMIUM KONTROLÜ - Abonelik almamış kullanıcılar image üretemez
+        guard revenueCatService.isPro else {
+            print("🚫 CreateDesignViewModel: User is not premium, blocking image generation")
+            self.error = NSError(domain: "PremiumRequired", code: 403, userInfo: [
+                NSLocalizedDescriptionKey: "Premium subscription required to generate images. Please subscribe to continue."
+            ])
+            return
+        }
+        
+        print("✅ CreateDesignViewModel: User is premium, proceeding with image generation")
         
         isLoading = true
         error = nil

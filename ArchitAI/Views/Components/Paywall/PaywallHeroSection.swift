@@ -8,26 +8,18 @@ struct PaywallHeroSection: View {
         VStack(spacing: 0) {
             // Before/After Design Animation
             ZStack {
-                // Gradient Background
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 0.05, green: 0.05, blue: 0.1),
-                        Color(red: 0.1, green: 0.05, blue: 0.15),
-                        Color.black
-                    ]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                // Solid black background (no gradient)
+                Color.black
                 
                 // Subtle animated circles
                 Circle()
-                    .fill(Constants.Colors.PremiumOrange.opacity(0.08))
+                    .fill(Constants.Colors.PremiumRed.opacity(0.10))
                     .frame(width: 180, height: 180)
                     .offset(x: isGlowing ? 40 : -40, y: isGlowing ? -20 : 20)
                     .animation(.easeInOut(duration: 6).repeatForever(autoreverses: true), value: isGlowing)
                 
                 Circle()
-                    .fill(Constants.Colors.PremiumOrange.opacity(0.05))
+                    .fill(Constants.Colors.PremiumRed.opacity(0.07))
                     .frame(width: 120, height: 120)
                     .offset(x: isGlowing ? -30 : 30, y: isGlowing ? 40 : -40)
                     .animation(.easeInOut(duration: 8).repeatForever(autoreverses: true), value: isGlowing)
@@ -86,7 +78,7 @@ struct PaywallHeroSection: View {
                             .cornerRadius(24)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 24)
-                                    .stroke(Constants.Colors.PremiumOrange.opacity(0.4), lineWidth: 2)
+                                    .stroke(Constants.Colors.PremiumRed.opacity(0.5), lineWidth: 2)
                             )
                             .overlay(
                                 Text("After")
@@ -94,7 +86,7 @@ struct PaywallHeroSection: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 18)
                                     .padding(.vertical, 10)
-                                    .background(Constants.Colors.PremiumOrange.opacity(0.9))
+                                    .background(Constants.Colors.PremiumRed.opacity(0.95))
                                     .cornerRadius(12)
                                     .padding(16)
                                 , alignment: .topLeading
@@ -102,7 +94,7 @@ struct PaywallHeroSection: View {
                             .opacity(showAfterDesign ? 1 : 0)
                             .scaleEffect(showAfterDesign ? 1.0 : 0.9)
                             .animation(.easeInOut(duration: 1.0), value: showAfterDesign)
-                            .shadow(color: Constants.Colors.PremiumOrange.opacity(0.4), radius: 20, x: 0, y: 12)
+                            .shadow(color: Constants.Colors.PremiumRed.opacity(0.45), radius: 20, x: 0, y: 12)
                     }
                     .padding(.horizontal, 2) // Sağdan ve soldan padding'i çok az yaptım
                     

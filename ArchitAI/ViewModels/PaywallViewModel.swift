@@ -45,9 +45,8 @@ final class PaywallViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        // Pro durumu değiştiğinde paywall'ı kapat
+        // Pro durumu değiştiğinde veya başlangıçta pro ise paywall'ı kapat
         purchasesService.$isPro
-            .dropFirst() // İlk değeri skip et
             .sink { [weak self] isPro in
                 print("🔵 PaywallViewModel: isPro changed to: \(isPro)")
                 if isPro {

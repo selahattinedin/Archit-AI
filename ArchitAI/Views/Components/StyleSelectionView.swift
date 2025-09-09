@@ -27,34 +27,64 @@ private struct StyleCard: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack(spacing: 12) {
-            Image(style.image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 180)
-                .clipped()
-                .cornerRadius(12)
-            
-            VStack(spacing: 4) {
-                Text(style.name)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(isSelected ? (colorScheme == .dark ? .white : .black) : Constants.Colors.textSecondary)
+        ZStack {
+            VStack(spacing: 12) {
+                ZStack {
+                    Image(style.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 180)
+                        .clipped()
+                        .cornerRadius(12)
+                    
+                    // Selection Checkmark
+                    if isSelected {
+                        VStack {
+                            HStack {
+                                Spacer()
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.orange)
+                                        .frame(width: 32, height: 32)
+                                        .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                                    
+                                    Image(systemName: "checkmark")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.top, 12)
+                                .padding(.trailing, 12)
+                            }
+                            Spacer()
+                        }
+                    }
+                }
                 
-                Text(style.description)
-                    .font(.system(size: 13))
-                    .foregroundColor(isSelected ? (colorScheme == .dark ? .white : .black) : Constants.Colors.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
+                VStack(spacing: 4) {
+                    Text(style.name)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
+                    
+                    Text(style.description)
+                        .font(.system(size: 13))
+                        .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                }
+                .padding(.horizontal, 8)
+                .padding(.bottom, 12)
             }
-            .padding(.horizontal, 8)
-            .padding(.bottom, 12)
+            .frame(maxWidth: .infinity)
+            .background(
+                isSelected ? 
+                    Color.orange.opacity(0.1) : 
+                    (colorScheme == .dark ? Constants.Colors.cardBackground : Color.white)
+            )
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isSelected ? Color.orange : Constants.Colors.cardBorder, lineWidth: 1.5)
+            )
         }
-        .frame(maxWidth: .infinity)
-        .background(Constants.Colors.cardBackground)
-        .cornerRadius(12)
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(isSelected ? (colorScheme == .dark ? Color.white : Color.black) : Constants.Colors.cardBorder, lineWidth: 1.5)
-        )
     }
 }

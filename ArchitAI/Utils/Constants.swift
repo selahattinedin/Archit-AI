@@ -2,18 +2,18 @@ import SwiftUI
 
 enum Constants {
     enum API {
-        static let stabilityAPIKey = "sk-GOmbSuJeNRPVZsVpqh8wqmESoWmbtXbED73EnYdWsyRkgH2l"
+        static let stabilityAPIKey = "sk-zQjAxj4nmWXN5y72LIq1meKvEGCkPXrSmvGhc0zYWzDhSqlY"
         static let stabilityBaseURL = "https://api.stability.ai/v1"
         static let defaultEngine = "stable-diffusion-xl-1024-v1-0"
-        static let defaultSteps = 40
-        static let defaultCFGScale = 7.0
+        static let defaultSteps = 25
+        static let defaultCFGScale = 6.5
     }
     
     enum Colors {
         static let cardBackground = Color(uiColor: UIColor { traitCollection in
             return traitCollection.userInterfaceStyle == .dark ? 
                 UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1.0) : // Dark mode
-                UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1.0)   // Light mode
+                UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)   // Light mode
         })
         
         static let cardBorder = Color(uiColor: UIColor { traitCollection in
@@ -41,6 +41,9 @@ enum Constants {
         
         // Premium orange rengi - proBackground ile aynı
         static let PremiumOrange = proBackground
+
+        // Premium red theme for paywall (closer to provided references)
+        static let PremiumRed = Color(red: 0.90, green: 0.12, blue: 0.16)
     }
     
     enum Spacing {

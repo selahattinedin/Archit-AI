@@ -25,76 +25,50 @@ struct CreateView: View {
                     StepsProgressView(currentStep: currentStep)
                         .padding(.top, 10)
                     
-                    Group {
-                        switch currentStep {
-                        case 0:
-                            PhotoSelectionStepView(
-                                selectedPhoto: $viewModel.selectedPhoto,
-                                onContinue: { withAnimation { currentStep = 1 } }
-                            )
-                            
-                        case 1:
-                            RoomSelectionStepView(
-                                selectedRoom: $viewModel.selectedRoom,
-                                rooms: rooms,
-                                onContinue: { withAnimation { currentStep = 2 } }
-                            )
-                            
-                        case 2:
-                            StyleSelectionStepView(
-                                selectedStyle: $viewModel.selectedStyle,
-                                styles: styles,
-                                isLoading: isLoading,
-                                onGenerate: {
-                                    isLoading = true
-                                    Task {
-                                        await viewModel.createDesign()
-                                        if let design = viewModel.generatedDesign {
-                                            generatedDesign = design
-                                            isLoading = false
-                                            showResult = true
-                                        }
-                                    }
-                                },
-                                error: viewModel.error
-                            )
-                            
-                        default:
-                            EmptyView()
-                        }
-                    }
+                    CreateStepsView(
+                        viewModel: viewModel,
+                        currentStep: $currentStep,
+                        isLoading: $isLoading,
+                        showResult: $showResult,
+                        generatedDesign: $generatedDesign,
+                        showPaywall: $showPaywall
+                    )
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Create Design")
                 .navigationBarBackButtonHidden()
-                .navigationBarItems(
-                    leading: Group {
-                        if currentStep > 0 && !showResult && !isLoading {
-                            Button {
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        if (currentStep == 1 || currentStep == 2) && !showResult && !isLoading {
+                            Button(action: {
                                 withAnimation {
                                     if currentStep == 2 {
                                         viewModel.selectedStyle = nil
                                     }
                                     currentStep -= 1
                                 }
-                            } label: {
+                            }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(Constants.Colors.textPrimary)
                             }
                         }
-                    },
-                    trailing: (!showResult && !isLoading) ? Button {
-                        withAnimation {
-                            viewModel.selectedPhoto = nil
-                            viewModel.selectedRoom = nil
-                            viewModel.selectedStyle = nil
-                            currentStep = 0
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        if !showResult && !isLoading && (currentStep == 1 || currentStep == 2) {
+                            Button(action: {
+                                withAnimation {
+                                    viewModel.selectedPhoto = nil
+                                    viewModel.selectedRoom = nil
+                                    viewModel.selectedStyle = nil
+                                    currentStep = 0
+                                }
+                            }) {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(Constants.Colors.textPrimary)
+                            }
                         }
-                    } label: {
-                        Image(systemName: "xmark")
-                            .foregroundColor(Constants.Colors.textPrimary)
-                    } : nil
-                )
+                    }
+                }
                 
                 if isLoading {
                     LoadingView()
@@ -104,7 +78,7 @@ struct CreateView: View {
                 if showResult, let design = generatedDesign {
                     DesignDetailView(
                         design: design,
-                        isFromCreate: true, // Create'den geliyor
+                        isFromCreate: true,
                         onSave: {
                             viewModel.onComplete(design)
                         },
@@ -126,16 +100,31 @@ struct CreateView: View {
         }
         .fullScreenCover(isPresented: $showPaywall) {
             PaywallView(purchasesService: purchases)
+                .onDisappear {
+                    // Paywall kapatıldığında showPaywall'ı false yap
+                    showPaywall = false
+                }
         }
         .onAppear {
+            // Firebase user ID'yi CreateDesignViewModel'e set et
+            viewModel.currentUserID = authService.currentUserId
+            
             // Premium kontrolü - abone değilse Paywall göster
             if !purchases.isPro {
                 showPaywall = true
-                return
             }
-            
-            // Firebase user ID'yi CreateDesignViewModel'e set et
-            viewModel.currentUserID = authService.currentUserId
+        }
+        .onChange(of: purchases.isPro) { isPro in
+            // Premium durumu değiştiğinde paywall'ı güncelle
+            if isPro {
+                // Kullanıcı premium oldu, paywall'ı kapat
+                showPaywall = false
+                print("✅ CreateView: User became premium, hiding paywall")
+            } else {
+                // Kullanıcı premium değil, paywall'ı göster
+                showPaywall = true
+                print("❌ CreateView: User is not premium, showing paywall")
+            }
         }
     }
 }

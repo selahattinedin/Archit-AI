@@ -9,80 +9,152 @@ struct PhotoUploadView: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            VStack(spacing: 20) {
-                ZStack {
-                    if let image = selectedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: .infinity)
-                            .frame(maxHeight: 280)
-                            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                    .stroke(Constants.Colors.cardBorder, lineWidth: 1)
+            // Photo Display Area - Larger
+            ZStack {
+                if let image = selectedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 350)
+                        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                .stroke(Constants.Colors.cardBorder, lineWidth: 1)
+                        )
+                        .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
+                        .overlay(
+                            Button {
+                                selectedImage = nil
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .frame(width: 24, height: 24)
+                                    .background(
+                                        Circle()
+                                            .fill(colorScheme == .dark ? 
+                                                Color.black.opacity(0.6) : 
+                                                Color.white.opacity(0.6)
+                                            )
+                                    )
+                            }
+                            .padding(12),
+                            alignment: .topTrailing
+                        )
+                } else {
+                    // Upload Container - Larger with content inside
+                    ZStack {
+                        // Background gradient
+                        LinearGradient(
+                            colors: [
+                                colorScheme == .dark ? 
+                                    Color.gray.opacity(0.1) : 
+                                    Color.blue.opacity(0.05),
+                                colorScheme == .dark ? 
+                                    Color.gray.opacity(0.05) : 
+                                    Color.purple.opacity(0.05)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        
+                        // Dashed border
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [
+                                        colorScheme == .dark ? 
+                                            Color.gray.opacity(0.4) : 
+                                            Color.blue.opacity(0.3),
+                                        colorScheme == .dark ? 
+                                            Color.gray.opacity(0.2) : 
+                                            Color.purple.opacity(0.3)
+                                    ],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                style: StrokeStyle(lineWidth: 2, dash: [8, 6])
                             )
-                            .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
-                            .overlay(
+                        
+                        // Content inside the frame
+                        VStack(spacing: 20) {
+                            // Icon with background
+                            ZStack {
+                                Circle()
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [
+                                                colorScheme == .dark ? 
+                                                    Color.gray.opacity(0.2) : 
+                                                    Color.blue.opacity(0.1),
+                                                colorScheme == .dark ? 
+                                                    Color.gray.opacity(0.1) : 
+                                                    Color.purple.opacity(0.1)
+                                            ],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                                    .frame(width: 80, height: 80)
+                                
+                                Image(systemName: "photo.on.rectangle.angled")
+                                    .font(.system(size: 32, weight: .medium))
+                                    .foregroundColor(
+                                        colorScheme == .dark ? 
+                                            .gray.opacity(0.7) : 
+                                            .blue.opacity(0.8)
+                                    )
+                            }
+                            
+                            VStack(spacing: 12) {
+                                Text("Select a photo to transform")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(
+                                        colorScheme == .dark ? 
+                                            .gray.opacity(0.8) : 
+                                            .primary.opacity(0.8)
+                                    )
+                                
+                                Text("Tap to choose from gallery or take a photo")
+                                    .font(.system(size: 14, weight: .regular))
+                                    .foregroundColor(
+                                        colorScheme == .dark ? 
+                                            .gray.opacity(0.6) : 
+                                            .secondary
+                                    )
+                                    .multilineTextAlignment(.center)
+                                
+                                // Small Upload Button
                                 Button {
                                     isShowingActionSheet = true
                                 } label: {
-                                    Image(systemName: "arrow.triangle.2.circlepath")
-                                        .font(.system(size: 18, weight: .medium))
-                                        .foregroundColor(.white)
-                                        .padding(8)
-                                        .background(.ultraThinMaterial)
-                                        .clipShape(Circle())
+                                    HStack(spacing: 6) {
+                                        Image(systemName: "plus.circle.fill")
+                                            .font(.system(size: 14, weight: .medium))
+                                        Text("Upload Photo")
+                                            .font(.system(size: 14, weight: .medium))
+                                    }
+                                    .foregroundColor(colorScheme == .dark ? .black : .white)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .background(colorScheme == .dark ? Color.white : Color.black)
+                                    .clipShape(Capsule())
                                 }
-                                .padding(12),
-                                alignment: .topTrailing
-                            )
-                    } else {
-                        // Upload Container
-                        VStack(spacing: 16) {
-                            Image(systemName: "photo.on.rectangle.angled")
-                                .font(.system(size: 32))
-                                .foregroundColor(.gray.opacity(0.8))
-                            
-                            Text("Select a photo to transform")
-                                .font(.system(size: 15, weight: .medium))
-                                .foregroundColor(.gray.opacity(0.8))
+                                .buttonStyle(ScaleButtonStyle())
+                            }
                         }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 280)
-                        .background(
-                            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .fill(Constants.Colors.cardBackground)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                        .stroke(Constants.Colors.cardBorder, lineWidth: 1)
-                                )
-                        )
                     }
-                }
-                .frame(height: 280)
-                
-                // Upload Button
-                Button {
-                    isShowingActionSheet = true
-                } label: {
-                    HStack(spacing: 8) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 18, weight: .medium))
-                        Text("Upload Photo")
-                            .font(.system(size: 16, weight: .medium))
-                    }
-                    .foregroundColor(colorScheme == .dark ? .black : .white)
-                    .frame(height: 46)
                     .frame(maxWidth: .infinity)
-                    .background(colorScheme == .dark ? Color.white : Color.black)
-                    .clipShape(Capsule())
+                    .frame(height: 350)
+                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                    .onTapGesture {
+                        isShowingActionSheet = true
+                    }
                 }
-                .buttonStyle(ScaleButtonStyle())
-                .padding(.horizontal, 20)
             }
             
-            // Example Photos
+            // Example Photos - Moved to bottom (above continue button)
             VStack(alignment: .leading, spacing: 16) {
                 Text("Example Photos")
                     .font(.system(size: 17, weight: .semibold))
@@ -91,12 +163,11 @@ struct PhotoUploadView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach([
-                            "old_room",
-                            "old_bathroom",
                             "new_room",
                             "new_bathroom",
-                            "old_room",
-                            "old_bathroom"
+                            "new_bedroom",
+                            "new_garden",
+                            "new_balcony"
                         ], id: \.self) { imageName in
                             Image(imageName)
                                 .resizable()

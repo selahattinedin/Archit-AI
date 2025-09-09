@@ -131,8 +131,14 @@ final class RevenueCatService: NSObject, ObservableObject {
         let isPremiumActive = info.entitlements.active.first { key, _ in
             key.lowercased() == "premium"
         } != nil
+        
+        print("🔴 RevenueCatService: Updating entitlements - isPro: \(isPremiumActive)")
+        print("🔴 RevenueCatService: Active entitlements: \(info.entitlements.active.keys)")
+        
         DispatchQueue.main.async {
+            let oldValue = self.isPro
             self.isPro = isPremiumActive
+            print("🔴 RevenueCatService: isPro changed from \(oldValue) to \(isPremiumActive)")
         }
     }
 }

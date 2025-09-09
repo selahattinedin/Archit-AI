@@ -9,7 +9,7 @@ struct ArchitAIApp: App {
     @AppStorage("selectedTheme") private var selectedTheme: Theme = .system
     @StateObject private var authService = FirebaseAuthService()
     @StateObject private var purchases = RevenueCatService.shared
-    @State private var showLaunchPaywall = true
+    @State private var showLaunchPaywall = false
     
     init() {
         // Firebase'i başlat
@@ -29,9 +29,6 @@ struct ArchitAIApp: App {
             MainTabView()
                 .environmentObject(authService)
                 .environmentObject(purchases)
-                .fullScreenCover(isPresented: $showLaunchPaywall) {
-                    PaywallView(purchasesService: purchases)
-                }
                 .onAppear {
                     updateAppTheme(to: selectedTheme)
                     // Kullanıcı kimliği varsa RevenueCat'e ilet

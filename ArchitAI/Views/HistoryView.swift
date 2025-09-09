@@ -16,7 +16,7 @@ struct HistoryView: View {
                         ProgressView()
                             .scaleEffect(1.5)
                         
-                        Text("Tasarımlar yükleniyor...")
+                        Text("Loading designs...")
                             .font(.system(size: 16))
                             .foregroundColor(Constants.Colors.textSecondary)
                         
@@ -33,7 +33,7 @@ struct HistoryView: View {
                             .foregroundColor(.red)
                         
                         VStack(spacing: 8) {
-                            Text("Bir hata oluştu")
+                            Text("An error occurred")
                                 .font(.system(size: 20, weight: .medium))
                                 .foregroundColor(Constants.Colors.textPrimary)
                             
@@ -56,11 +56,11 @@ struct HistoryView: View {
                             .foregroundColor(Constants.Colors.textSecondary)
                         
                         VStack(spacing: 8) {
-                            Text("Henüz bir tasarım eklemediniz")
+                            Text("No designs yet")
                                 .font(.system(size: 20, weight: .medium))
                                 .foregroundColor(Constants.Colors.textPrimary)
                             
-                            Text("İlk tasarımınızı oluşturmak için Create sekmesine gidin")
+                            Text("Go to Create tab to create your first design")
                                 .font(.system(size: 16))
                                 .foregroundColor(Constants.Colors.textSecondary)
                                 .multilineTextAlignment(.center)

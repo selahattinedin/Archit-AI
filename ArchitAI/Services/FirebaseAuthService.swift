@@ -79,4 +79,38 @@ class FirebaseAuthService: ObservableObject {
     var isAnonymous: Bool {
         return currentUser?.isAnonymous ?? false
     }
+    
+    // Delete account
+    func deleteAccount() async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw NSError(domain: "FirebaseAuthService", code: -1, userInfo: [NSLocalizedDescriptionKey: "No user logged in"])
+        }
+        
+        // Delete user data from Firestore if needed
+        if let userId = currentUserId {
+            let db = Firestore.firestore()
+            // Delete user's designs
+            let designDocs = try await db.collection("designs").whereField("userId", isEqualTo: userId).getDocuments().documents
+            for document in designDocs {
+                try await document.reference.delete()
+            }
+            // Delete user document
+            try await db.collection("users").document(userId).delete()
+        }
+        
+        // Delete user's storage data if needed
+        if let userId = currentUserId {
+            let storage = Storage.storage()
+            let userStorageRef = storage.reference().child("users/\(userId)")
+            try await userStorageRef.delete()
+        }
+        
+        // Finally delete the user account
+        try await user.delete()
+        
+        DispatchQueue.main.async {
+            self.currentUser = nil
+            self.isAuthenticated = false
+        }
+    }
 }

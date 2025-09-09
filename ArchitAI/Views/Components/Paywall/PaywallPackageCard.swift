@@ -13,17 +13,17 @@ struct PaywallPackageCard: View {
                 // Selection Indicator
                 ZStack {
                     Circle()
-                        .fill(isSelected ? Constants.Colors.PremiumOrange : Color.clear)
+                        .fill(isSelected ? Color.white : Color.clear)
                         .frame(width: 24, height: 24)
                         .overlay(
                             Circle()
-                                .stroke(isSelected ? Constants.Colors.PremiumOrange : Color.white.opacity(0.3), lineWidth: 2)
+                                .stroke(isSelected ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
                         )
                     
                     if isSelected {
                         Image(systemName: "checkmark")
                             .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                     }
                 }
                 
@@ -43,16 +43,16 @@ struct PaywallPackageCard: View {
                 // Price
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(package.storeProduct.localizedPriceString)
-                        .font(.system(size: 20, weight: .black))
-                        .foregroundColor(Constants.Colors.PremiumOrange)
+                        .font(.system(size: 20, weight: .regular))
+                        .foregroundColor(.white)
                     
                     if package.packageType == .annual {
                         Text("Best Value")
                             .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(Constants.Colors.PremiumOrange)
+                            .foregroundColor(Constants.Colors.PremiumRed)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
-                            .background(Constants.Colors.PremiumOrange.opacity(0.2))
+                            .background(Constants.Colors.PremiumRed.opacity(0.2))
                             .cornerRadius(8)
                     }
                 }
@@ -65,12 +65,12 @@ struct PaywallPackageCard: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(
-                        isSelected ? Constants.Colors.PremiumOrange : Color.white.opacity(0.2),
-                        lineWidth: isSelected ? 3 : 1.5
+                        isSelected ? Color.white : Color.white.opacity(0.2),
+                        lineWidth: isSelected ? 2 : 1.5
                     )
             )
             .shadow(
-                color: isSelected ? Constants.Colors.PremiumOrange.opacity(0.3) : Color.clear,
+                color: isSelected ? Color.white.opacity(0.25) : Color.clear,
                 radius: isSelected ? 12 : 0,
                 x: 0,
                 y: isSelected ? 6 : 0

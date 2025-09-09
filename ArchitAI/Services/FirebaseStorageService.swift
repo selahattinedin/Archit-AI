@@ -226,7 +226,9 @@ class FirebaseStorageService: ObservableObject {
         let room = Room(
             name: roomData["name"] as? String ?? "",
             icon: roomData["icon"] as? String ?? "photo",
-            description: roomData["description"] as? String ?? ""
+            description: roomData["description"] as? String ?? "",
+            category: RoomCategory(rawValue: roomData["category"] as? String ?? "living") ?? .living,
+            gradientColors: roomData["gradientColors"] as? [String] ?? []
         )
         
         // Tarih conversion

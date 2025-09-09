@@ -3,19 +3,30 @@ import SwiftUI
 struct PaywallView: View {
     @StateObject private var viewModel: PaywallViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var navigateToMain = false
     
     init(purchasesService: RevenueCatService) {
         self._viewModel = StateObject(wrappedValue: PaywallViewModel(purchasesService: purchasesService))
     }
     
     var body: some View {
+        Group {
+            if navigateToMain {
+                MainTabView()
+            } else {
+                mainPaywallContent
+            }
+        }
+    }
+    
+    private var mainPaywallContent: some View {
         ZStack {
             // Ana content
             VStack(spacing: 0) {
                 PaywallHeroSection()
                 PaywallContentSection(viewModel: viewModel)
             }
-            .background(Color.black)
+            .background(Color.black) // solid black background per request
             
             // Close button overlay - En üstte
             VStack {
@@ -55,17 +66,8 @@ struct PaywallView: View {
         .onChange(of: viewModel.shouldDismiss) { shouldDismiss in
             print("🟡 shouldDismiss changed to: \(shouldDismiss)")
             if shouldDismiss {
-                print("🟡 Attempting to dismiss paywall...")
-                dismiss()
-                print("🟡 Dismiss called")
-            }
-        }
-        .onChange(of: viewModel.isPro) { isPro in
-            print("🟡 isPro changed to: \(isPro)")
-            if isPro {
-                print("🟡 User became Pro, dismissing paywall")
-                dismiss()
-                print("🟡 Dismiss called for Pro user")
+                print("🟡 Navigating to MainTabView...")
+                navigateToMain = true
             }
         }
         .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {

@@ -24,6 +24,7 @@ actor StabilityAIService {
     static let shared = StabilityAIService()
     private let baseURL = Constants.API.stabilityBaseURL
     private let apiKey = Constants.API.stabilityAPIKey
+    private let revenueCatService = RevenueCatService.shared
     
     private init() {}
     
@@ -37,6 +38,13 @@ actor StabilityAIService {
         engine: String = Constants.API.defaultEngine,
         imageStrength: Double = 0.35 // Orijinal görüntünün ne kadar korunacağı (0-1)
     ) async throws -> UIImage {
+        // 🔒 PREMIUM KONTROLÜ - En son güvenlik katmanı
+        guard await revenueCatService.isPro else {
+            print("🚫 StabilityAIService: User is not premium, blocking API call")
+            throw StabilityAIError.apiError("Premium subscription required to generate images. Please subscribe to continue.")
+        }
+        
+        print("✅ StabilityAIService: User is premium, proceeding with API call")
         let endpoint = "\(baseURL)/generation/\(engine)/image-to-image"
         
         let size = CGSize(width: 1024, height: 1024)

@@ -31,8 +31,8 @@ struct PaywallContinueButton: View {
             .background(
                 LinearGradient(
                     gradient: Gradient(colors: [
-                        Constants.Colors.PremiumOrange,
-                        Constants.Colors.PremiumOrange.opacity(0.8)
+                        Constants.Colors.PremiumRed,
+                        Constants.Colors.PremiumRed.opacity(0.85)
                     ]),
                     startPoint: .leading,
                     endPoint: .trailing
@@ -44,7 +44,7 @@ struct PaywallContinueButton: View {
                     .stroke(Constants.Colors.PremiumOrange.opacity(0.3), lineWidth: 1)
             )
             .shadow(
-                color: Constants.Colors.PremiumOrange.opacity(0.4),
+                color: Constants.Colors.PremiumRed.opacity(0.45),
                 radius: 12,
                 x: 0,
                 y: 6
