@@ -23,7 +23,7 @@ struct CreateView: View {
             ZStack {
                 VStack(spacing: 0) {
                     StepsProgressView(currentStep: currentStep)
-                        .padding(.top, 10)
+                        .padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10)
                     
                     CreateStepsView(
                         viewModel: viewModel,

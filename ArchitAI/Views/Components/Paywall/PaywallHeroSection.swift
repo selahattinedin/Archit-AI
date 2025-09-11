@@ -28,12 +28,12 @@ struct PaywallHeroSection: View {
                     // Premium Badge - Beyaz ve şık
                     HStack(spacing: 14) {
                         Image(systemName: "crown.fill")
-                            .font(.system(size: 22, weight: .bold))
+                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 28 : 22, weight: .bold))
                             .foregroundColor(.white)
                             .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
                         
                         Text("PREMIUM")
-                            .font(.system(size: 18, weight: .medium))
+                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .medium))
                             .foregroundColor(.white)
                             .tracking(3)
                             .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
@@ -46,7 +46,8 @@ struct PaywallHeroSection: View {
                         Image("old_room")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 380, height: 300) // Genişliği weekly/yearly kartları ile aynı yaptım
+                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 700 : 380, 
+                                   height: UIDevice.current.userInterfaceIdiom == .pad ? 525 : 300) // iPad için daha büyük
                             .clipped()
                             .cornerRadius(24)
                             .overlay(
@@ -55,10 +56,10 @@ struct PaywallHeroSection: View {
                             )
                             .overlay(
                                 Text("Before")
-                                    .font(.system(size: 18, weight: .bold))
+                                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .bold))
                                     .foregroundColor(.white)
-                                    .padding(.horizontal, 18)
-                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18)
+                                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 14 : 10)
                                     .background(Color.black.opacity(0.7))
                                     .cornerRadius(12)
                                     .padding(16)
@@ -73,7 +74,8 @@ struct PaywallHeroSection: View {
                         Image("new_room")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 380, height: 300) // Genişliği weekly/yearly kartları ile aynı yaptım
+                            .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 700 : 380, 
+                                   height: UIDevice.current.userInterfaceIdiom == .pad ? 525 : 300) // iPad için daha büyük
                             .clipped()
                             .cornerRadius(24)
                             .overlay(
@@ -82,10 +84,10 @@ struct PaywallHeroSection: View {
                             )
                             .overlay(
                                 Text("After")
-                                    .font(.system(size: 18, weight: .bold))
+                                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .bold))
                                     .foregroundColor(.white)
-                                    .padding(.horizontal, 18)
-                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18)
+                                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 14 : 10)
                                     .background(Constants.Colors.PremiumRed.opacity(0.95))
                                     .cornerRadius(12)
                                     .padding(16)
@@ -100,7 +102,7 @@ struct PaywallHeroSection: View {
                     
                     // Kısa Açıklama - Daha şık
                     Text("Transform your space with AI")
-                        .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 26 : 20, weight: .semibold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
@@ -110,7 +112,7 @@ struct PaywallHeroSection: View {
                     Spacer()
                 }
             }
-            .frame(height: 450)
+            .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 700 : 450)
             .onAppear {
                 // Start animations
                 isGlowing = true

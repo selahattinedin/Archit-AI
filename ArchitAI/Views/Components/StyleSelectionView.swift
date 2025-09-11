@@ -5,10 +5,16 @@ struct StyleSelectionView: View {
     @Binding var selectedStyle: DesignStyle?
     
     var body: some View {
-        LazyVGrid(columns: [
+        let columns = UIDevice.current.userInterfaceIdiom == .pad ? [
+            GridItem(.flexible()),
             GridItem(.flexible()),
             GridItem(.flexible())
-        ], spacing: 16) {
+        ] : [
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
+        
+        LazyVGrid(columns: columns, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16) {
             ForEach(styles) { style in
                 StyleCard(style: style, isSelected: selectedStyle?.id == style.id)
                     .onTapGesture {
@@ -32,8 +38,8 @@ private struct StyleCard: View {
                 ZStack {
                     Image(style.image)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 180)
+                        .aspectRatio(4/3, contentMode: .fill)
+                        .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 160 : 140)
                         .clipped()
                         .cornerRadius(12)
                     

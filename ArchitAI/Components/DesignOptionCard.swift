@@ -7,144 +7,112 @@ struct DesignOptionCard: View {
     let afterImage: String
     let action: () -> Void
     
-    @State private var sliderPosition: CGFloat = 0.5
-    @State private var isDragging = false
+    @State private var showingAfterImage = false
+    @State private var isAnimating = true
     @State private var isHovered = false
     @Environment(\.colorScheme) var colorScheme
+    
+    private let animationDuration: Double = 2.0
+    private let pauseDuration: Double = 1.0
+    
+    private func startAnimation() {
+        guard isAnimating else { return }
+        
+        withAnimation(.easeInOut(duration: animationDuration)) {
+            showingAfterImage = true
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration + pauseDuration) {
+            guard isAnimating else { return }
+            
+            withAnimation(.easeInOut(duration: animationDuration)) {
+                showingAfterImage = false
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration + pauseDuration) {
+                guard isAnimating else { return }
+                startAnimation()
+            }
+        }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             // Hero Image Section
             ZStack {
-                // Background for slider
-                Rectangle()
-                    .fill(Color.gray.opacity(0.1))
-                    .frame(height: 250)
-                
-                // Overlay gradient for better text readability
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color.clear,
-                        Color.black.opacity(0.3)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .frame(height: 250)
-                
-                // Before/After Overlay Slider
-                GeometryReader { geometry in
-                    ZStack {
-                        // After Image (Background)
-                        Image(afterImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width)
-                            .frame(height: 250)
-                            .clipped()
-                            .allowsHitTesting(false) // Disable interaction
-                        
-                        // Before Image (Overlay)
-                        Image(beforeImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width)
-                            .frame(height: 250)
-                            .clipped()
-                            .allowsHitTesting(false) // Disable interaction
-                            .mask(
-                                Rectangle()
-                                    .frame(width: geometry.size.width * sliderPosition)
-                                    .frame(height: 250)
-                                    .offset(x: -geometry.size.width * (1 - sliderPosition) / 2)
-                            )
-                    }
-                    .overlay(
-                        // Slim line with central white handle containing left/right arrows
-                        ZStack {
-                            // Main vertical line (full height, thinner)
-                            Rectangle()
-                                .fill(Color.white)
-                                .frame(width: 2, height: geometry.size.height)
-                                .shadow(color: .black.opacity(0.25), radius: 1, x: 0, y: 0)
-
-                            // Central circular handle with arrows
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: 32, height: 32)
-                                .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
-                                .overlay(
-                                    HStack(spacing: 6) {
-                                        Image(systemName: "chevron.left")
-                                            .font(.system(size: 12, weight: .bold))
-                                            .foregroundColor(.black)
-                                        Image(systemName: "chevron.right")
-                                            .font(.system(size: 12, weight: .bold))
-                                            .foregroundColor(.black)
-                                    }
-                                )
-                                .gesture(
-                                    DragGesture(minimumDistance: 0)
-                                        .onChanged { value in
-                                            if !isDragging {
-                                                isDragging = true
-                                            }
-                                            let newPosition = (value.location.x + geometry.size.width/2) / geometry.size.width
-                                            withAnimation(.easeOut(duration: 0.1)) {
-                                                sliderPosition = max(0, min(1, newPosition))
-                                            }
-                                        }
-                                        .onEnded { _ in
-                                            isDragging = false
-                                            Constants.Haptics.selection()
-                                        }
-                                )
-                        }
-                        .offset(x: geometry.size.width * sliderPosition - geometry.size.width/2)
-                    )
-                    // Disable general gesture on the whole view
-                }
-                
-                // Interactive Slider
-                VStack {
-                    Spacer()
+                GeometryReader { proxy in
+                    let imageHeight = isIPad ? min(proxy.size.width * 0.75, 350) : 250
                     
-                    HStack {
-                        // Before/After Toggle Button
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                sliderPosition = sliderPosition > 0.5 ? 0.0 : 1.0
-                            }
-                            Constants.Haptics.selection()
-                        }) {
-                            HStack(spacing: 8) {
-                                Text(sliderPosition > 0.5 ? "Before" : "After")
+                    ZStack {
+                        // Background
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.1))
+                            .frame(height: imageHeight)
+                        
+                        // Images
+                        ZStack {
+                            // Before Image
+                            Image(beforeImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: imageHeight)
+                                .clipped()
+                            
+                            // After Image with opacity animation
+                            Image(afterImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: imageHeight)
+                                .clipped()
+                                .opacity(showingAfterImage ? 1 : 0)
+                        }
+                        
+                        // Overlay gradient for better text readability
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.clear,
+                                Color.black.opacity(0.3)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .frame(height: imageHeight)
+                        
+                        // Before/After Label
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Text(showingAfterImage ? "After" : "Before")
                                     .font(.system(size: 14, weight: .semibold))
                                     .foregroundColor(.white)
-                                
-                                Image(systemName: sliderPosition > 0.5 ? "arrow.left" : "arrow.right")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(
-                                Capsule()
-                                    .fill(isDragging ? Color.white.opacity(0.3) : Color.white.opacity(0.2))
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
                                     .background(
                                         Capsule()
-                                            .fill(.ultraThinMaterial)
+                                            .fill(Color.white.opacity(0.2))
+                                            .background(
+                                                Capsule()
+                                                    .fill(.ultraThinMaterial)
+                                            )
                                     )
-                            )
+                                    .padding(.leading, 20)
+                                    .padding(.bottom, 20)
+                                
+                                Spacer()
+                            }
                         }
-                        .padding(.leading, 20)
-                        
-                        Spacer()
                     }
-                    .padding(.bottom, 20)
                 }
             }
-            .frame(height: 250)
+            .onAppear {
+                startAnimation()
+            }
+            .onChange(of: isAnimating) { newValue in
+                if newValue {
+                    startAnimation()
+                }
+            }
+            .frame(height: isIPad ? 350 : 250)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             
             // Content Section - Clickable area only
@@ -191,9 +159,21 @@ struct DesignOptionCard: View {
             withAnimation(.easeInOut(duration: 0.2)) {
                 isHovered = hovering
             }
+            isAnimating = !hovering
+        }
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: animationDuration)) {
+                showingAfterImage.toggle()
+            }
+            isAnimating = false
+            Constants.Haptics.selection()
         }
         .onAppear {
-            sliderPosition = 0.5
+            showingAfterImage = false
+            isAnimating = true
+        }
+        .onDisappear {
+            isAnimating = false
         }
     }
 }

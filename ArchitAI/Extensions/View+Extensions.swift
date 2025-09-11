@@ -48,3 +48,20 @@ extension Animation {
     }
 }
 
+// MARK: - Device Detection
+extension View {
+    var isIPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    func adaptiveLayout<Content: View>(_ ipadContent: @escaping () -> Content) -> some View {
+        Group {
+            if isIPad {
+                ipadContent()
+            } else {
+                self
+            }
+        }
+    }
+}
+

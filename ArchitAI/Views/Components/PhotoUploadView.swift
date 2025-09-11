@@ -8,7 +8,7 @@ struct PhotoUploadView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 60 : 24) {
             // Photo Display Area - Larger
             ZStack {
                 if let image = selectedImage {
@@ -16,7 +16,7 @@ struct PhotoUploadView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 350)
+                        .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600 : 350)
                         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
                         .overlay(
                             RoundedRectangle(cornerRadius: 30, style: .continuous)
@@ -96,10 +96,11 @@ struct PhotoUploadView: View {
                                             endPoint: .bottomTrailing
                                         )
                                     )
-                                    .frame(width: 80, height: 80)
+                                    .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 100 : 80,
+                                           height: UIDevice.current.userInterfaceIdiom == .pad ? 100 : 80)
                                 
                                 Image(systemName: "photo.on.rectangle.angled")
-                                    .font(.system(size: 32, weight: .medium))
+                                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 44 : 32, weight: .medium))
                                     .foregroundColor(
                                         colorScheme == .dark ? 
                                             .gray.opacity(0.7) : 
@@ -109,7 +110,7 @@ struct PhotoUploadView: View {
                             
                             VStack(spacing: 12) {
                                 Text("Select a photo to transform")
-                                    .font(.system(size: 18, weight: .semibold))
+                                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .semibold))
                                     .foregroundColor(
                                         colorScheme == .dark ? 
                                             .gray.opacity(0.8) : 
@@ -117,7 +118,7 @@ struct PhotoUploadView: View {
                                     )
                                 
                                 Text("Tap to choose from gallery or take a photo")
-                                    .font(.system(size: 14, weight: .regular))
+                                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .regular))
                                     .foregroundColor(
                                         colorScheme == .dark ? 
                                             .gray.opacity(0.6) : 
@@ -131,13 +132,13 @@ struct PhotoUploadView: View {
                                 } label: {
                                     HStack(spacing: 6) {
                                         Image(systemName: "plus.circle.fill")
-                                            .font(.system(size: 14, weight: .medium))
+                                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .medium))
                                         Text("Upload Photo")
-                                            .font(.system(size: 14, weight: .medium))
+                                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .medium))
                                     }
                                     .foregroundColor(colorScheme == .dark ? .black : .white)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16)
+                                    .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 12 : 8)
                                     .background(colorScheme == .dark ? Color.white : Color.black)
                                     .clipShape(Capsule())
                                 }
@@ -146,7 +147,7 @@ struct PhotoUploadView: View {
                         }
                     }
                     .frame(maxWidth: .infinity)
-                    .frame(height: 350)
+                    .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600 : 350)
                     .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
                     .onTapGesture {
                         isShowingActionSheet = true
@@ -155,13 +156,13 @@ struct PhotoUploadView: View {
             }
             
             // Example Photos - Moved to bottom (above continue button)
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16) {
                 Text("Example Photos")
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 22 : 17, weight: .semibold))
                     .foregroundColor(Constants.Colors.textPrimary)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 12) {
                         ForEach([
                             "new_room",
                             "new_bathroom",
@@ -172,7 +173,8 @@ struct PhotoUploadView: View {
                             Image(imageName)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 140, height: 100)
+                                .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 320 : 140,
+                                       height: UIDevice.current.userInterfaceIdiom == .pad ? 240 : 100)
                                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -185,7 +187,8 @@ struct PhotoUploadView: View {
                                 }
                         }
                     }
-                    .padding(.horizontal, 1)
+                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 30 : 1)
+                    .padding(.bottom, UIDevice.current.userInterfaceIdiom == .pad ? 30 : 0)
                 }
             }
         }

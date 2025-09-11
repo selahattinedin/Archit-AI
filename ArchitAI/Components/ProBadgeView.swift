@@ -4,18 +4,20 @@ struct ProBadgeView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 8 : 6) {
             Image(systemName: "sparkles")
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12, weight: .medium))
                 .foregroundColor(.white)
             
             Text("PREMIUM")
-                .font(.system(size: 12, weight: .semibold))
+                .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 16 : 12, weight: .semibold))
                 .foregroundColor(.white)
-                .kerning(0.5)
+                .kerning(UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0.5)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
+        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 12)
+        .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 10 : 6)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [

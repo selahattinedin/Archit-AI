@@ -8,14 +8,14 @@ struct PhotoSelectionStepView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Main Content without scroll
-            VStack(spacing: 24) {
+            VStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 24) {
                 // Photo Upload Section
                 PhotoUploadView(selectedImage: $selectedPhoto)
                     .padding(.horizontal)
                 
                 Spacer()
             }
-            .padding(.top, 1)
+            .padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
             
             // Fixed Button at bottom
             VStack(spacing: 0) {
