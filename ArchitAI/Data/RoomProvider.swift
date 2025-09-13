@@ -10,116 +10,116 @@ final class RoomProvider: RoomProviding {
         return [
             // Living Spaces
             Room(
-                name: "Living Room",
+                name: "room_living_room",
                 icon: "living-room",
-                description: "Transform your main living space",
+                description: "room_living_room_desc",
                 category: .living,
                 gradientColors: ["FF6B6B", "4ECDC4"]
             ),
             Room(
-                name: "Dining Room",
+                name: "room_dining_room",
                 icon: "dining_room",
-                description: "Create an elegant dining experience",
+                description: "room_dining_room_desc",
                 category: .living,
                 gradientColors: ["A8E6CF", "FFD93D"]
             ),
             
             // Bedrooms
             Room(
-                name: "Bedroom",
+                name: "room_bedroom",
                 icon: "bedroom",
-                description: "Create your perfect sanctuary",
+                description: "room_bedroom_desc",
                 category: .bedroom,
                 gradientColors: ["667eea", "764ba2"]
             ),
             Room(
-                name: "Kids Room",
+                name: "room_kids_room",
                 icon: "kids_room",
-                description: "Create a playful children's space",
+                description: "room_kids_room_desc",
                 category: .bedroom,
                 gradientColors: ["4facfe", "00f2fe"]
             ),
             
             // Kitchen & Dining
             Room(
-                name: "Kitchen",
+                name: "room_kitchen",
                 icon: "kitchen",
-                description: "Design your dream culinary space",
+                description: "room_kitchen_desc",
                 category: .kitchen,
                 gradientColors: ["fa709a", "fee140"]
             ),
             
             // Bathrooms
             Room(
-                name: "Bathroom",
+                name: "room_bathroom",
                 icon: "bathroom",
-                description: "Create a luxurious spa experience",
+                description: "room_bathroom_desc",
                 category: .bathroom,
                 gradientColors: ["89f7fe", "66a6ff"]
             ),
             
             // Workspaces
             Room(
-                name: "Home Office",
+                name: "room_home_office",
                 icon: "office",
-                description: "Build your productive workspace",
+                description: "room_home_office_desc",
                 category: .workspace,
                 gradientColors: ["667eea", "764ba2"]
             ),
             Room(
-                name: "Study Room",
+                name: "room_study_room",
                 icon: "study-room",
-                description: "Create a focused study environment",
+                description: "room_study_room_desc",
                 category: .workspace,
                 gradientColors: ["f093fb", "f5576c"]
             ),
             
             // Outdoor Spaces
             Room(
-                name: "Garden",
+                name: "room_garden",
                 icon: "garden",
-                description: "Design your outdoor oasis",
+                description: "room_garden_desc",
                 category: .outdoor,
                 gradientColors: ["43e97b", "38f9d7"]
             ),
             Room(
-                name: "Balcony",
+                name: "room_balcony",
                 icon: "balcony",
-                description: "Transform your outdoor area",
+                description: "room_balcony_desc",
                 category: .outdoor,
                 gradientColors: ["fa709a", "fee140"]
             ),
             
             // Entertainment
             Room(
-                name: "Entertainment",
+                name: "room_entertainment",
                 icon: "entertainment",
-                description: "Build your entertainment space",
+                description: "room_entertainment_desc",
                 category: .entertainment,
                 gradientColors: ["fdbb2d", "22c1c3"]
             ),
             
             // Storage & Utility
             Room(
-                name: "Entryway",
+                name: "room_entryway",
                 icon: "entryway",
-                description: "Create an organized entry space",
+                description: "room_entryway_desc",
                 category: .storage,
                 gradientColors: ["fa709a", "fee140"]
             ),
             
             // Specialty Rooms
             Room(
-                name: "Home Gym",
+                name: "room_home_gym",
                 icon: "gym",
-                description: "Create your fitness sanctuary",
+                description: "room_home_gym_desc",
                 category: .specialty,
                 gradientColors: ["89f7fe", "66a6ff"]
             ),
             Room(
-                name: "Library",
+                name: "room_library",
                 icon: "library",
-                description: "Design your reading sanctuary",
+                description: "room_library_desc",
                 category: .specialty,
                 gradientColors: ["fdbb2d", "22c1c3"]
             )

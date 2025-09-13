@@ -1,0 +1,206 @@
+// General
+"app_name" = "ArchitAI";
+"continue" = "Continuar";
+"cancel" = "Cancelar";
+"back" = "Atrás";
+"done" = "Listo";
+"delete" = "Eliminar";
+"delete_design" = "Eliminar Diseño";
+"delete_design_message" = "¿Estás seguro de que quieres eliminar este diseño? Esta acción no se puede deshacer.";
+"delete_design_confirm" = "Eliminar Diseño";
+"share" = "Compartir";
+"save" = "Guardar";
+"error" = "Error";
+"loading" = "Cargando...";
+"please_wait" = "Espere...";
+"step_format" = "Paso %d/%d";
+"generating" = "Generando...";
+
+// Navigation & Tabs
+"home" = "Inicio";
+"create" = "Crear";
+"history" = "Historial";
+"settings" = "Ajustes";
+
+// Home View
+"archit_ai" = "archit ai";
+
+// Design Cards
+"room_design_title" = "Diseño de Habitación";
+"room_design_subtitle" = "¡Sube una foto y deja que la IA diseñe tu espacio!";
+"bedroom_design_title" = "Diseño de Dormitorio";
+"bedroom_design_subtitle" = "¡Transforma tu dormitorio en un espacio elegante!";
+"balcony_design_title" = "Diseño de Balcón";
+"balcony_design_subtitle" = "¡Convierte tu balcón en un oasis!";
+"garden_design_title" = "Diseño de Jardín";
+"garden_design_subtitle" = "¡Crea tu jardín soñado con IA!";
+"bathroom_design_title" = "Diseño de Baño";
+"bathroom_design_subtitle" = "¡Moderniza tu baño con diseños elegantes!";
+
+// Create Design Flow
+"select_photo" = "Selecciona foto";
+"tap_to_choose" = "Toca para elegir foto";
+"upload_photo" = "Subir Foto";
+"example_photos" = "Ejemplos";
+"choose_design_style" = "Elige Estilo";
+"select_aesthetic" = "Selecciona tu estilo preferido";
+"generate_design" = "Generar";
+"transform_room" = "Transformar";
+"continue_button" = "Continuar";
+"continue" = "Continuar";
+
+// Time Formats
+"year" = "año";
+"years" = "años";
+"month" = "mes";
+"months" = "meses";
+"week" = "semana";
+"weeks" = "semanas";
+"day" = "día";
+"days" = "días";
+"hour" = "hora";
+"hours" = "horas";
+"minute" = "minuto";
+"minutes" = "minutos";
+"second" = "segundo";
+"seconds" = "segundos";
+"ago" = "hace";
+
+// Design Details
+"before" = "Antes";
+"after" = "Después";
+"room_type" = "Habitación";
+"style" = "Estilo";
+"description" = "Descripción";
+
+// History View
+"loading_designs" = "Cargando...";
+"error_occurred" = "Error";
+"no_designs" = "Sin diseños";
+"create_first_design" = "Crea tu primer diseño";
+"time_ago_format" = "hace %@";
+
+// Success View
+"design_generated" = "¡Listo!";
+"design_success_message" = "Diseño guardado en historial";
+
+// Settings
+"language" = "Idioma";
+"select_language" = "Seleccionar Idioma";
+"version" = "Versión";
+"about" = "Acerca de";
+"appearance" = "Apariencia";
+"theme" = "Tema";
+"light_theme" = "Claro";
+"dark_theme" = "Oscuro";
+"system_theme" = "Sistema";
+
+// Account
+"account" = "Cuenta";
+"delete_account" = "Eliminar Cuenta";
+"delete_account_message" = "¿Eliminar cuenta? No se puede deshacer.";
+"delete_account_error" = "Error al eliminar cuenta.";
+
+// Premium Features
+"premium" = "PREMIUM";
+"premium_status_active" = "Activo";
+"premium_status_inactive" = "Inactivo";
+"upgrade_to_premium" = "Actualizar";
+"premium_features" = "Premium";
+"unlock_premium" = "Desbloquear";
+"best_value" = "Mejor Valor";
+"continue_with_annual" = "Plan Anual";
+"no_offers" = "Sin ofertas.";
+"loading_offers" = "Cargando...";
+
+// Legal & Support
+"legal" = "Legal";
+"legal_and_support" = "Legal y Soporte";
+"privacy_policy" = "Privacidad";
+"terms_of_service" = "Términos de Servicio";
+"terms_of_use" = "Términos de Uso (EULA)";
+"eula" = "EULA";
+"website" = "Web";
+"contact_us" = "Contacto";
+
+// Transform Text
+"transform_space" = "Transforma con IA";
+
+// Loading States
+"please_wait_designing" = "Diseñando...";
+"something_went_wrong" = "Error";
+
+// Room Names
+"room_living_room" = "Sala";
+"room_dining_room" = "Comedor";
+"room_bedroom" = "Dormitorio";
+"room_kids_room" = "Infantil";
+"room_kitchen" = "Cocina";
+"room_bathroom" = "Baño";
+"room_home_office" = "Oficina";
+"room_study_room" = "Estudio";
+"room_garden" = "Jardín";
+"room_balcony" = "Balcón";
+"room_entertainment" = "Ocio";
+"room_entryway" = "Entrada";
+"room_home_gym" = "Gimnasio";
+"room_library" = "Biblioteca";
+
+// Room Descriptions
+"room_living_room_desc" = "Renueva tu sala";
+"room_dining_room_desc" = "Espacio para cenar";
+"room_bedroom_desc" = "Tu refugio ideal";
+"room_kids_room_desc" = "Espacio infantil";
+"room_kitchen_desc" = "Cocina soñada";
+"room_bathroom_desc" = "Baño tipo spa";
+"room_home_office_desc" = "Oficina productiva";
+"room_study_room_desc" = "Zona de estudio";
+"room_garden_desc" = "Oasis exterior";
+"room_balcony_desc" = "Balcón renovado";
+"room_entertainment_desc" = "Zona de ocio";
+"room_entryway_desc" = "Entrada ordenada";
+"room_home_gym_desc" = "Tu gimnasio";
+"room_library_desc" = "Rincón de lectura";
+
+// Room Categories
+"room_category_living" = "Vida";
+"room_category_bedroom" = "Dormir";
+"room_category_kitchen" = "Cocina";
+"room_category_bathroom" = "Baño";
+"room_category_workspace" = "Trabajo";
+"room_category_outdoor" = "Exterior";
+"room_category_entertainment" = "Ocio";
+"room_category_storage" = "Almacén";
+"room_category_specialty" = "Especial";
+
+// Design Styles
+"style_organic_modern" = "Orgánico";
+"style_vintage" = "Vintage";
+"style_gothic" = "Gótico";
+"style_gamer" = "Gamer";
+"style_technoland" = "Tech";
+"style_bohem" = "Bohemio";
+"style_classic" = "Clásico";
+"style_dark_theme" = "Oscuro";
+"style_light_theme" = "Claro";
+"style_industrial" = "Industrial";
+"style_japandi" = "Japandi";
+"style_loft" = "Loft";
+"style_luxury" = "Lujo";
+"style_turkish" = "Turco";
+
+// Style Descriptions
+"style_organic_modern_desc" = "Natural y moderno";
+"style_vintage_desc" = "Clásico retro";
+"style_gothic_desc" = "Oscuro y dramático";
+"style_gamer_desc" = "Setup gaming RGB";
+"style_technoland_desc" = "Alta tecnología";
+"style_bohem_desc" = "Natural y artístico";
+"style_classic_desc" = "Elegancia clásica";
+"style_dark_theme_desc" = "Tonos oscuros";
+"style_light_theme_desc" = "Luz natural";
+"style_industrial_desc" = "Estilo urbano";
+"style_japandi_desc" = "Minimalista zen";
+"style_loft_desc" = "Espacios abiertos";
+"style_luxury_desc" = "Lujo premium";
+"style_turkish_desc" = "Turco moderno";

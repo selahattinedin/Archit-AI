@@ -1,32 +1,34 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var languageManager = LanguageManager.shared
+    
     private var iPadContent: some View {
         let designCards = [
-            (title: "Room Design",
-             subtitle: "Upload a pic, choose a style, let AI design the room!",
+            (id: UUID(), title: "room_design_title".localized(with: languageManager.languageUpdateTrigger),
+             subtitle: "room_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
              beforeImage: "old_room",
              afterImage: "new_room"),
-            (title: "Bedroom Design",
-             subtitle: "Transform your bedroom into a cozy and stylish space!",
+            (id: UUID(), title: "bedroom_design_title".localized(with: languageManager.languageUpdateTrigger),
+             subtitle: "bedroom_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
              beforeImage: "old_bedroom",
              afterImage: "new_bedroom"),
-            (title: "Balcony Design",
-             subtitle: "Transform your balcony into a cozy and stylish space!",
+            (id: UUID(), title: "balcony_design_title".localized(with: languageManager.languageUpdateTrigger),
+             subtitle: "balcony_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
              beforeImage: "old_balcony",
              afterImage: "new_balcony"),
-            (title: "Garden Design",
-             subtitle: "Upload a pic, choose a style, let AI design the garden!",
+            (id: UUID(), title: "garden_design_title".localized(with: languageManager.languageUpdateTrigger),
+             subtitle: "garden_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
              beforeImage: "old_garden",
              afterImage: "new_garden"),
-            (title: "Bathroom Design",
-             subtitle: "Transform your bathroom with modern and stylish designs!",
+            (id: UUID(), title: "bathroom_design_title".localized(with: languageManager.languageUpdateTrigger),
+             subtitle: "bathroom_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
              beforeImage: "old_bathroom",
              afterImage: "new_bathroom")
         ]
         
         return LazyVStack(spacing: 30) {
-            ForEach(designCards, id: \.title) { card in
+            ForEach(designCards, id: \.id) { card in
                 DesignOptionCard(
                     title: card.title,
                     subtitle: card.subtitle,
@@ -52,8 +54,13 @@ struct HomeView: View {
     @State private var showSettings = false
     @State private var showPaywall = false
     @State private var scrollOffset: CGFloat = 0
+    @State private var refreshID = UUID() // View'ı yenilemek için
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
+    private var isIPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
     
     var body: some View {
         NavigationView {
@@ -71,12 +78,12 @@ struct HomeView: View {
                                 // Premium Button
                                 HStack {
                                     Button {
-                                        print("Premium button tapped")
                                         showPaywall = true
                                     } label: {
                                         ProBadgeView()
                                             .scaleEffect(1.2)
                                     }
+                                    .accessibilityLabel("upgrade_to_premium".localized(with: languageManager.languageUpdateTrigger))
                                     .contentShape(Rectangle())
                                 }
                                 .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? 160 : 120, height: 44)
@@ -84,7 +91,7 @@ struct HomeView: View {
                                 Spacer()
                                 
                                 // Title
-                                Text("archit ai")
+                                Text("archit_ai".localized(with: languageManager.languageUpdateTrigger))
                                     .font(.system(size: 32, weight: .bold))
                                     .foregroundColor(colorScheme == .dark ? .white : .black)
                                 
@@ -93,13 +100,13 @@ struct HomeView: View {
                                 // Settings Button
                                 HStack {
                                     Button {
-                                        print("Settings button tapped")
                                         showSettings = true
                                     } label: {
                                         Image(systemName: "gearshape.fill")
                                             .font(.system(size: 24))
                                             .foregroundColor(Constants.Colors.textPrimary)
                                     }
+                                    .accessibilityLabel("settings".localized(with: languageManager.languageUpdateTrigger))
                                     .contentShape(Rectangle())
                                 }
                                 .frame(width: 120, height: 44)
@@ -121,27 +128,27 @@ struct HomeView: View {
                         VStack(spacing: 20) {
                             HStack {
                                 Button(action: {
-                                    print("Premium button tapped (iPhone)")
                                     showPaywall.toggle()
                                 }) {
                                     ProBadgeView()
                                 }
+                                .accessibilityLabel("upgrade_to_premium".localized(with: languageManager.languageUpdateTrigger))
                                 .buttonStyle(PlainButtonStyle())
                                 
                                 Spacer()
                                 
                                 Button(action: {
-                                    print("Settings button tapped (iPhone)")
                                     showSettings.toggle()
                                 }) {
                                     Image(systemName: "gearshape.fill")
                                         .font(.system(size: 20))
                                         .foregroundColor(Constants.Colors.textPrimary)
                                 }
+                                .accessibilityLabel("settings".localized(with: languageManager.languageUpdateTrigger))
                                 .buttonStyle(PlainButtonStyle())
                             }
                             .overlay(
-                                Text("archit ai")
+                                Text("archit_ai".localized(with: languageManager.languageUpdateTrigger))
                                     .font(.system(size: 18, weight: .bold))
                                     .foregroundColor(colorScheme == .dark ? .white : .black)
                             )
@@ -153,30 +160,30 @@ struct HomeView: View {
                         
                         ScrollView(showsIndicators: false) {
                             let designCards = [
-                                (title: "Room Design",
-                                 subtitle: "Upload a pic, choose a style, let AI design the room!",
+                                (id: UUID(), title: "room_design_title".localized(with: languageManager.languageUpdateTrigger),
+                                 subtitle: "room_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
                                  beforeImage: "old_room",
                                  afterImage: "new_room"),
-                                (title: "Bedroom Design",
-                                 subtitle: "Transform your bedroom into a cozy and stylish space!",
+                                (id: UUID(), title: "bedroom_design_title".localized(with: languageManager.languageUpdateTrigger),
+                                 subtitle: "bedroom_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
                                  beforeImage: "old_bedroom",
                                  afterImage: "new_bedroom"),
-                                (title: "Balcony Design",
-                                 subtitle: "Transform your balcony into a cozy and stylish space!",
+                                (id: UUID(), title: "balcony_design_title".localized(with: languageManager.languageUpdateTrigger),
+                                 subtitle: "balcony_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
                                  beforeImage: "old_balcony",
                                  afterImage: "new_balcony"),
-                                (title: "Garden Design",
-                                 subtitle: "Upload a pic, choose a style, let AI design the garden!",
+                                (id: UUID(), title: "garden_design_title".localized(with: languageManager.languageUpdateTrigger),
+                                 subtitle: "garden_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
                                  beforeImage: "old_garden",
                                  afterImage: "new_garden"),
-                                (title: "Bathroom Design",
-                                 subtitle: "Transform your bathroom with modern and stylish designs!",
+                                (id: UUID(), title: "bathroom_design_title".localized(with: languageManager.languageUpdateTrigger),
+                                 subtitle: "bathroom_design_subtitle".localized(with: languageManager.languageUpdateTrigger),
                                  beforeImage: "old_bathroom",
                                  afterImage: "new_bathroom")
                             ]
                             
                             LazyVStack(spacing: 25) {
-                                ForEach(designCards, id: \.title) { card in
+                                ForEach(designCards, id: \.id) { card in
                                     DesignOptionCard(
                                         title: card.title,
                                         subtitle: card.subtitle,
@@ -227,5 +234,10 @@ struct HomeView: View {
             // User ID değiştiğinde HomeViewModel'i güncelle
             viewModel.setUserID(userID)
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LanguageChanged"))) { _ in
+            // Dil değiştiğinde view'ı yeniden yükle
+            refreshID = UUID()
+        }
+        .id(refreshID) // View'ı yenilemek için
     }
 }

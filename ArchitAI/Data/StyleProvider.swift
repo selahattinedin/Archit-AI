@@ -4,86 +4,86 @@ final class StyleProvider {
     static var styles: [DesignStyle] = {
         return [
             DesignStyle(
-                name: "Organic Modern",
-                description: "Natural materials with clean modern lines",
+                name: "style_organic_modern",
+                description: "style_organic_modern_desc",
                 image: "organic_modern",
                 tags: ["natural", "modern", "minimal"]
             ),
             DesignStyle(
-                name: "Vintage",
-                description: "Classic and timeless design with retro elements",
+                name: "style_vintage",
+                description: "style_vintage_desc",
                 image: "vintage",
                 tags: ["classic", "retro", "elegant"]
             ),
             DesignStyle(
-                name: "Gothic",
-                description: "Dark and dramatic with architectural elements",
+                name: "style_gothic",
+                description: "style_gothic_desc",
                 image: "gothic",
                 tags: ["dark", "dramatic", "luxury"]
             ),
             DesignStyle(
-                name: "Gamer",
-                description: "Modern gaming setup with RGB lighting",
+                name: "style_gamer",
+                description: "style_gamer_desc",
                 image: "gamer",
                 tags: ["gaming", "modern", "tech"]
             ),
             DesignStyle(
-                name: "Technoland",
-                description: "Futuristic design with high-tech elements",
+                name: "style_technoland",
+                description: "style_technoland_desc",
                 image: "technoland",
                 tags: ["futuristic", "tech", "modern"]
             ),
             DesignStyle(
-                name: "Bohem",
-                description: "Free-spirited and artistic with natural elements",
+                name: "style_bohem",
+                description: "style_bohem_desc",
                 image: "bohem",
                 tags: ["artistic", "natural", "cozy"]
             ),
             DesignStyle(
-                name: "Classic",
-                description: "Timeless elegance with traditional elements",
+                name: "style_classic",
+                description: "style_classic_desc",
                 image: "classic",
                 tags: ["elegant", "traditional", "refined"]
             ),
             DesignStyle(
-                name: "Dark Theme",
-                description: "Bold and sophisticated with dark tones",
+                name: "style_dark_theme",
+                description: "style_dark_theme_desc",
                 image: "dark_theme",
                 tags: ["dark", "modern", "bold"]
             ),
             DesignStyle(
-                name: "Light Theme",
-                description: "Bright and airy with natural light",
+                name: "style_light_theme",
+                description: "style_light_theme_desc",
                 image: "light_theme",
                 tags: ["bright", "minimal", "fresh"]
             ),
             DesignStyle(
-                name: "Industrial",
-                description: "Raw and urban with exposed elements",
+                name: "style_industrial",
+                description: "style_industrial_desc",
                 image: "industrial",
                 tags: ["urban", "raw", "modern"]
             ),
             DesignStyle(
-                name: "Japandi",
-                description: "Japanese minimalism meets Scandinavian design",
+                name: "style_japandi",
+                description: "style_japandi_desc",
                 image: "japandi",
                 tags: ["minimal", "zen", "natural"]
             ),
             DesignStyle(
-                name: "Loft",
-                description: "Urban living with high ceilings and open spaces",
+                name: "style_loft",
+                description: "style_loft_desc",
                 image: "loft",
                 tags: ["urban", "spacious", "modern"]
             ),
             DesignStyle(
-                name: "Luxury",
-                description: "Opulent design with premium finishes",
+                name: "style_luxury",
+                description: "style_luxury_desc",
                 image: "luxury",
                 tags: ["premium", "elegant", "sophisticated"]
             ),
             DesignStyle(
-                name: "Turkish",
-                description: "Traditional Turkish design with modern touches",
+                name: "style_turkish",
+                description: "style_turkish_desc",
                 image: "turkish",
                 tags: ["traditional", "cultural", "warm"]
             )

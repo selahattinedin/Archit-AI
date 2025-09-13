@@ -5,6 +5,7 @@ struct AccountSettingsSection: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var showDeleteAccountAlert: Bool
     @Binding var showDeleteError: Bool
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         if authService.isAuthenticated {
@@ -14,14 +15,14 @@ struct AccountSettingsSection: View {
                 } label: {
                     HStack {
                         Image(systemName: "person.crop.circle.badge.minus")
-                        Text("Delete Account")
+                        Text("delete_account".localized(with: languageManager.languageUpdateTrigger))
                         Spacer()
                     }
                     .foregroundColor(.red)
                     .padding(.vertical, 8)
                 }
             } header: {
-                Text("Account")
+                Text("account".localized(with: languageManager.languageUpdateTrigger))
                     .textCase(.uppercase)
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.gray)

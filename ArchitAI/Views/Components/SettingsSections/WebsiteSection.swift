@@ -1,13 +1,14 @@
 import SwiftUI
 
 struct WebsiteSection: View {
+    @StateObject private var languageManager = LanguageManager.shared
     var body: some View {
         Section {
             Link(destination: URL(string: "https://architai.app")!) {
                 HStack {
                     Image(systemName: "globe")
                         .foregroundColor(.primary)
-                    Text("Website")
+                    Text("website".localized(with: languageManager.languageUpdateTrigger))
                     Spacer()
                     Image(systemName: "arrow.up.right.square")
                         .foregroundColor(.primary)
@@ -15,7 +16,7 @@ struct WebsiteSection: View {
                 }
             }
         } header: {
-            Text("Website")
+            Text("website".localized(with: languageManager.languageUpdateTrigger))
                 .textCase(.uppercase)
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(.gray)

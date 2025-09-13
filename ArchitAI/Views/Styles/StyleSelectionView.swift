@@ -5,16 +5,19 @@ struct StyleSelectionView: View {
     @Binding var selectedStyle: DesignStyle?
     
     var body: some View {
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = UIDevice.current.userInterfaceIdiom == .pad ? (screenWidth - 80) / 3 : (screenWidth - 48) / 2
+        
         let columns = UIDevice.current.userInterfaceIdiom == .pad ? [
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible())
+            GridItem(.fixed(itemWidth)),
+            GridItem(.fixed(itemWidth)),
+            GridItem(.fixed(itemWidth))
         ] : [
-            GridItem(.flexible()),
-            GridItem(.flexible())
+            GridItem(.fixed(itemWidth)),
+            GridItem(.fixed(itemWidth))
         ]
         
-        LazyVGrid(columns: columns, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16) {
+        LazyVGrid(columns: columns, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 16) {
             ForEach(styles) { style in
                 StyleCard(style: style, isSelected: selectedStyle?.id == style.id)
                     .onTapGesture {
@@ -24,6 +27,7 @@ struct StyleSelectionView: View {
                     }
             }
         }
+        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 16)
     }
 }
 
@@ -31,6 +35,11 @@ private struct StyleCard: View {
     let style: DesignStyle
     let isSelected: Bool
     @Environment(\.colorScheme) var colorScheme
+    
+    private var itemWidth: CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        return UIDevice.current.userInterfaceIdiom == .pad ? (screenWidth - 80) / 3 : (screenWidth - 48) / 2
+    }
     
     var body: some View {
         ZStack {
@@ -67,11 +76,11 @@ private struct StyleCard: View {
                 }
                 
                 VStack(spacing: 4) {
-                    Text(style.name)
+                    Text(style.localizedName)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
                     
-                    Text(style.description)
+                    Text(style.localizedDescription)
                         .font(.system(size: 13))
                         .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
                         .multilineTextAlignment(.center)
@@ -80,10 +89,10 @@ private struct StyleCard: View {
                 .padding(.horizontal, 8)
                 .padding(.bottom, 12)
             }
-            .frame(maxWidth: .infinity)
+            .frame(width: itemWidth - (UIDevice.current.userInterfaceIdiom == .pad ? 12 : 8))
             .background(
-                isSelected ? 
-                    Color.orange.opacity(0.1) : 
+                isSelected ?
+                    Color.orange.opacity(0.1) :
                     (colorScheme == .dark ? Constants.Colors.cardBackground : Color.white)
             )
             .cornerRadius(12)

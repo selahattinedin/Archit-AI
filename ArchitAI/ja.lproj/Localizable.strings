@@ -1,0 +1,204 @@
+// General
+"app_name" = "ArchitAI";
+"continue" = "続行";
+"cancel" = "キャンセル";
+"back" = "戻る";
+"done" = "完了";
+"delete" = "削除";
+"delete_design" = "デザインを削除";
+"delete_design_message" = "このデザインを削除してもよろしいですか？この操作は元に戻せません。";
+"delete_design_confirm" = "デザインを削除";
+"share" = "共有";
+"save" = "保存";
+"error" = "エラー";
+"loading" = "読み込み中...";
+"please_wait" = "お待ちください...";
+"step_format" = "ステップ %d/%d";
+"generating" = "生成中...";
+
+// Navigation & Tabs
+"home" = "ホーム";
+"create" = "作成";
+"history" = "履歴";
+"settings" = "設定";
+
+// Home View
+"archit_ai" = "Archit AI";
+
+// Design Cards
+"room_design_title" = "ルームデザイン";
+"room_design_subtitle" = "写真をアップロードして、スタイルを選び、AIにルームをデザインさせましょう！";
+"bedroom_design_title" = "ベッドルームデザイン";
+"bedroom_design_subtitle" = "ベッドルームを居心地の良いスタイリッシュな空間に変身させましょう！";
+"balcony_design_title" = "バルコニーデザイン";
+"balcony_design_subtitle" = "バルコニーを居心地の良いスタイリッシュな空間に変身させましょう！";
+"garden_design_title" = "ガーデンデザイン";
+"garden_design_subtitle" = "写真をアップロードして、スタイルを選び、AIにガーデンをデザインさせましょう！";
+"bathroom_design_title" = "バスルームデザイン";
+"bathroom_design_subtitle" = "モダンでスタイリッシュなデザインでバスルームを変身させましょう！";
+
+// Create Design Flow
+"select_photo" = "変身させる写真を選択";
+"tap_to_choose" = "ギャラリーから選択するか写真を撮るためにタップ";
+"upload_photo" = "写真をアップロード";
+"example_photos" = "サンプル写真";
+"choose_design_style" = "デザインスタイルを選択";
+"select_aesthetic" = "お好みのインテリアデザイン美学を選択";
+"generate_design" = "デザインを生成";
+"transform_room" = "ルームを変身";
+"continue_button" = "続行";
+
+// Design Details
+"before" = "前";
+"after" = "後";
+"room_type" = "ルームタイプ";
+"style" = "スタイル";
+"description" = "説明";
+
+// History View
+"loading_designs" = "デザインを読み込み中...";
+"error_occurred" = "エラーが発生しました";
+"no_designs" = "まだデザインがありません";
+"create_first_design" = "最初のデザインを作成するには作成タブに移動してください";
+
+// Time Formats
+"year" = "年";
+"years" = "年";
+"month" = "月";
+"months" = "月";
+"week" = "週";
+"weeks" = "週";
+"day" = "日";
+"days" = "日";
+"hour" = "時間";
+"hours" = "時間";
+"minute" = "分";
+"minutes" = "分";
+"second" = "秒";
+"seconds" = "秒";
+"ago" = "前";
+
+// Success View
+"design_generated" = "デザインが生成されました！";
+"design_success_message" = "デザインが正常に作成され、履歴に保存されました。";
+
+// Settings
+"language" = "言語";
+"select_language" = "言語を選択";
+"version" = "バージョン";
+"about" = "について";
+"appearance" = "外観";
+"theme" = "テーマ";
+"light_theme" = "ライトテーマ";
+"dark_theme" = "ダークテーマ";
+"system_theme" = "システム";
+
+// Account
+"account" = "アカウント";
+"delete_account" = "アカウントを削除";
+"delete_account_message" = "アカウントを削除してもよろしいですか？この操作は元に戻せません。";
+"delete_account_error" = "アカウントの削除中にエラーが発生しました。後でもう一度お試しください。";
+
+// Premium Features
+"premium" = "プレミアム";
+"premium_status_active" = "アクティブ";
+"premium_status_inactive" = "非アクティブ";
+"upgrade_to_premium" = "プレミアムにアップグレード";
+"premium_features" = "プレミアム機能";
+"unlock_premium" = "プレミアムをアンロック";
+"best_value" = "最高の価値";
+"continue_with_annual" = "年間で続行";
+"no_offers" = "現在利用可能なオファーはありません。";
+"loading_offers" = "オファーを読み込み中...";
+
+// Legal & Support
+"legal" = "法的";
+"legal_and_support" = "法的・サポート";
+"privacy_policy" = "プライバシーポリシー";
+"terms_of_service" = "サービス利用規約";
+"terms_of_use" = "利用規約 (EULA)";
+"eula" = "エンドユーザーライセンス契約";
+"website" = "ウェブサイト";
+"contact_us" = "お問い合わせ";
+
+// Transform Text
+"transform_space" = "AIでスペースを変身";
+
+// Loading States
+"please_wait_designing" = "お待ちください、デザイン中...";
+"something_went_wrong" = "何かが間違っています";
+
+// Room Names
+"room_living_room" = "リビングルーム";
+"room_dining_room" = "ダイニングルーム";
+"room_bedroom" = "ベッドルーム";
+"room_kids_room" = "キッズルーム";
+"room_kitchen" = "キッチン";
+"room_bathroom" = "バスルーム";
+"room_home_office" = "ホームオフィス";
+"room_study_room" = "スタディルーム";
+"room_garden" = "ガーデン";
+"room_balcony" = "バルコニー";
+"room_entertainment" = "エンターテイメント";
+"room_entryway" = "エントランス";
+"room_home_gym" = "ホームジム";
+"room_library" = "ライブラリ";
+
+// Room Descriptions
+"room_living_room_desc" = "メインのリビングスペースを変身";
+"room_dining_room_desc" = "エレガントなダイニング体験を作成";
+"room_bedroom_desc" = "完璧な聖域を作成";
+"room_kids_room_desc" = "楽しい子供の空間を作成";
+"room_kitchen_desc" = "夢のキッチンスペースをデザイン";
+"room_bathroom_desc" = "豪華なスパ体験を作成";
+"room_home_office_desc" = "生産的なワークスペースを構築";
+"room_study_room_desc" = "集中した学習環境を作成";
+"room_garden_desc" = "屋外のオアシスをデザイン";
+"room_balcony_desc" = "屋外エリアを変身";
+"room_entertainment_desc" = "エンターテイメントスペースを構築";
+"room_entryway_desc" = "整理されたエントランススペースを作成";
+"room_home_gym_desc" = "フィットネスの聖域を作成";
+"room_library_desc" = "読書の聖域をデザイン";
+
+// Room Categories
+"room_category_living" = "リビング";
+"room_category_bedroom" = "ベッドルーム";
+"room_category_kitchen" = "キッチン";
+"room_category_bathroom" = "バスルーム";
+"room_category_workspace" = "ワークスペース";
+"room_category_outdoor" = "屋外";
+"room_category_entertainment" = "エンターテイメント";
+"room_category_storage" = "ストレージ";
+"room_category_specialty" = "スペシャルティ";
+
+// Design Styles
+"style_organic_modern" = "オーガニックモダン";
+"style_vintage" = "ヴィンテージ";
+"style_gothic" = "ゴシック";
+"style_gamer" = "ゲーマー";
+"style_technoland" = "テクノランド";
+"style_bohem" = "ボヘミアン";
+"style_classic" = "クラシック";
+"style_dark_theme" = "ダークテーマ";
+"style_light_theme" = "ライトテーマ";
+"style_industrial" = "インダストリアル";
+"style_japandi" = "ジャパンディ";
+"style_loft" = "ロフト";
+"style_luxury" = "ラグジュアリー";
+"style_turkish" = "トルコ";
+
+// Style Descriptions
+"style_organic_modern_desc" = "クリーンなモダンラインと自然素材";
+"style_vintage_desc" = "レトロな要素を持つクラシックで時代を超えたデザイン";
+"style_gothic_desc" = "建築要素を持つダークでドラマチック";
+"style_gamer_desc" = "RGBライティングのモダンゲーミングセットアップ";
+"style_technoland_desc" = "ハイテク要素の未来的デザイン";
+"style_bohem_desc" = "自然要素を持つ自由奔放で芸術的";
+"style_classic_desc" = "伝統的要素を持つ時代を超えたエレガンス";
+"style_dark_theme_desc" = "ダークトーンで大胆で洗練された";
+"style_light_theme_desc" = "自然光で明るく風通しの良い";
+"style_industrial_desc" = "露出要素を持つ生々しく都市的な";
+"style_japandi_desc" = "日本のミニマリズムとスカンジナビアデザインの融合";
+"style_loft_desc" = "高い天井とオープンスペースの都市生活";
+"style_luxury_desc" = "プレミアム仕上げの豪華なデザイン";
+"style_turkish_desc" = "モダンなタッチを持つ伝統的トルコデザイン";

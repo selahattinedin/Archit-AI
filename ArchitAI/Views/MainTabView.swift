@@ -5,7 +5,9 @@ struct MainTabView: View {
     @StateObject private var createViewModel: CreateDesignViewModel
     @EnvironmentObject var authService: FirebaseAuthService
     @State private var selectedTab = 0
+    @State private var viewRefreshTrigger = false
     @Environment(\.colorScheme) var colorScheme
+    @StateObject private var languageManager = LanguageManager.shared
     
     init() {
         let homeVM = HomeViewModel()
@@ -72,7 +74,7 @@ struct MainTabView: View {
                 .environmentObject(authService)
                 .tabItem {
                     Image(systemName: "house.fill")
-                    Text("Home")
+                    Text("home".localized(with: languageManager.languageUpdateTrigger))
                 }
                 .tag(0)
             
@@ -81,18 +83,18 @@ struct MainTabView: View {
                 .environmentObject(homeViewModel)
                 .tabItem {
                     Image(systemName: "plus.circle.fill")
-                    Text("Create")
+                    Text("create".localized(with: languageManager.languageUpdateTrigger))
                 }
                 .tag(1)
             
             HistoryView()
                 .environmentObject(homeViewModel)
                 .environmentObject(authService)
-                .tabItem {
-                    Image(systemName: "clock.fill")
-                    Text("History")
-                }
-                .tag(2)
+            .tabItem {
+                Image(systemName: "clock.fill")
+                Text("history".localized(with: languageManager.languageUpdateTrigger))
+            }
+            .tag(2)
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("SwitchToHistoryTab"))) { _ in
             withAnimation {
@@ -110,6 +112,10 @@ struct MainTabView: View {
             } else {
                 homeViewModel.setUserID(nil)
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init("LanguageChanged"))) { _ in
+            // Force view refresh
+            viewRefreshTrigger.toggle()
         }
     }
 }

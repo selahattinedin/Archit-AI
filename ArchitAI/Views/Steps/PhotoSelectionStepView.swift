@@ -4,6 +4,7 @@ struct PhotoSelectionStepView: View {
     @Binding var selectedPhoto: UIImage?
     let onContinue: () -> Void
     @Environment(\.colorScheme) var colorScheme
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -20,7 +21,7 @@ struct PhotoSelectionStepView: View {
             // Fixed Button at bottom
             VStack(spacing: 0) {
                 ContinueButton(
-                    title: "Continue",
+                    title: "continue".localized(with: languageManager.languageUpdateTrigger),
                     isEnabled: selectedPhoto != nil,
                     action: onContinue
                 )

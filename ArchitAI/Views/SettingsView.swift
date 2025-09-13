@@ -7,35 +7,22 @@ struct SettingsView: View {
     @EnvironmentObject var purchases: RevenueCatService
     @State private var showDeleteAccountAlert = false
     @State private var showDeleteError = false
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         NavigationView {
             List {
-                PremiumSettingsSection()
+                PremiumStatusSection()
                 AppearanceSettingsSection()
+                LanguageSettingsSection()
                 LegalSection()
                 WebsiteSection()
                 ContactSection()
                 
-                Section {
-                    HStack {
-                        Text("Version")
-                            .foregroundColor(.primary)
-                        Spacer()
-                        Text("1.0.0")
-                            .foregroundColor(.gray)
-                    }
-                } header: {
-                    Text("About")
-                        .textCase(.uppercase)
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(.gray)
-                }
-                
                 AccountSettingsSection(showDeleteAccountAlert: $showDeleteAccountAlert,
                                     showDeleteError: $showDeleteError)
             }
-            .navigationTitle("Settings")
+            .navigationTitle("settings".localized(with: languageManager.languageUpdateTrigger))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -48,9 +35,9 @@ struct SettingsView: View {
                     }
                 }
             }
-            .alert("Delete Account", isPresented: $showDeleteAccountAlert) {
-                Button("Cancel", role: .cancel) {}
-                Button("Delete", role: .destructive) {
+            .alert("delete_account".localized(with: languageManager.languageUpdateTrigger), isPresented: $showDeleteAccountAlert) {
+                Button("cancel".localized(with: languageManager.languageUpdateTrigger), role: .cancel) {}
+                Button("delete".localized(with: languageManager.languageUpdateTrigger), role: .destructive) {
                     Task {
                         do {
                             try await authService.deleteAccount()
@@ -61,12 +48,12 @@ struct SettingsView: View {
                     }
                 }
             } message: {
-                Text("Are you sure you want to delete your account? This action cannot be undone.")
+                Text("delete_account_message".localized(with: languageManager.languageUpdateTrigger))
             }
-            .alert("Error", isPresented: $showDeleteError) {
-                Button("OK", role: .cancel) {}
+            .alert("error".localized(with: languageManager.languageUpdateTrigger), isPresented: $showDeleteError) {
+                Button("done".localized(with: languageManager.languageUpdateTrigger), role: .cancel) {}
             } message: {
-                Text("An error occurred while deleting your account. Please try again later.")
+                Text("delete_account_error".localized(with: languageManager.languageUpdateTrigger))
             }
         }
     }

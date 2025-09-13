@@ -1,0 +1,204 @@
+// General
+"app_name" = "ArchitAI";
+"continue" = "Continua";
+"cancel" = "Annulla";
+"back" = "Indietro";
+"done" = "Fatto";
+"delete" = "Elimina";
+"delete_design" = "Elimina design";
+"delete_design_message" = "Sei sicuro di voler eliminare questo design? Questa azione non può essere annullata.";
+"delete_design_confirm" = "Elimina design";
+"share" = "Condividi";
+"save" = "Salva";
+"error" = "Errore";
+"loading" = "Caricamento...";
+"please_wait" = "Attendere prego...";
+"step_format" = "Passo %d/%d";
+"generating" = "Generazione...";
+
+// Navigation & Tabs
+"home" = "Home";
+"create" = "Crea";
+"history" = "Cronologia";
+"settings" = "Impostazioni";
+
+// Home View
+"archit_ai" = "Archit AI";
+
+// Design Cards
+"room_design_title" = "Design della Stanza";
+"room_design_subtitle" = "Carica una foto, scegli uno stile e lascia che l'IA progetti la stanza!";
+"bedroom_design_title" = "Design della Camera da Letto";
+"bedroom_design_subtitle" = "Trasforma la tua camera da letto in uno spazio confortevole ed elegante!";
+"balcony_design_title" = "Design del Balcone";
+"balcony_design_subtitle" = "Trasforma il tuo balcone in uno spazio confortevole ed elegante!";
+"garden_design_title" = "Design del Giardino";
+"garden_design_subtitle" = "Carica una foto, scegli uno stile e lascia che l'IA progetti il giardino!";
+"bathroom_design_title" = "Design del Bagno";
+"bathroom_design_subtitle" = "Trasforma il tuo bagno con design moderni ed eleganti!";
+
+// Create Design Flow
+"select_photo" = "Seleziona una foto da trasformare";
+"tap_to_choose" = "Tocca per scegliere dalla galleria o scattare una foto";
+"upload_photo" = "Carica foto";
+"example_photos" = "Foto di esempio";
+"choose_design_style" = "Scegli lo stile di design";
+"select_aesthetic" = "Seleziona la tua estetica di design d'interni preferita";
+"generate_design" = "Genera design";
+"transform_room" = "Trasforma la stanza";
+"continue_button" = "Continua";
+
+// Design Details
+"before" = "Prima";
+"after" = "Dopo";
+"room_type" = "Tipo di stanza";
+"style" = "Stile";
+"description" = "Descrizione";
+
+// History View
+"loading_designs" = "Caricamento design...";
+"error_occurred" = "Si è verificato un errore";
+"no_designs" = "Nessun design ancora";
+"create_first_design" = "Vai alla scheda Crea per creare il tuo primo design";
+
+// Time Formats
+"year" = "anno";
+"years" = "anni";
+"month" = "mese";
+"months" = "mesi";
+"week" = "settimana";
+"weeks" = "settimane";
+"day" = "giorno";
+"days" = "giorni";
+"hour" = "ora";
+"hours" = "ore";
+"minute" = "minuto";
+"minutes" = "minuti";
+"second" = "secondo";
+"seconds" = "secondi";
+"ago" = "fa";
+
+// Success View
+"design_generated" = "Design generato!";
+"design_success_message" = "Il tuo design è stato creato con successo e salvato nella cronologia.";
+
+// Settings
+"language" = "Lingua";
+"select_language" = "Seleziona lingua";
+"version" = "Versione";
+"about" = "Informazioni";
+"appearance" = "Aspetto";
+"theme" = "Tema";
+"light_theme" = "Tema chiaro";
+"dark_theme" = "Tema scuro";
+"system_theme" = "Sistema";
+
+// Account
+"account" = "Account";
+"delete_account" = "Elimina account";
+"delete_account_message" = "Sei sicuro di voler eliminare il tuo account? Questa azione non può essere annullata.";
+"delete_account_error" = "Si è verificato un errore durante l'eliminazione del tuo account. Riprova più tardi.";
+
+// Premium Features
+"premium" = "PREMIUM";
+"premium_status_active" = "Attivo";
+"premium_status_inactive" = "Inattivo";
+"upgrade_to_premium" = "Passa a Premium";
+"premium_features" = "Funzionalità Premium";
+"unlock_premium" = "Sblocca Premium";
+"best_value" = "Miglior valore";
+"continue_with_annual" = "Continua con l'abbonamento annuale";
+"no_offers" = "Nessuna offerta disponibile al momento.";
+"loading_offers" = "Caricamento offerte...";
+
+// Legal & Support
+"legal" = "Legale";
+"legal_and_support" = "Legale e Supporto";
+"privacy_policy" = "Informativa sulla privacy";
+"terms_of_service" = "Termini di servizio";
+"terms_of_use" = "Termini di utilizzo (EULA)";
+"eula" = "Contratto di licenza utente finale";
+"website" = "Sito web";
+"contact_us" = "Contattaci";
+
+// Transform Text
+"transform_space" = "Trasforma il tuo spazio con l'IA";
+
+// Loading States
+"please_wait_designing" = "Attendere prego, progettazione in corso...";
+"something_went_wrong" = "Qualcosa è andato storto";
+
+// Room Names
+"room_living_room" = "Soggiorno";
+"room_dining_room" = "Sala da pranzo";
+"room_bedroom" = "Camera da letto";
+"room_kids_room" = "Camera dei bambini";
+"room_kitchen" = "Cucina";
+"room_bathroom" = "Bagno";
+"room_home_office" = "Ufficio in casa";
+"room_study_room" = "Studio";
+"room_garden" = "Giardino";
+"room_balcony" = "Balcone";
+"room_entertainment" = "Intrattenimento";
+"room_entryway" = "Ingresso";
+"room_home_gym" = "Palestra in casa";
+"room_library" = "Biblioteca";
+
+// Room Descriptions
+"room_living_room_desc" = "Trasforma il tuo spazio di vita principale";
+"room_dining_room_desc" = "Crea un'esperienza di pranzo elegante";
+"room_bedroom_desc" = "Crea il tuo santuario perfetto";
+"room_kids_room_desc" = "Crea uno spazio bambini giocoso";
+"room_kitchen_desc" = "Progetta il tuo spazio cucina dei sogni";
+"room_bathroom_desc" = "Crea un'esperienza spa lussuosa";
+"room_home_office_desc" = "Costruisci il tuo spazio di lavoro produttivo";
+"room_study_room_desc" = "Crea un ambiente di studio concentrato";
+"room_garden_desc" = "Progetta la tua oasi esterna";
+"room_balcony_desc" = "Trasforma il tuo spazio esterno";
+"room_entertainment_desc" = "Costruisci il tuo spazio di intrattenimento";
+"room_entryway_desc" = "Crea uno spazio d'ingresso organizzato";
+"room_home_gym_desc" = "Crea il tuo santuario fitness";
+"room_library_desc" = "Progetta il tuo santuario della lettura";
+
+// Room Categories
+"room_category_living" = "Vita";
+"room_category_bedroom" = "Camera da letto";
+"room_category_kitchen" = "Cucina";
+"room_category_bathroom" = "Bagno";
+"room_category_workspace" = "Spazio di lavoro";
+"room_category_outdoor" = "Esterno";
+"room_category_entertainment" = "Intrattenimento";
+"room_category_storage" = "Magazzino";
+"room_category_specialty" = "Specialità";
+
+// Design Styles
+"style_organic_modern" = "Moderno Organico";
+"style_vintage" = "Vintage";
+"style_gothic" = "Gotico";
+"style_gamer" = "Gamer";
+"style_technoland" = "Technoland";
+"style_bohem" = "Bohemien";
+"style_classic" = "Classico";
+"style_dark_theme" = "Tema scuro";
+"style_light_theme" = "Tema chiaro";
+"style_industrial" = "Industriale";
+"style_japandi" = "Japandi";
+"style_loft" = "Loft";
+"style_luxury" = "Lusso";
+"style_turkish" = "Turco";
+
+// Style Descriptions
+"style_organic_modern_desc" = "Materiali naturali con linee moderne pulite";
+"style_vintage_desc" = "Design classico e senza tempo con elementi retrò";
+"style_gothic_desc" = "Scuro e drammatico con elementi architettonici";
+"style_gamer_desc" = "Setup di gioco moderno con illuminazione RGB";
+"style_technoland_desc" = "Design futuristico con elementi high-tech";
+"style_bohem_desc" = "Libero e artistico con elementi naturali";
+"style_classic_desc" = "Eleganza senza tempo con elementi tradizionali";
+"style_dark_theme_desc" = "Audace e raffinato con toni scuri";
+"style_light_theme_desc" = "Luminoso e arioso con luce naturale";
+"style_industrial_desc" = "Grezzo e urbano con elementi esposti";
+"style_japandi_desc" = "Minimalismo giapponese incontra il design scandinavo";
+"style_loft_desc" = "Vita urbana con soffitti alti e spazi aperti";
+"style_luxury_desc" = "Design opulento con finiture premium";
+"style_turkish_desc" = "Design turco tradizionale con accenti moderni";

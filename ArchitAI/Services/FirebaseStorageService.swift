@@ -71,15 +71,15 @@ class FirebaseStorageService: ObservableObject {
             "id": design.id.uuidString,
             "title": design.title,
             "style": [
-                "name": design.style.name,
-                "description": design.style.description,
+                "name": design.style.name, // Bu zaten localization key
+                "description": design.style.description, // Bu zaten localization key
                 "image": design.style.image,
                 "tags": design.style.tags
             ],
             "room": [
-                "name": design.room.name,
+                "name": design.room.name, // Bu zaten localization key
                 "icon": design.room.icon,
-                "description": design.room.description
+                "description": design.room.description // Bu zaten localization key
             ],
             "beforeImageURL": design.beforeImageURL ?? "",
             "afterImageURL": design.afterImageURL ?? "",
@@ -216,17 +216,33 @@ class FirebaseStorageService: ObservableObject {
         let styleData = data["style"] as? [String: Any] ?? [:]
         let roomData = data["room"] as? [String: Any] ?? [:]
         
+        // Stil için localization key'lerini bul
+        let styleName = styleData["name"] as? String ?? ""
+        let styleDesc = styleData["description"] as? String ?? ""
+        
+        // Eğer direkt string ise (eski veri), localization key'ine çevir
+        let styleNameKey = styleName.starts(with: "style_") ? styleName : "style_\(styleName.lowercased().replacingOccurrences(of: " ", with: "_"))"
+        let styleDescKey = styleDesc.starts(with: "style_") ? styleDesc : "style_\(styleName.lowercased().replacingOccurrences(of: " ", with: "_"))_desc"
+        
         let style = DesignStyle(
-            name: styleData["name"] as? String ?? "",
-            description: styleData["description"] as? String ?? "",
+            name: styleNameKey,
+            description: styleDescKey,
             image: styleData["image"] as? String ?? "photo",
             tags: styleData["tags"] as? [String] ?? []
         )
         
+        // Oda için localization key'lerini bul
+        let roomName = roomData["name"] as? String ?? ""
+        let roomDesc = roomData["description"] as? String ?? ""
+        
+        // Eğer direkt string ise (eski veri), localization key'ine çevir
+        let roomNameKey = roomName.starts(with: "room_") ? roomName : "room_\(roomName.lowercased().replacingOccurrences(of: " ", with: "_"))"
+        let roomDescKey = roomDesc.starts(with: "room_") ? roomDesc : "room_\(roomName.lowercased().replacingOccurrences(of: " ", with: "_"))_desc"
+        
         let room = Room(
-            name: roomData["name"] as? String ?? "",
+            name: roomNameKey,
             icon: roomData["icon"] as? String ?? "photo",
-            description: roomData["description"] as? String ?? "",
+            description: roomDescKey,
             category: RoomCategory(rawValue: roomData["category"] as? String ?? "living") ?? .living,
             gradientColors: roomData["gradientColors"] as? [String] ?? []
         )

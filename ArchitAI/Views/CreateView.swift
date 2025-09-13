@@ -14,6 +14,7 @@ struct CreateView: View {
     @State private var showPaywall = false
     @Binding var tabBarHidden: Bool
     @Environment(\.colorScheme) var colorScheme
+    @StateObject private var languageManager = LanguageManager.shared
     
     private let rooms = RoomProvider().getAllRooms()
     private let styles = StyleProvider.styles
@@ -35,7 +36,7 @@ struct CreateView: View {
                     )
                 }
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Create Design")
+                .navigationTitle("create".localized(with: languageManager.languageUpdateTrigger))
                 .navigationBarBackButtonHidden()
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -50,6 +51,7 @@ struct CreateView: View {
                             }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(Constants.Colors.textPrimary)
+                                    .accessibilityLabel("back".localized(with: languageManager.languageUpdateTrigger))
                             }
                         }
                     }
@@ -65,6 +67,7 @@ struct CreateView: View {
                             }) {
                                 Image(systemName: "xmark")
                                     .foregroundColor(Constants.Colors.textPrimary)
+                                    .accessibilityLabel("cancel".localized)
                             }
                         }
                     }
@@ -101,29 +104,21 @@ struct CreateView: View {
         .fullScreenCover(isPresented: $showPaywall) {
             PaywallView(purchasesService: purchases)
                 .onDisappear {
-                    // Paywall kapatıldığında showPaywall'ı false yap
                     showPaywall = false
                 }
         }
         .onAppear {
-            // Firebase user ID'yi CreateDesignViewModel'e set et
             viewModel.currentUserID = authService.currentUserId
             
-            // Premium kontrolü - abone değilse Paywall göster
             if !purchases.isPro {
                 showPaywall = true
             }
         }
         .onChange(of: purchases.isPro) { isPro in
-            // Premium durumu değiştiğinde paywall'ı güncelle
             if isPro {
-                // Kullanıcı premium oldu, paywall'ı kapat
                 showPaywall = false
-                print("✅ CreateView: User became premium, hiding paywall")
             } else {
-                // Kullanıcı premium değil, paywall'ı göster
                 showPaywall = true
-                print("❌ CreateView: User is not premium, showing paywall")
             }
         }
     }

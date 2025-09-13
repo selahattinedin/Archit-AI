@@ -5,6 +5,7 @@ struct RoomSelectionStepView: View {
     let onContinue: () -> Void
     @Environment(\.colorScheme) var colorScheme
     @State private var animateContent = false
+    @StateObject private var languageManager = LanguageManager.shared
     
     init(selectedRoom: Binding<Room?>, rooms: [Room], onContinue: @escaping () -> Void) {
         let vm = RoomSelectionViewModel(
@@ -94,11 +95,11 @@ struct RoomSelectionStepView: View {
                 }
 
                 VStack(spacing: 4) {
-                    Text(room.name)
+                    Text(room.localizedName)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
 
-                    Text(room.description)
+                    Text(room.localizedDescription)
                         .font(.system(size: 13))
                         .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
                         .multilineTextAlignment(.center)
@@ -125,7 +126,7 @@ struct RoomSelectionStepView: View {
     
     private var bottomButton: some View {
         ContinueButton(
-            title: "Continue",
+            title: "continue".localized(with: languageManager.languageUpdateTrigger),
             isEnabled: viewModel.selectedRoom != nil,
             action: onContinue
         )

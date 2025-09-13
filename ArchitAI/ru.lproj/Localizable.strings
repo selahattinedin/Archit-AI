@@ -1,0 +1,204 @@
+// General
+"app_name" = "ArchitAI";
+"continue" = "Продолжить";
+"cancel" = "Отмена";
+"back" = "Назад";
+"done" = "Готово";
+"delete" = "Удалить";
+"delete_design" = "Удалить дизайн";
+"delete_design_message" = "Вы уверены, что хотите удалить этот дизайн? Это действие нельзя отменить.";
+"delete_design_confirm" = "Удалить дизайн";
+"share" = "Поделиться";
+"save" = "Сохранить";
+"error" = "Ошибка";
+"loading" = "Загрузка...";
+"please_wait" = "Пожалуйста, подождите...";
+"step_format" = "Шаг %d/%d";
+"generating" = "Генерация...";
+
+// Navigation & Tabs
+"home" = "Главная";
+"create" = "Создать";
+"history" = "История";
+"settings" = "Настройки";
+
+// Home View
+"archit_ai" = "Archit AI";
+
+// Design Cards
+"room_design_title" = "Дизайн Комнаты";
+"room_design_subtitle" = "Загрузите фото, выберите стиль и создайте дизайн с ИИ!";
+"bedroom_design_title" = "Дизайн Спальни";
+"bedroom_design_subtitle" = "Превратите вашу спальню в уютное и стильное пространство!";
+"balcony_design_title" = "Дизайн Балкона";
+"balcony_design_subtitle" = "Превратите ваш балкон в уютное и стильное пространство!";
+"garden_design_title" = "Дизайн Сада";
+"garden_design_subtitle" = "Загрузите фото, выберите стиль и позвольте ИИ спроектировать сад!";
+"bathroom_design_title" = "Дизайн Ванной";
+"bathroom_design_subtitle" = "Превратите вашу ванную с современными и стильными дизайнами!";
+
+// Create Design Flow
+"select_photo" = "Выберите фото для трансформации";
+"tap_to_choose" = "Нажмите, чтобы выбрать из галереи или сделать фото";
+"upload_photo" = "Загрузить фото";
+"example_photos" = "Примеры фото";
+"choose_design_style" = "Выберите стиль дизайна";
+"select_aesthetic" = "Выберите вашу предпочтительную эстетику дизайна интерьера";
+"generate_design" = "Сгенерировать дизайн";
+"transform_room" = "Трансформировать комнату";
+"continue_button" = "Продолжить";
+
+// Design Details
+"before" = "До";
+"after" = "После";
+"room_type" = "Тип комнаты";
+"style" = "Стиль";
+"description" = "Описание";
+
+// History View
+"loading_designs" = "Загрузка дизайнов...";
+"error_occurred" = "Произошла ошибка";
+"no_designs" = "Пока нет дизайнов";
+"create_first_design" = "Перейдите на вкладку Создать, чтобы создать ваш первый дизайн";
+
+// Time Formats
+"year" = "год";
+"years" = "лет";
+"month" = "месяц";
+"months" = "месяцев";
+"week" = "неделя";
+"weeks" = "недель";
+"day" = "день";
+"days" = "дней";
+"hour" = "час";
+"hours" = "часов";
+"minute" = "минута";
+"minutes" = "минут";
+"second" = "секунда";
+"seconds" = "секунд";
+"ago" = "назад";
+
+// Success View
+"design_generated" = "Дизайн сгенерирован!";
+"design_success_message" = "Ваш дизайн был успешно создан и сохранен в истории.";
+
+// Settings
+"language" = "Язык";
+"select_language" = "Выберите язык";
+"version" = "Версия";
+"about" = "О приложении";
+"appearance" = "Внешний вид";
+"theme" = "Тема";
+"light_theme" = "Светлая тема";
+"dark_theme" = "Темная тема";
+"system_theme" = "Системная";
+
+// Account
+"account" = "Аккаунт";
+"delete_account" = "Удалить аккаунт";
+"delete_account_message" = "Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить.";
+"delete_account_error" = "Произошла ошибка при удалении вашего аккаунта. Пожалуйста, попробуйте позже.";
+
+// Premium Features
+"premium" = "ПРЕМИУМ";
+"premium_status_active" = "Активен";
+"premium_status_inactive" = "Неактивен";
+"upgrade_to_premium" = "Перейти на Премиум";
+"premium_features" = "Премиум функции";
+"unlock_premium" = "Разблокировать Премиум";
+"best_value" = "Лучшая цена";
+"continue_with_annual" = "Продолжить с годовым планом";
+"no_offers" = "В настоящее время предложения недоступны.";
+"loading_offers" = "Загрузка предложений...";
+
+// Legal & Support
+"legal" = "Правовая информация";
+"legal_and_support" = "Правовая информация и Поддержка";
+"privacy_policy" = "Политика конфиденциальности";
+"terms_of_service" = "Условия сервиса";
+"terms_of_use" = "Условия использования (EULA)";
+"eula" = "Лицензионное соглашение с конечным пользователем";
+"website" = "Веб-сайт";
+"contact_us" = "Связаться с нами";
+
+// Transform Text
+"transform_space" = "Трансформируйте ваше пространство с ИИ";
+
+// Loading States
+"please_wait_designing" = "Пожалуйста, подождите, проектирование...";
+"something_went_wrong" = "Что-то пошло не так";
+
+// Room Names
+"room_living_room" = "Гостиная";
+"room_dining_room" = "Столовая";
+"room_bedroom" = "Спальня";
+"room_kids_room" = "Детская";
+"room_kitchen" = "Кухня";
+"room_bathroom" = "Ванная";
+"room_home_office" = "Домашний офис";
+"room_study_room" = "Кабинет";
+"room_garden" = "Сад";
+"room_balcony" = "Балкон";
+"room_entertainment" = "Развлечения";
+"room_entryway" = "Прихожая";
+"room_home_gym" = "Домашний спортзал";
+"room_library" = "Библиотека";
+
+// Room Descriptions
+"room_living_room_desc" = "Трансформируйте ваше основное жилое пространство";
+"room_dining_room_desc" = "Создайте элегантный обеденный опыт";
+"room_bedroom_desc" = "Создайте ваше идеальное убежище";
+"room_kids_room_desc" = "Создайте игровое детское пространство";
+"room_kitchen_desc" = "Спроектируйте кухню вашей мечты";
+"room_bathroom_desc" = "Создайте роскошный спа-опыт";
+"room_home_office_desc" = "Постройте ваше продуктивное рабочее пространство";
+"room_study_room_desc" = "Создайте сфокусированную учебную среду";
+"room_garden_desc" = "Спроектируйте ваш наружный оазис";
+"room_balcony_desc" = "Трансформируйте ваше наружное пространство";
+"room_entertainment_desc" = "Постройте ваше развлекательное пространство";
+"room_entryway_desc" = "Создайте организованное входное пространство";
+"room_home_gym_desc" = "Создайте ваше фитнес-убежище";
+"room_library_desc" = "Спроектируйте ваше читательское убежище";
+
+// Room Categories
+"room_category_living" = "Жилье";
+"room_category_bedroom" = "Спальня";
+"room_category_kitchen" = "Кухня";
+"room_category_bathroom" = "Ванная";
+"room_category_workspace" = "Рабочее пространство";
+"room_category_outdoor" = "Наружное";
+"room_category_entertainment" = "Развлечения";
+"room_category_storage" = "Хранение";
+"room_category_specialty" = "Специальность";
+
+// Design Styles
+"style_organic_modern" = "Органический Модерн";
+"style_vintage" = "Винтаж";
+"style_gothic" = "Готический";
+"style_gamer" = "Геймер";
+"style_technoland" = "Технолэнд";
+"style_bohem" = "Богемный";
+"style_classic" = "Классический";
+"style_dark_theme" = "Темная тема";
+"style_light_theme" = "Светлая тема";
+"style_industrial" = "Индустриальный";
+"style_japandi" = "Джапанди";
+"style_loft" = "Лофт";
+"style_luxury" = "Роскошь";
+"style_turkish" = "Турецкий";
+
+// Style Descriptions
+"style_organic_modern_desc" = "Натуральные материалы с чистыми современными линиями";
+"style_vintage_desc" = "Классический и вневременной дизайн с ретро элементами";
+"style_gothic_desc" = "Темный и драматичный с архитектурными элементами";
+"style_gamer_desc" = "Современная игровая установка с RGB освещением";
+"style_technoland_desc" = "Футуристический дизайн с высокотехнологичными элементами";
+"style_bohem_desc" = "Свободный и художественный с натуральными элементами";
+"style_classic_desc" = "Вневременная элегантность с традиционными элементами";
+"style_dark_theme_desc" = "Смелый и изысканный с темными тонами";
+"style_light_theme_desc" = "Светлый и воздушный с естественным светом";
+"style_industrial_desc" = "Грубый и городской с открытыми элементами";
+"style_japandi_desc" = "Японский минимализм встречается со скандинавским дизайном";
+"style_loft_desc" = "Городская жизнь с высокими потолками и открытыми пространствами";
+"style_luxury_desc" = "Роскошный дизайн с премиум отделкой";
+"style_turkish_desc" = "Традиционный турецкий дизайн с современными акцентами";

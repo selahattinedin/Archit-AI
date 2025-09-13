@@ -109,7 +109,7 @@ struct PhotoUploadView: View {
                             }
                             
                             VStack(spacing: 12) {
-                                Text("Select a photo to transform")
+                                Text("select_photo".localized)
                                     .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .semibold))
                                     .foregroundColor(
                                         colorScheme == .dark ? 
@@ -117,7 +117,7 @@ struct PhotoUploadView: View {
                                             .primary.opacity(0.8)
                                     )
                                 
-                                Text("Tap to choose from gallery or take a photo")
+                                Text("tap_to_choose".localized)
                                     .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .regular))
                                     .foregroundColor(
                                         colorScheme == .dark ? 
@@ -133,7 +133,7 @@ struct PhotoUploadView: View {
                                     HStack(spacing: 6) {
                                         Image(systemName: "plus.circle.fill")
                                             .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .medium))
-                                        Text("Upload Photo")
+                                        Text("upload_photo".localized)
                                             .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 18 : 14, weight: .medium))
                                     }
                                     .foregroundColor(colorScheme == .dark ? .black : .white)
@@ -157,7 +157,7 @@ struct PhotoUploadView: View {
             
             // Example Photos - Moved to bottom (above continue button)
             VStack(alignment: .leading, spacing: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16) {
-                Text("Example Photos")
+                Text("example_photos".localized)
                     .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 22 : 17, weight: .semibold))
                     .foregroundColor(Constants.Colors.textPrimary)
                 
@@ -192,15 +192,15 @@ struct PhotoUploadView: View {
                 }
             }
         }
-        .confirmationDialog("Choose Photo", isPresented: $isShowingActionSheet) {
-            Button("Take Photo") {
+        .confirmationDialog("choose_photo".localized, isPresented: $isShowingActionSheet) {
+            Button("take_photo".localized) {
                 isShowingCamera = true
             }
-            Button("Choose from Library") {
+            Button("choose_from_library".localized) {
                 isShowingLibrary = true
             }
             if selectedImage != nil {
-                Button("Remove Photo", role: .destructive) {
+                Button("remove_photo".localized, role: .destructive) {
                     selectedImage = nil
                 }
             }

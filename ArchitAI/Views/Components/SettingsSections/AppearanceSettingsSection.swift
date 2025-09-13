@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AppearanceSettingsSection: View {
     @AppStorage("selectedTheme") private var selectedTheme: Theme = .system
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         Section {
@@ -35,7 +36,7 @@ struct AppearanceSettingsSection: View {
                 }
             }
         } header: {
-            Text("Appearance")
+            Text("appearance".localized(with: languageManager.languageUpdateTrigger))
                 .textCase(.uppercase)
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(.gray)

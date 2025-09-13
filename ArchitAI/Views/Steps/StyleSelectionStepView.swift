@@ -9,6 +9,7 @@ struct StyleSelectionStepView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var animateContent = false
     @State private var selectedIndex: Int? = nil
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -61,12 +62,12 @@ struct StyleSelectionStepView: View {
             .animation(.spring(response: 0.6, dampingFraction: 0.8), value: animateContent)
             
             VStack(spacing: 12) {
-                Text("Choose Design Style")
+                Text("choose_design_style".localized(with: languageManager.languageUpdateTrigger))
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(Constants.Colors.textPrimary)
                     .multilineTextAlignment(.center)
                 
-                Text("Select your preferred interior design aesthetic")
+                Text("select_aesthetic".localized(with: languageManager.languageUpdateTrigger))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(Constants.Colors.textSecondary)
                     .multilineTextAlignment(.center)
@@ -150,12 +151,12 @@ struct StyleSelectionStepView: View {
                 
                 // Content Section
                 VStack(spacing: 8) {
-                    Text(style.name)
+                    Text(style.name.localized)
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(Constants.Colors.textPrimary)
                         .multilineTextAlignment(.center)
                     
-                    Text(style.description)
+                    Text(style.description.localized)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(Constants.Colors.textSecondary)
                         .multilineTextAlignment(.center)
@@ -168,7 +169,7 @@ struct StyleSelectionStepView: View {
             .background(
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .fill(
-                        isSelected ? 
+                        isSelected ?
                             LinearGradient(
                                 gradient: Gradient(colors: [Color.purple.opacity(0.08), Color.blue.opacity(0.03)]),
                                 startPoint: .topLeading,
@@ -184,7 +185,7 @@ struct StyleSelectionStepView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .stroke(
-                        isSelected ? 
+                        isSelected ?
                             LinearGradient(
                                 gradient: Gradient(colors: [Color.purple.opacity(0.4), Color.blue.opacity(0.2)]),
                                 startPoint: .topLeading,
@@ -199,8 +200,8 @@ struct StyleSelectionStepView: View {
                     )
             )
             .shadow(
-                color: isSelected ? 
-                    Color.purple.opacity(0.15) : 
+                color: isSelected ?
+                    Color.purple.opacity(0.15) :
                     .black.opacity(0.04),
                 radius: isSelected ? 15 : 8,
                 x: 0,
@@ -241,7 +242,7 @@ struct StyleSelectionStepView: View {
             
             // Error Content
             VStack(alignment: .leading, spacing: 4) {
-                Text("Something went wrong")
+                Text("something_went_wrong".localized(with: languageManager.languageUpdateTrigger))
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.red)
                 
@@ -282,7 +283,7 @@ struct StyleSelectionStepView: View {
     // MARK: - Bottom Button (used in safeAreaInset)
     private var bottomButton: some View {
         ContinueButton(
-            title: isLoading ? "Generating..." : "Transform Room",
+            title: isLoading ? "generating".localized : "transform_room".localized,
             icon: "wand.and.stars",
             isLoading: isLoading,
             isEnabled: selectedStyle != nil && !isLoading,

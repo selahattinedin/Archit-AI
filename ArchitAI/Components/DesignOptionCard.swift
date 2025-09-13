@@ -82,7 +82,7 @@ struct DesignOptionCard: View {
                         VStack {
                             Spacer()
                             HStack {
-                                Text(showingAfterImage ? "After" : "Before")
+                                Text(showingAfterImage ? "after".localized : "before".localized)
                                     .font(.system(size: 14, weight: .semibold))
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 16)

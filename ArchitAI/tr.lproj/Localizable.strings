@@ -1,0 +1,203 @@
+// General
+"app_name" = "ArchitAI";
+"continue" = "Devam Et";
+"cancel" = "İptal";
+"back" = "Geri";
+"done" = "Tamam";
+"delete" = "Sil";
+"delete_design" = "Tasarımı Sil";
+"delete_design_message" = "Bu tasarımı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.";
+"delete_design_confirm" = "Tasarımı Sil";
+"share" = "Paylaş";
+"save" = "Kaydet";
+"error" = "Hata";
+"loading" = "Yükleniyor...";
+"please_wait" = "Lütfen bekleyin...";
+"step_format" = "Adım %d/%d";
+"generating" = "Oluşturuluyor...";
+
+// Navigation & Tabs
+"home" = "Ana Sayfa";
+"create" = "Oluştur";
+"history" = "Geçmiş";
+"settings" = "Ayarlar";
+
+// Home View
+"archit_ai" = "archit ai";
+
+// Design Cards
+"room_design_title" = "Oda Tasarımı";
+"room_design_subtitle" = "Bir fotoğraf yükle, stil seç, AI odanı tasarlasın!";
+"bedroom_design_title" = "Yatak Odası Tasarımı";
+"bedroom_design_subtitle" = "Yatak odanı şık ve konforlu bir alana dönüştür!";
+"balcony_design_title" = "Balkon Tasarımı";
+"balcony_design_subtitle" = "Balkonunu şık ve konforlu bir alana dönüştür!";
+"garden_design_title" = "Bahçe Tasarımı";
+"garden_design_subtitle" = "Bir fotoğraf yükle, stil seç, AI bahçeni tasarlasın!";
+"bathroom_design_title" = "Banyo Tasarımı";
+"bathroom_design_subtitle" = "Banyonu modern ve şık tasarımlarla dönüştür!";
+
+// Create Design Flow
+"select_photo" = "Dönüştürmek için bir fotoğraf seç";
+"tap_to_choose" = "Galeriden seçmek veya fotoğraf çekmek için dokun";
+"upload_photo" = "Fotoğraf Yükle";
+"example_photos" = "Örnek Fotoğraflar";
+"choose_design_style" = "Tasarım Stilini Seç";
+"select_aesthetic" = "Tercih ettiğin iç mekan tasarım stilini seç";
+"generate_design" = "Tasarım Oluştur";
+"transform_room" = "Odayı Dönüştür";
+"continue_button" = "Devam Et";
+
+// Design Details
+"before" = "Öncesi";
+"after" = "Sonrası";
+"room_type" = "Oda Tipi";
+"style" = "Stil";
+"description" = "Açıklama";
+
+// History View
+"loading_designs" = "Tasarımlar yükleniyor...";
+"error_occurred" = "Bir hata oluştu";
+"no_designs" = "Henüz tasarım yok";
+"create_first_design" = "İlk tasarımını oluşturmak için Oluştur sekmesine git";
+// Time Formats
+"year" = "yıl";
+"years" = "yıl";
+"month" = "ay";
+"months" = "ay";
+"week" = "hafta";
+"weeks" = "hafta";
+"day" = "gün";
+"days" = "gün";
+"hour" = "saat";
+"hours" = "saat";
+"minute" = "dakika";
+"minutes" = "dakika";
+"second" = "saniye";
+"seconds" = "saniye";
+"ago" = "önce";
+
+// Success View
+"design_generated" = "Tasarım Oluşturuldu!";
+"design_success_message" = "Tasarımınız başarıyla oluşturuldu ve geçmişe kaydedildi.";
+
+// Settings
+"language" = "Dil";
+"select_language" = "Dil Seç";
+"version" = "Versiyon";
+"about" = "Hakkında";
+"appearance" = "Görünüm";
+"theme" = "Tema";
+"light_theme" = "Açık Tema";
+"dark_theme" = "Koyu Tema";
+"system_theme" = "Sistem";
+
+// Account
+"account" = "Hesap";
+"delete_account" = "Hesabı Sil";
+"delete_account_message" = "Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.";
+"delete_account_error" = "Hesabınızı silerken bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+
+// Premium Features
+"premium" = "PREMIUM";
+"premium_status_active" = "Aktif";
+"premium_status_inactive" = "Aktif Değil";
+"upgrade_to_premium" = "Premium'a Yükselt";
+"premium_features" = "Premium Özellikler";
+"unlock_premium" = "Premium'u Aç";
+"best_value" = "En İyi Değer";
+"continue_with_annual" = "Yıllık ile Devam Et";
+"no_offers" = "Şu anda mevcut teklif yok.";
+"loading_offers" = "Teklifler yükleniyor...";
+
+// Legal & Support
+"legal" = "Yasal";
+"legal_and_support" = "Yasal ve Destek";
+"privacy_policy" = "Gizlilik Politikası";
+"terms_of_service" = "Hizmet Koşulları";
+"terms_of_use" = "Kullanım Şartları (EULA)";
+"eula" = "Son Kullanıcı Lisans Sözleşmesi";
+"website" = "Website";
+"contact_us" = "Bize Ulaşın";
+
+// Transform Text
+"transform_space" = "AI ile mekanını dönüştür";
+
+// Loading States
+"please_wait_designing" = "Lütfen bekleyin, tasarlanıyor...";
+"something_went_wrong" = "Bir şeyler yanlış gitti";
+
+// Room Names
+"room_living_room" = "Oturma Odası";
+"room_dining_room" = "Yemek Odası";
+"room_bedroom" = "Yatak Odası";
+"room_kids_room" = "Çocuk Odası";
+"room_kitchen" = "Mutfak";
+"room_bathroom" = "Banyo";
+"room_home_office" = "Ev Ofisi";
+"room_study_room" = "Çalışma Odası";
+"room_garden" = "Bahçe";
+"room_balcony" = "Balkon";
+"room_entertainment" = "Eğlence Odası";
+"room_entryway" = "Giriş";
+"room_home_gym" = "Ev Spor Salonu";
+"room_library" = "Kütüphane";
+
+// Room Descriptions
+"room_living_room_desc" = "Ana yaşam alanınızı dönüştürün";
+"room_dining_room_desc" = "Şık bir yemek deneyimi yaratın";
+"room_bedroom_desc" = "Mükemmel sığınağınızı yaratın";
+"room_kids_room_desc" = "Eğlenceli bir çocuk alanı yaratın";
+"room_kitchen_desc" = "Hayalinizdeki mutfağı tasarlayın";
+"room_bathroom_desc" = "Lüks bir spa deneyimi yaratın";
+"room_home_office_desc" = "Üretken çalışma alanınızı oluşturun";
+"room_study_room_desc" = "Odaklanmış bir çalışma ortamı yaratın";
+"room_garden_desc" = "Dış mekan vahanızı tasarlayın";
+"room_balcony_desc" = "Dış mekan alanınızı dönüştürün";
+"room_entertainment_desc" = "Eğlence alanınızı oluşturun";
+"room_entryway_desc" = "Düzenli bir giriş alanı yaratın";
+"room_home_gym_desc" = "Fitness sığınağınızı yaratın";
+"room_library_desc" = "Okuma sığınağınızı tasarlayın";
+
+// Room Categories
+"room_category_living" = "Yaşam";
+"room_category_bedroom" = "Yatak Odası";
+"room_category_kitchen" = "Mutfak";
+"room_category_bathroom" = "Banyo";
+"room_category_workspace" = "Çalışma Alanı";
+"room_category_outdoor" = "Dış Mekan";
+"room_category_entertainment" = "Eğlence";
+"room_category_storage" = "Depolama";
+"room_category_specialty" = "Özel";
+
+// Design Styles
+"style_organic_modern" = "Organik Modern";
+"style_vintage" = "Vintage";
+"style_gothic" = "Gotik";
+"style_gamer" = "Oyuncu";
+"style_technoland" = "Teknoloji";
+"style_bohem" = "Bohem";
+"style_classic" = "Klasik";
+"style_dark_theme" = "Koyu Tema";
+"style_light_theme" = "Açık Tema";
+"style_industrial" = "Endüstriyel";
+"style_japandi" = "Japandi";
+"style_loft" = "Loft";
+"style_luxury" = "Lüks";
+"style_turkish" = "Türk";
+
+// Style Descriptions
+"style_organic_modern_desc" = "Doğal malzemeler ve modern çizgiler";
+"style_vintage_desc" = "Klasik ve zamansız tasarım, retro öğelerle";
+"style_gothic_desc" = "Karanlık ve dramatik mimari öğeler";
+"style_gamer_desc" = "RGB aydınlatmalı modern oyun kurulumu";
+"style_technoland_desc" = "Yüksek teknolojili fütüristik tasarım";
+"style_bohem_desc" = "Özgür ruhlu ve sanatsal doğal öğeler";
+"style_classic_desc" = "Geleneksel öğelerle zamansız zarafet";
+"style_dark_theme_desc" = "Koyu tonlarla cesur ve sofistike";
+"style_light_theme_desc" = "Doğal ışıkla aydınlık ve ferah";
+"style_industrial_desc" = "Ham ve kentsel açık öğeler";
+"style_japandi_desc" = "Japon minimalizmi ve İskandinav tasarımı";
+"style_loft_desc" = "Yüksek tavanlı ve açık alanlı kentsel yaşam";
+"style_luxury_desc" = "Premium bitişlerle gösterişli tasarım";
+"style_turkish_desc" = "Modern dokunuşlarla geleneksel Türk tasarımı";

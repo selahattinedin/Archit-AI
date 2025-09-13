@@ -4,6 +4,8 @@ struct DesignDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @StateObject private var languageManager = LanguageManager.shared
+    @State private var showDeleteAlert = false
     let design: Design
     let isFromCreate: Bool // Create'den mi geliyor yoksa History'den mi
     let onSave: (() -> Void)? // Save callback (sadece Create'den gelince)
@@ -43,7 +45,7 @@ struct DesignDetailView: View {
                         
                         // BEFORE
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Before")
+                            Text("before".localized(with: languageManager.languageUpdateTrigger))
                                 .font(.subheadline)
                                 .foregroundColor(colorScheme == .dark ? .white.opacity(0.7) : .gray)
                             
@@ -91,7 +93,7 @@ struct DesignDetailView: View {
                         
                         // AFTER
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("After")
+                            Text("after".localized(with: languageManager.languageUpdateTrigger))
                                 .font(.subheadline)
                                 .foregroundColor(colorScheme == .dark ? .white.opacity(0.7) : .gray)
                             
@@ -143,28 +145,28 @@ struct DesignDetailView: View {
                     // Design Info
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Room Type")
+                            Text("room_type".localized(with: languageManager.languageUpdateTrigger))
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
-                            Text(design.room.name)
+                            Text(design.room.localizedName)
                                 .font(.headline)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                         
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Style")
+                            Text("style".localized(with: languageManager.languageUpdateTrigger))
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
-                            Text(design.style.name)
+                            Text(design.style.localizedName)
                                 .font(.headline)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                         
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Description")
+                            Text("description".localized(with: languageManager.languageUpdateTrigger))
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
-                            Text(design.style.description)
+                            Text(design.style.localizedDescription)
                                 .font(.body)
                                 .foregroundColor(colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.8))
                         }
@@ -201,7 +203,7 @@ struct DesignDetailView: View {
                                 HStack(spacing: 8) {
                                     Image(systemName: "square.and.arrow.up")
                                         .font(.system(size: 16))
-                                    Text("Share")
+                                    Text("share".localized(with: languageManager.languageUpdateTrigger))
                                         .font(.system(size: 16, weight: .medium))
                                 }
                                 .foregroundColor(colorScheme == .dark ? .black : .white)
@@ -224,8 +226,8 @@ struct DesignDetailView: View {
                                         HStack(spacing: 8) {
                                             Image(systemName: "square.and.arrow.down")
                                                 .font(.system(size: 16))
-                                            Text("Save")
-                                                .font(.system(size: 16, weight: .medium))
+                                    Text("save".localized(with: languageManager.languageUpdateTrigger))
+                                        .font(.system(size: 16, weight: .medium))
                                         }
                                         .foregroundColor(.white)
                                         .frame(height: 48)
@@ -236,13 +238,12 @@ struct DesignDetailView: View {
                                 } else {
                                     // Already saved - Delete butonu
                                     Button {
-                                        homeViewModel.removeDesign(design)
-                                        dismiss()
+                                        showDeleteAlert = true
                                     } label: {
                                         HStack(spacing: 8) {
                                             Image(systemName: "trash")
                                                 .font(.system(size: 16))
-                                            Text("Delete")
+                                            Text("delete".localized(with: languageManager.languageUpdateTrigger))
                                                 .font(.system(size: 16, weight: .medium))
                                         }
                                         .foregroundColor(.white)
@@ -255,13 +256,12 @@ struct DesignDetailView: View {
                             } else {
                                 // History'den geliyorsa DELETE butonu göster
                                 Button {
-                                    homeViewModel.removeDesign(design)
-                                    dismiss()
+                                    showDeleteAlert = true
                                 } label: {
                                     HStack(spacing: 8) {
                                         Image(systemName: "trash")
                                             .font(.system(size: 16))
-                                        Text("Delete")
+                                        Text("delete".localized(with: languageManager.languageUpdateTrigger))
                                             .font(.system(size: 16, weight: .medium))
                                     }
                                     .foregroundColor(.white)
@@ -280,6 +280,15 @@ struct DesignDetailView: View {
         }
         .navigationBarHidden(true)
         .background(colorScheme == .dark ? Color.black : Color.white)
+        .confirmationDialog("delete_design".localized(with: languageManager.languageUpdateTrigger), isPresented: $showDeleteAlert, titleVisibility: .visible) {
+            Button("delete_design_confirm".localized(with: languageManager.languageUpdateTrigger), role: .destructive) {
+                homeViewModel.removeDesign(design)
+                dismiss()
+            }
+            Button("cancel".localized(with: languageManager.languageUpdateTrigger), role: .cancel) {}
+        } message: {
+            Text("delete_design_message".localized(with: languageManager.languageUpdateTrigger))
+        }
         .onAppear {
             // View hemen yüklensin
         }

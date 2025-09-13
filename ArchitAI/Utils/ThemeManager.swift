@@ -30,11 +30,11 @@ enum Theme: String {
     var text: String {
         switch self {
         case .light:
-            return "Light"
+            return "light_theme".localized
         case .dark:
-            return "Dark"
+            return "dark_theme".localized
         case .system:
-            return "System"
+            return "system_theme".localized
         }
     }
 }
