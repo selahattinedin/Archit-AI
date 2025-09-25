@@ -5,10 +5,9 @@ struct PaywallContentSection: View {
     @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 24) {
-                // Features section completely removed
-                PaywallPackagesSection(viewModel: viewModel)
+        VStack(spacing: 24) {
+            // Features section completely removed
+            PaywallPackagesSection(viewModel: viewModel)
                 
                 // Continue butonu her zaman görünür olsun
                 if let selectedPackage = viewModel.selectedPackage {
@@ -62,6 +61,7 @@ struct PaywallContentSection: View {
                     .disabled(true)
                     .padding(.horizontal, 24)
                     .padding(.top, 8)
+                    
                     HStack {
                         Button(action: { openURL("https://architai.vercel.app/privacy-policy") }) {
                             Text("privacy_policy".localized(with: languageManager.languageUpdateTrigger))
@@ -86,7 +86,6 @@ struct PaywallContentSection: View {
                 }
                 
                 Spacer(minLength: 24)
-            }
         }
         .background(Color.clear)
     }

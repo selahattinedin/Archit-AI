@@ -21,10 +21,12 @@ struct PaywallView: View {
     
     private var mainPaywallContent: some View {
         ZStack {
-            // Ana content
-            VStack(spacing: 0) {
-                PaywallHeroSection()
-                PaywallContentSection(viewModel: viewModel)
+            // Ana content - ScrollView ile sarmaladım
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    PaywallHeroSection()
+                    PaywallContentSection(viewModel: viewModel)
+                }
             }
             .background(Color.black) // solid black background per request
             

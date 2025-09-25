@@ -30,7 +30,7 @@ struct AppearanceSettingsSection: View {
                         if selectedTheme == theme {
                             Image(systemName: "checkmark")
                                 .font(.system(size: 14, weight: .bold))
-                                .foregroundColor(theme == .dark ? .gray : .black)
+                                .foregroundColor(.gray)
                         }
                     }
                 }

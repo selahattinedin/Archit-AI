@@ -114,6 +114,11 @@ struct DesignOptionCard: View {
             }
             .frame(height: isIPad ? 350 : 250)
             .clipShape(RoundedRectangle(cornerRadius: 20))
+            .contentShape(Rectangle())
+            .onTapGesture {
+                // Görsel bölümüne dokununca da Create akşına geç
+                action()
+            }
             
             // Content Section - Clickable area only
             Button(action: action) {
@@ -160,13 +165,6 @@ struct DesignOptionCard: View {
                 isHovered = hovering
             }
             isAnimating = !hovering
-        }
-        .onTapGesture {
-            withAnimation(.easeInOut(duration: animationDuration)) {
-                showingAfterImage.toggle()
-            }
-            isAnimating = false
-            Constants.Haptics.selection()
         }
         .onAppear {
             showingAfterImage = false

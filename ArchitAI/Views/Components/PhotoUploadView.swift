@@ -7,41 +7,50 @@ struct PhotoUploadView: View {
     @State private var isShowingLibrary = false
     @Environment(\.colorScheme) var colorScheme
     
+    
     var body: some View {
         VStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 60 : 24) {
             // Photo Display Area - Larger
             ZStack {
                 if let image = selectedImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600 : 350)
-                        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .stroke(Constants.Colors.cardBorder, lineWidth: 1)
-                        )
-                        .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
-                        .overlay(
-                            Button {
-                                selectedImage = nil
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 14, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .frame(width: 24, height: 24)
-                                    .background(
-                                        Circle()
-                                            .fill(colorScheme == .dark ? 
-                                                Color.black.opacity(0.6) : 
-                                                Color.white.opacity(0.6)
-                                            )
-                                    )
-                            }
-                            .padding(12),
-                            alignment: .topTrailing
-                        )
+                    GeometryReader { geometry in
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .clipped()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: UIDevice.current.userInterfaceIdiom == .pad ? 600 : 350)
+                    .background(
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .fill(Color.black.opacity(colorScheme == .dark ? 0.4 : 0.06))
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .stroke(Constants.Colors.cardBorder, lineWidth: 1)
+                    )
+                    .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 4)
+                    .overlay(
+                        Button {
+                            selectedImage = nil
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(width: 24, height: 24)
+                                .background(
+                                    Circle()
+                                        .fill(colorScheme == .dark ? 
+                                            Color.black.opacity(0.6) : 
+                                            Color.white.opacity(0.6)
+                                        )
+                                )
+                        }
+                        .padding(12),
+                        alignment: .topTrailing
+                    )
                 } else {
                     // Upload Container - Larger with content inside
                     ZStack {

@@ -45,16 +45,22 @@ class LanguageManager: ObservableObject {
     @Published var languageUpdateTrigger = UUID()
     
     private init() {
-        // Önce UserDefaults'ı temizle
-        UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
-        
+        // Profesyonel yaklaşım: Kullanıcı tercihi öncelikli
         if let savedLanguage = UserDefaults.standard.string(forKey: "app_language"),
            let language = AppLanguage(rawValue: savedLanguage) {
+            // Kullanıcı daha önce dil seçmiş, onu kullan
             self.selectedLanguage = language
         } else {
-            self.selectedLanguage = .english
+            // İlk açılış, cihaz dilini kullan
+            let systemLanguageCode = Locale.current.languageCode ?? "en"
+            let language = AppLanguage(rawValue: systemLanguageCode) ?? .english
+            self.selectedLanguage = language
+            UserDefaults.standard.set(language.rawValue, forKey: "app_language")
         }
+        
+        // Sistem bileşenleri (örn. kamera) için dili AppleLanguages ile hizala
+        UserDefaults.standard.set([selectedLanguage.rawValue], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
         
         // Başlangıçta dili ayarla
         print("🚀 Initializing with language: \(selectedLanguage.rawValue)")
@@ -70,6 +76,10 @@ class LanguageManager: ObservableObject {
         // Dili değiştir
         selectedLanguage = language
         UserDefaults.standard.set(language.rawValue, forKey: "app_language")
+        
+        // Sistem bileşenlerinin (ör. UIImagePickerController) dili için AppleLanguages'i güncelle
+        UserDefaults.standard.set([language.rawValue], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
         
         // Bundle'ı ayarla
         Bundle.setLanguage(language.rawValue)
@@ -89,11 +99,6 @@ extension Bundle {
     fileprivate static func resetBundle() {
         _bundle = nil
         _languageCode = nil
-        
-        // Clear language preferences
-        UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-        UserDefaults.standard.removeObject(forKey: "app_language")
-        UserDefaults.standard.synchronize()
     }
     
     static func setLanguage(_ language: String) {
