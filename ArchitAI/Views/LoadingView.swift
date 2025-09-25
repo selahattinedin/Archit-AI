@@ -11,7 +11,7 @@ struct LoadingView: View {
                 LottieView(name: "Loading", loopMode: .loop, animationSpeed: 1.0)
                     .frame(width: 120, height: 120)
                 
-                Text("Please wait, designing...")
+                Text("please_wait_designing".localized)
                     .font(.title3)
                     .fontWeight(.medium)
                     .foregroundColor(colorScheme == .dark ? Color.white : Color.black)

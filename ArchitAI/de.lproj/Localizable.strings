@@ -1,13 +1,26 @@
+// Photo Action Sheet
+"choose_photo" = "Foto auswählen";
+"take_photo" = "Foto aufnehmen";
+"choose_from_library" = "Aus Mediathek wählen";
+"remove_photo" = "Foto entfernen";
+
+// Premium Status Labels
+"weekly_premium" = "Premium (Wöchentlich)";
+"yearly_premium" = "Premium (Jährlich)";
+"premium_active" = "Premium aktiv";
+"not_premium" = "Kein Premium";
+"cancel" = "Abbrechen";
 // General
 "app_name" = "ArchitAI";
 "continue" = "Weiter";
 "cancel" = "Abbrechen";
 "back" = "Zurück";
 "done" = "Fertig";
+"ok" = "OK";
 "delete" = "Löschen";
-"delete_design" = "Design löschen";
+"delete_design" = "Design Löschen";
 "delete_design_message" = "Sind Sie sicher, dass Sie dieses Design löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.";
-"delete_design_confirm" = "Design löschen";
+"delete_design_confirm" = "Design Löschen";
 "share" = "Teilen";
 "save" = "Speichern";
 "error" = "Fehler";
@@ -23,7 +36,7 @@
 "settings" = "Einstellungen";
 
 // Home View
-"archit_ai" = "Archit AI";
+"archit_ai" = "archit ai";
 
 // Design Cards
 "room_design_title" = "Raumdesign";
@@ -95,7 +108,7 @@
 
 // Account
 "account" = "Konto";
-"delete_account" = "Konto löschen";
+"delete_account" = "Konto Löschen";
 "delete_account_message" = "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.";
 "delete_account_error" = "Beim Löschen Ihres Kontos ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.";
 
@@ -110,6 +123,13 @@
 "continue_with_annual" = "Mit Jahresabo fortfahren";
 "no_offers" = "Derzeit sind keine Angebote verfügbar.";
 "loading_offers" = "Angebote werden geladen...";
+"refresh" = "Aktualisieren";
+"annual" = "Jährlich";
+"weekly" = "Wöchentlich";
+"annual_continue" = "Mit Jährlich fortfahren";
+"weekly_continue" = "Mit Wöchentlich fortfahren";
+"paywall_subtitle_annual" = "Ein Jahr lang Zugriff auf alle Funktionen";
+"paywall_subtitle_weekly" = "Premium wöchentlich erleben";
 
 // Legal & Support
 "legal" = "Rechtliches";
@@ -139,6 +159,8 @@
 "room_study_room" = "Arbeitszimmer";
 "room_garden" = "Garten";
 "room_balcony" = "Balkon";
+"room_pantry" = "Speisekammer";
+"room_laundry_room" = "Waschküche";
 "room_entertainment" = "Unterhaltung";
 "room_entryway" = "Eingang";
 "room_home_gym" = "Heimfitness";
@@ -155,6 +177,8 @@
 "room_study_room_desc" = "Schaffen Sie eine fokussierte Lernumgebung";
 "room_garden_desc" = "Gestalten Sie Ihre Outdoor-Oase";
 "room_balcony_desc" = "Verwandeln Sie Ihren Außenbereich";
+"room_pantry_desc" = "Optimieren Sie Ihren Vorratsraum";
+"room_laundry_room_desc" = "Organisieren Sie Ihre Wasch- und Hauswirtschaftsfläche";
 "room_entertainment_desc" = "Bauen Sie Ihren Unterhaltungsbereich";
 "room_entryway_desc" = "Schaffen Sie einen organisierten Eingangsbereich";
 "room_home_gym_desc" = "Schaffen Sie Ihr Fitness-Refugium";
@@ -186,6 +210,9 @@
 "style_loft" = "Loft";
 "style_luxury" = "Luxus";
 "style_turkish" = "Türkisch";
+"style_eighty_style" = "80's Style";
+"style_rustic" = "Rustikal";
+"style_tropic" = "Tropisch";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Natürliche Materialien mit sauberen modernen Linien";
@@ -202,3 +229,7 @@
 "style_loft_desc" = "Städtisches Leben mit hohen Decken und offenen Räumen";
 "style_luxury_desc" = "Opulentes Design mit Premium-Finish";
 "style_turkish_desc" = "Traditionelles türkisches Design mit modernen Akzenten";
+"style_eighty_style_desc" = "Kräftige Farben, Neonakzente, retro geometrische Muster";
+"style_rustic_desc" = "Warmes Naturholz, Stein, gemütliche Texturen";
+"style_tropic_desc" = "Üppiges Grün, lebhafte Farben, natürliches Licht, tropische Texturen";
+"restore_purchases" = "Käufe wiederherstellen";

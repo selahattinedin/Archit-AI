@@ -12,9 +12,7 @@ struct ModernRoomSelectionView: View {
             ForEach(rooms) { room in
                 RoomCard(room: room, isSelected: selectedRoom?.id == room.id)
                     .onTapGesture {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            selectedRoom = room
-                        }
+                        selectedRoom = room
                     }
             }
         }

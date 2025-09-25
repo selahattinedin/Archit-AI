@@ -107,10 +107,10 @@ extension Bundle {
         if language == "en" {
             if let lprojPath = Bundle.main.path(forResource: "en", ofType: "lproj"),
                let lprojBundle = Bundle(path: lprojPath) {
-                print("🇬🇧 Using en.lproj: \(lprojPath)")
+                // Debug print removed
                 _bundle = lprojBundle
             } else {
-                print("⚠️ No en.lproj found, falling back to Base.lproj")
+                // Debug print removed
                 _bundle = Bundle.main
             }
             return
@@ -120,10 +120,10 @@ extension Bundle {
         if language == "ja" {
             if let lprojPath = Bundle.main.path(forResource: "ja", ofType: "lproj"),
                let lprojBundle = Bundle(path: lprojPath) {
-                print("🇯🇵 Using ja.lproj: \(lprojPath)")
+                // Debug print removed
                 _bundle = lprojBundle
             } else {
-                print("⚠️ No ja.lproj found, falling back to Base.lproj")
+                // Debug print removed
                 _bundle = Bundle.main
             }
             return
@@ -133,10 +133,10 @@ extension Bundle {
         if language == "de" {
             if let lprojPath = Bundle.main.path(forResource: "de", ofType: "lproj"),
                let lprojBundle = Bundle(path: lprojPath) {
-                print("🇩🇪 Using de.lproj: \(lprojPath)")
+                // Debug print removed
                 _bundle = lprojBundle
             } else {
-                print("⚠️ No de.lproj found, falling back to Base.lproj")
+                // Debug print removed
                 _bundle = Bundle.main
             }
             return
@@ -146,10 +146,10 @@ extension Bundle {
         if language == "fr" {
             if let lprojPath = Bundle.main.path(forResource: "fr", ofType: "lproj"),
                let lprojBundle = Bundle(path: lprojPath) {
-                print("🇫🇷 Using fr.lproj: \(lprojPath)")
+                // Debug print removed
                 _bundle = lprojBundle
             } else {
-                print("⚠️ No fr.lproj found, falling back to Base.lproj")
+                // Debug print removed
                 _bundle = Bundle.main
             }
             return
@@ -159,10 +159,10 @@ extension Bundle {
         if language == "it" {
             if let lprojPath = Bundle.main.path(forResource: "it", ofType: "lproj"),
                let lprojBundle = Bundle(path: lprojPath) {
-                print("🇮🇹 Using it.lproj: \(lprojPath)")
+                // Debug print removed
                 _bundle = lprojBundle
             } else {
-                print("⚠️ No it.lproj found, falling back to Base.lproj")
+                // Debug print removed
                 _bundle = Bundle.main
             }
             return
@@ -172,10 +172,10 @@ extension Bundle {
         if language == "ru" {
             if let lprojPath = Bundle.main.path(forResource: "ru", ofType: "lproj"),
                let lprojBundle = Bundle(path: lprojPath) {
-                print("🇷🇺 Using ru.lproj: \(lprojPath)")
+                // Debug print removed
                 _bundle = lprojBundle
             } else {
-                print("⚠️ No ru.lproj found, falling back to Base.lproj")
+                // Debug print removed
                 _bundle = Bundle.main
             }
             return
@@ -184,10 +184,10 @@ extension Bundle {
         // Diğer diller için .lproj dosyasını bul
         if let lprojPath = Bundle.main.path(forResource: language, ofType: "lproj"),
            let lprojBundle = Bundle(path: lprojPath) {
-            print("✅ Using \(language).lproj: \(lprojPath)")
+            // Debug print removed
             _bundle = lprojBundle
         } else {
-            print("⚠️ No .lproj found for: \(language), falling back to Base.lproj")
+            // Debug print removed
             _bundle = Bundle.main
         }
     }
@@ -195,12 +195,12 @@ extension Bundle {
     static func localizedBundle() -> Bundle {
         // Mevcut bundle'ı kullan
         if let bundle = _bundle {
-            print("📦 Using bundle: \(bundle.bundlePath)")
+            // Debug print removed
             return bundle
         }
         
         // Fallback olarak main bundle
-        print("⚠️ No bundle set, using main bundle")
+        // Debug print removed
         return Bundle.main
     }
 }
@@ -228,7 +228,7 @@ extension String {
                    currentLanguage == "it" ? "🇮🇹" : 
                    currentLanguage == "ru" ? "🇷🇺" : "🌍"
         
-        print("\(emoji) [\(currentLanguage)] Key: \(self) = \(finalResult)")
+        // Debug print removed
         return finalResult
     }
     

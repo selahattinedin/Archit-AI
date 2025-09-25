@@ -75,16 +75,10 @@ private struct StyleCard: View {
                     }
                 }
                 
-                VStack(spacing: 4) {
+                VStack(spacing: 0) {
                     Text(style.localizedName)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
-                    
-                    Text(style.localizedDescription)
-                        .font(.system(size: 13))
-                        .foregroundColor(isSelected ? Color.orange : Constants.Colors.textPrimary)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
                 }
                 .padding(.horizontal, 8)
                 .padding(.bottom, 12)

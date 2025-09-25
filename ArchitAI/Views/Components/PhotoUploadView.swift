@@ -192,18 +192,22 @@ struct PhotoUploadView: View {
                 }
             }
         }
-        .confirmationDialog("choose_photo".localized, isPresented: $isShowingActionSheet) {
-            Button("take_photo".localized) {
-                isShowingCamera = true
-            }
-            Button("choose_from_library".localized) {
-                isShowingLibrary = true
-            }
-            if selectedImage != nil {
-                Button("remove_photo".localized, role: .destructive) {
-                    selectedImage = nil
-                }
-            }
+        .actionSheet(isPresented: $isShowingActionSheet) {
+            ActionSheet(
+                title: Text("choose_photo".localized),
+                buttons: [
+                    .default(Text("take_photo".localized)) {
+                        isShowingCamera = true
+                    },
+                    .default(Text("choose_from_library".localized)) {
+                        isShowingLibrary = true
+                    },
+                    selectedImage != nil ? .destructive(Text("remove_photo".localized)) {
+                        selectedImage = nil
+                    } : nil,
+                    .cancel(Text("cancel".localized))
+                ].compactMap { $0 }
+            )
         }
         .sheet(isPresented: $isShowingCamera) {
             ImagePicker(sourceType: .camera) { image in

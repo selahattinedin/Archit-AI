@@ -2,11 +2,51 @@ import SwiftUI
 
 enum Constants {
     enum API {
-        static let stabilityAPIKey = "sk-zQjAxj4nmWXN5y72LIq1meKvEGCkPXrSmvGhc0zYWzDhSqlY"
-        static let stabilityBaseURL = "https://api.stability.ai/v1"
-        static let defaultEngine = "stable-diffusion-xl-1024-v1-0"
-        static let defaultSteps = 25
-        static let defaultCFGScale = 6.5
+        // API anahtarları Config.plist dosyasından güvenli şekilde okunur
+        static var stabilityAPIKey: String {
+            guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+                  let plist = NSDictionary(contentsOfFile: path),
+                  let apiKey = plist["STABILITY_AI_API_KEY"] as? String else {
+                fatalError("STABILITY_AI_API_KEY not found in Config.plist")
+            }
+            return apiKey
+        }
+        
+        static var stabilityBaseURL: String {
+            guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+                  let plist = NSDictionary(contentsOfFile: path),
+                  let baseURL = plist["STABILITY_AI_BASE_URL"] as? String else {
+                return "https://api.stability.ai/v1" // fallback
+            }
+            return baseURL
+        }
+        
+        static var defaultEngine: String {
+            guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+                  let plist = NSDictionary(contentsOfFile: path),
+                  let engine = plist["DEFAULT_ENGINE"] as? String else {
+                return "stable-diffusion-xl-1024-v1-0" // fallback
+            }
+            return engine
+        }
+        
+        static var defaultSteps: Int {
+            guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+                  let plist = NSDictionary(contentsOfFile: path),
+                  let steps = plist["DEFAULT_STEPS"] as? Int else {
+                return 25 // fallback
+            }
+            return steps
+        }
+        
+        static var defaultCFGScale: Double {
+            guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+                  let plist = NSDictionary(contentsOfFile: path),
+                  let cfgScale = plist["DEFAULT_CFG_SCALE"] as? Double else {
+                return 6.5 // fallback
+            }
+            return cfgScale
+        }
     }
     
     enum Colors {

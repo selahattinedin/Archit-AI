@@ -6,10 +6,11 @@ struct PaywallPackageCard: View {
     let isSelected: Bool
     let title: String
     let onTap: () -> Void
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         Button(action: onTap) {
-            HStack(spacing: 16) {
+            HStack(spacing: 12) {
                 // Selection Indicator
                 ZStack {
                     Circle()
@@ -28,52 +29,63 @@ struct PaywallPackageCard: View {
                 }
                 
                 // Package Info
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.white)
                     
-                    Text(package.storeProduct.localizedTitle)
-                        .font(.system(size: 14, weight: .medium))
+                    Text(
+                        {
+                            switch package.packageType {
+                            case .annual:
+                                return "paywall_subtitle_annual".localized(with: languageManager.languageUpdateTrigger)
+                            case .weekly:
+                                return "paywall_subtitle_weekly".localized(with: languageManager.languageUpdateTrigger)
+                            default:
+                                return package.storeProduct.localizedTitle
+                            }
+                        }()
+                    )
+                        .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.white.opacity(0.7))
                 }
                 
                 Spacer()
                 
                 // Price
-                VStack(alignment: .trailing, spacing: 2) {
+                VStack(alignment: .trailing, spacing: 0) {
                     Text(package.storeProduct.localizedPriceString)
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.system(size: 18, weight: .regular))
                         .foregroundColor(.white)
                     
                     if package.packageType == .annual {
-                        Text("Best Value")
-                            .font(.system(size: 10, weight: .bold))
+                        Text("best_value".localized(with: languageManager.languageUpdateTrigger))
+                            .font(.system(size: 9, weight: .bold))
                             .foregroundColor(Constants.Colors.PremiumRed)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 2)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 1)
                             .background(Constants.Colors.PremiumRed.opacity(0.2))
-                            .cornerRadius(8)
+                            .cornerRadius(6)
                     }
                 }
             }
-            .padding(20)
+            .padding(14)
             .background(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 16)
                     .fill(Color.clear)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 16)
                     .stroke(
                         isSelected ? Color.white : Color.white.opacity(0.2),
-                        lineWidth: isSelected ? 2 : 1.5
+                        lineWidth: isSelected ? 1.8 : 1.2
                     )
             )
             .shadow(
                 color: isSelected ? Color.white.opacity(0.25) : Color.clear,
-                radius: isSelected ? 12 : 0,
+                radius: isSelected ? 10 : 0,
                 x: 0,
-                y: isSelected ? 6 : 0
+                y: isSelected ? 5 : 0
             )
             .scaleEffect(isSelected ? 1.02 : 1.0)
             .animation(.easeInOut(duration: 0.2), value: isSelected)

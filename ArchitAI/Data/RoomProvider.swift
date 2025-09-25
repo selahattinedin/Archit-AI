@@ -107,6 +107,20 @@ final class RoomProvider: RoomProviding {
                 category: .storage,
                 gradientColors: ["fa709a", "fee140"]
             ),
+            Room(
+                name: "room_laundry_room",
+                icon: "laundry",
+                description: "room_laundry_room_desc",
+                category: .storage,
+                gradientColors: ["89f7fe", "66a6ff"]
+            ),
+            Room(
+                name: "room_pantry",
+                icon: "pantry",
+                description: "room_pantry_desc",
+                category: .storage,
+                gradientColors: ["A8E6CF", "FFD93D"]
+            ),
             
             // Specialty Rooms
             Room(

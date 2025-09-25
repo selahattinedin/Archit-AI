@@ -4,7 +4,11 @@
 "cancel" = "Cancel";
 "back" = "Back";
 "done" = "Done";
+"ok" = "OK";
 "delete" = "Delete";
+"delete_design" = "Delete Design";
+"delete_design_message" = "Are you sure you want to delete this design? This action cannot be undone.";
+"delete_design_confirm" = "Delete Design";
 "share" = "Share";
 "save" = "Save";
 "error" = "Error";
@@ -20,7 +24,7 @@
 "settings" = "Settings";
 
 // Home View
-"archit_ai" = "Archit AI";
+"archit_ai" = "archit ai";
 
 // Design Cards
 "room_design_title" = "Room Design";
@@ -107,12 +111,20 @@
 "continue_with_annual" = "Continue with Annual";
 "no_offers" = "No offers available at the moment.";
 "loading_offers" = "Loading offers...";
+"refresh" = "Refresh";
+"annual" = "Annual";
+"weekly" = "Weekly";
+"annual_continue" = "Continue with Annual";
+"weekly_continue" = "Continue with Weekly";
+"paywall_subtitle_annual" = "Full Access to All Features for a Year";
+"paywall_subtitle_weekly" = "Experience Premium Weekly";
 
 // Legal & Support
 "legal" = "Legal";
 "legal_and_support" = "Legal & Support";
 "privacy_policy" = "Privacy Policy";
 "terms_of_service" = "Terms of Service";
+"terms_of_use" = "Terms of Use (EULA)";
 "eula" = "End User License Agreement";
 "website" = "Website";
 "contact_us" = "Contact Us";
@@ -137,6 +149,8 @@
 "room_balcony" = "Balcony";
 "room_entertainment" = "Entertainment";
 "room_entryway" = "Entryway";
+"room_pantry" = "Pantry";
+"room_laundry_room" = "Laundry Room";
 "room_home_gym" = "Home Gym";
 "room_library" = "Library";
 
@@ -153,6 +167,8 @@
 "room_balcony_desc" = "Transform your outdoor area";
 "room_entertainment_desc" = "Build your entertainment space";
 "room_entryway_desc" = "Create an organized entry space";
+"room_pantry_desc" = "Optimize your food storage space";
+"room_laundry_room_desc" = "Organize your laundry and utility area";
 "room_home_gym_desc" = "Create your fitness sanctuary";
 "room_library_desc" = "Design your reading sanctuary";
 
@@ -182,6 +198,9 @@
 "style_loft" = "Loft";
 "style_luxury" = "Luxury";
 "style_turkish" = "Turkish";
+"style_eighty_style" = "80's Style";
+"style_rustic" = "Rustic";
+"style_tropic" = "Tropic";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Natural materials with clean modern lines";
@@ -198,3 +217,20 @@
 "style_loft_desc" = "Urban living with high ceilings and open spaces";
 "style_luxury_desc" = "Opulent design with premium finishes";
 "style_turkish_desc" = "Traditional Turkish design with modern touches";
+"style_eighty_style_desc" = "Bold colors, neon accents, retro geometric patterns";
+"style_rustic_desc" = "Warm natural wood, stone, cozy textures";
+"style_tropic_desc" = "Lush greenery, vibrant colors, natural light, tropical textures";
+
+// Photo Action Sheet
+"choose_photo" = "Choose Photo";
+"take_photo" = "Take Photo";
+"choose_from_library" = "Choose from Library";
+"remove_photo" = "Remove Photo";
+
+// Premium Status Labels
+"weekly_premium" = "Weekly Premium";
+"yearly_premium" = "Yearly Premium";
+"premium_active" = "Premium Active";
+"not_premium" = "Not Premium";
+"cancel" = "Cancel";
+"restore_purchases" = "Restore Purchases";

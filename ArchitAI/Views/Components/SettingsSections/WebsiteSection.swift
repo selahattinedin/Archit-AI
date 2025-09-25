@@ -4,7 +4,7 @@ struct WebsiteSection: View {
     @StateObject private var languageManager = LanguageManager.shared
     var body: some View {
         Section {
-            Link(destination: URL(string: "https://architai.app")!) {
+            Link(destination: URL(string: "https://architai.vercel.app")!) {
                 HStack {
                     Image(systemName: "globe")
                         .foregroundColor(.primary)

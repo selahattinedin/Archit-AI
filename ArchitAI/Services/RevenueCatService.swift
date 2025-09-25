@@ -9,6 +9,7 @@ final class RevenueCatService: NSObject, ObservableObject {
     @Published var offerings: Offerings?
     @Published var isLoading: Bool = false
     @Published var lastErrorMessage: String?
+    @Published var activeProductId: String?
     private var offeringsRetryCount: Int = 0
 
     private var cancellables: Set<AnyCancellable> = []
@@ -128,9 +129,11 @@ final class RevenueCatService: NSObject, ObservableObject {
     private func updateEntitlements(_ info: CustomerInfo?) {
         guard let info = info else { return }
         // Varsayılan entitlement id: "premium" (RevenueCat Dashboard'da oluşturduğunuz id ile eşleşmeli)
-        let isPremiumActive = info.entitlements.active.first { key, _ in
+        let activeEntry = info.entitlements.active.first { key, _ in
             key.lowercased() == "premium"
-        } != nil
+        }
+        let isPremiumActive = activeEntry != nil
+        let productId = activeEntry?.value.productIdentifier
         
         print("🔴 RevenueCatService: Updating entitlements - isPro: \(isPremiumActive)")
         print("🔴 RevenueCatService: Active entitlements: \(info.entitlements.active.keys)")
@@ -138,6 +141,7 @@ final class RevenueCatService: NSObject, ObservableObject {
         DispatchQueue.main.async {
             let oldValue = self.isPro
             self.isPro = isPremiumActive
+            self.activeProductId = productId
             print("🔴 RevenueCatService: isPro changed from \(oldValue) to \(isPremiumActive)")
         }
     }

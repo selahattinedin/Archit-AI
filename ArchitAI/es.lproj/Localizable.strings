@@ -4,6 +4,7 @@
 "cancel" = "Cancelar";
 "back" = "Atrás";
 "done" = "Listo";
+"ok" = "OK";
 "delete" = "Eliminar";
 "delete_design" = "Eliminar Diseño";
 "delete_design_message" = "¿Estás seguro de que quieres eliminar este diseño? Esta acción no se puede deshacer.";
@@ -112,6 +113,13 @@
 "continue_with_annual" = "Plan Anual";
 "no_offers" = "Sin ofertas.";
 "loading_offers" = "Cargando...";
+"refresh" = "Actualizar";
+"annual" = "Anual";
+"weekly" = "Semanal";
+"annual_continue" = "Continuar con Anual";
+"weekly_continue" = "Continuar con Semanal";
+"paywall_subtitle_annual" = "Acceso completo a todas las funciones por un año";
+"paywall_subtitle_weekly" = "Experimenta Premium semanalmente";
 
 // Legal & Support
 "legal" = "Legal";
@@ -141,6 +149,8 @@
 "room_study_room" = "Estudio";
 "room_garden" = "Jardín";
 "room_balcony" = "Balcón";
+"room_pantry" = "Despensa";
+"room_laundry_room" = "Lavandería";
 "room_entertainment" = "Ocio";
 "room_entryway" = "Entrada";
 "room_home_gym" = "Gimnasio";
@@ -157,6 +167,8 @@
 "room_study_room_desc" = "Zona de estudio";
 "room_garden_desc" = "Oasis exterior";
 "room_balcony_desc" = "Balcón renovado";
+"room_pantry_desc" = "Optimiza tu espacio de despensa";
+"room_laundry_room_desc" = "Organiza tu área de lavandería y utilidades";
 "room_entertainment_desc" = "Zona de ocio";
 "room_entryway_desc" = "Entrada ordenada";
 "room_home_gym_desc" = "Tu gimnasio";
@@ -188,6 +200,9 @@
 "style_loft" = "Loft";
 "style_luxury" = "Lujo";
 "style_turkish" = "Turco";
+"style_eighty_style" = "80's Style";
+"style_rustic" = "Rústico";
+"style_tropic" = "Tropical";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Natural y moderno";
@@ -204,3 +219,20 @@
 "style_loft_desc" = "Espacios abiertos";
 "style_luxury_desc" = "Lujo premium";
 "style_turkish_desc" = "Turco moderno";
+"style_eighty_style_desc" = "Colores audaces, neón, patrones geométricos retro";
+"style_rustic_desc" = "Madera natural cálida, piedra, texturas acogedoras";
+"style_tropic_desc" = "Vegetación frondosa, colores vibrantes, luz natural, texturas tropicales";
+
+// Photo Action Sheet
+"choose_photo" = "Elegir foto";
+"take_photo" = "Tomar foto";
+"choose_from_library" = "Elegir de la galería";
+"remove_photo" = "Eliminar foto";
+
+// Premium Status Labels
+"weekly_premium" = "Premium (Semanal)";
+"yearly_premium" = "Premium (Anual)";
+"premium_active" = "Premium activo";
+"not_premium" = "No premium";
+"cancel" = "Cancelar";
+"restore_purchases" = "Restaurar compras";

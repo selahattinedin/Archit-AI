@@ -69,8 +69,9 @@ actor StabilityAIService {
         request.httpMethod = "POST"
         
         let boundary = "Boundary-\(UUID().uuidString)"
+        let trimmedAPIKey = apiKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        request.setValue("Bearer \(trimmedAPIKey)", forHTTPHeaderField: "Authorization")
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
         var body = Data()
         
@@ -88,6 +89,15 @@ actor StabilityAIService {
             ["text": prompt, "weight": 1],
             ["text": negativePrompt, "weight": -1]
         ].filter { !($0["text"] as! String).isEmpty }
+        
+        // 📝 API'YA GÖNDERİLEN PROMPT LOGLAMA
+        print("🚀 StabilityAIService: Sending to API")
+        print("🔑 API Key: \(apiKey.prefix(10))...")
+        print("🌐 Endpoint: \(endpoint)")
+        print("📝 Main Prompt (\(prompt.count) chars): \(prompt)")
+        print("❌ Negative Prompt (\(negativePrompt.count) chars): \(negativePrompt)")
+        print("⚙️ Parameters: cfg_scale=\(cfgScale), steps=\(steps), style_preset=\(stylePreset ?? "none"), image_strength=\(imageStrength)")
+        print("🔐 Authorization Header: Bearer \(apiKey.prefix(10))...")
         
         for (index, prompt) in textPrompts.enumerated() {
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
@@ -123,11 +133,17 @@ actor StabilityAIService {
             throw StabilityAIError.invalidResponse
         }
         
+        // 📝 API YANITI LOGLAMA
+        print("📡 StabilityAIService: API Response received")
+        print("📊 Status Code: \(httpResponse.statusCode)")
+        print("📏 Response Data Size: \(data.count) bytes")
+        
         guard httpResponse.statusCode == 200 else {
             if let errorMessage = String(data: data, encoding: .utf8) {
-                print("API Error Response: \(errorMessage)")
+                print("❌ API Error Response: \(errorMessage)")
                 throw StabilityAIError.apiError("API Error: \(httpResponse.statusCode) - \(errorMessage)")
             }
+            print("❌ API Error: \(httpResponse.statusCode) - No error message")
             throw StabilityAIError.apiError("API Error: \(httpResponse.statusCode)")
         }
         
@@ -136,12 +152,21 @@ actor StabilityAIService {
         
         let result = try decoder.decode(StabilityAIResponse.self, from: data)
         
+        // 📝 BAŞARILI YANIT LOGLAMA
+        print("✅ StabilityAIService: Image generation successful")
+        print("🖼️ Artifacts count: \(result.artifacts.count)")
+        if let firstArtifact = result.artifacts.first {
+            print("🎨 First artifact - finish_reason: \(firstArtifact.finishReason), seed: \(firstArtifact.seed)")
+        }
+        
         guard let firstArtifact = result.artifacts.first,
               let imageData = Data(base64Encoded: firstArtifact.base64),
               let image = UIImage(data: imageData) else {
+            print("❌ Image conversion failed")
             throw StabilityAIError.imageConversionError
         }
         
+        print("🎉 StabilityAIService: Image successfully generated and converted")
         return image
     }
 }

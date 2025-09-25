@@ -3,6 +3,7 @@ import SwiftUI
 struct DesignDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @EnvironmentObject var homeViewModel: HomeViewModel
     @StateObject private var languageManager = LanguageManager.shared
     @State private var showDeleteAlert = false
@@ -10,6 +11,11 @@ struct DesignDetailView: View {
     let isFromCreate: Bool // Create'den mi geliyor yoksa History'den mi
     let onSave: (() -> Void)? // Save callback (sadece Create'den gelince)
     let onClose: (() -> Void)? // Close callback (Create'de X'e basılınca step 1'e dönmek için)
+    
+    // iPad detection
+    private var isTablet: Bool {
+        horizontalSizeClass == .regular
+    }
     
     
     
@@ -39,155 +45,178 @@ struct DesignDetailView: View {
             .padding(.bottom, 8)
             
             ScrollView {
-                VStack(spacing: 24) {
+                VStack(spacing: isTablet ? 32 : 24) {
                     // Before-After Images
-                    VStack(spacing: 20) {
+                    VStack(spacing: isTablet ? 32 : 20) {
                         
                         // BEFORE
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: isTablet ? 12 : 8) {
                             Text("before".localized(with: languageManager.languageUpdateTrigger))
-                                .font(.subheadline)
+                                .font(isTablet ? .title3 : .subheadline)
+                                .fontWeight(.medium)
                                 .foregroundColor(colorScheme == .dark ? .white.opacity(0.7) : .gray)
                             
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Constants.Colors.cardBackground)
-                                    .frame(height: 300)
-                                
-                                // Önce UIImage'den dene, yoksa URL'den yükle
-                                if let image = design.beforeImage {
-                                    Image(uiImage: image)
+                            // Önce UIImage'den dene, yoksa URL'den yükle
+                            if let image = design.beforeImage {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                            .fill(Constants.Colors.cardBackground)
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: isTablet ? 30 : 25))
+                            } else if let imageData = design.beforeImageData,
+                                      let image = UIImage(data: imageData) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                            .fill(Constants.Colors.cardBackground)
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: isTablet ? 30 : 25))
+                            } else if let url = design.beforeImageURL {
+                                // URL'den yükle
+                                AsyncImage(url: URL(string: url)) { image in
+                                    image
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 300)
-                                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                                } else if let imageData = design.beforeImageData,
-                                          let image = UIImage(data: imageData) {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 300)
-                                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                                } else if let url = design.beforeImageURL {
-                                    // URL'den yükle
-                                    AsyncImage(url: URL(string: url)) { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                    } placeholder: {
-                                        ZStack {
-                                            Rectangle()
-                                                .fill(Color.gray.opacity(0.2))
-                                            ProgressView()
-                                                .scaleEffect(0.8)
-                                        }
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                                .fill(Constants.Colors.cardBackground)
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: isTablet ? 30 : 25))
+                                } placeholder: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                            .fill(Color.gray.opacity(0.2))
+                                        ProgressView()
+                                            .scaleEffect(isTablet ? 1.2 : 0.8)
                                     }
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 300)
-                                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
                                 }
                             }
                         }
                         
                         // AFTER
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: isTablet ? 12 : 8) {
                             Text("after".localized(with: languageManager.languageUpdateTrigger))
-                                .font(.subheadline)
+                                .font(isTablet ? .title3 : .subheadline)
+                                .fontWeight(.medium)
                                 .foregroundColor(colorScheme == .dark ? .white.opacity(0.7) : .gray)
                             
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Constants.Colors.cardBackground)
-                                    .frame(height: 300)
-                                
-                                // Önce UIImage'den dene, yoksa URL'den yükle
-                                if let image = design.afterImage {
-                                    Image(uiImage: image)
+                            // Önce UIImage'den dene, yoksa URL'den yükle
+                            if let image = design.afterImage {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                            .fill(Constants.Colors.cardBackground)
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: isTablet ? 30 : 25))
+                            } else if let imageData = design.afterImageData,
+                                      let image = UIImage(data: imageData) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                            .fill(Constants.Colors.cardBackground)
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: isTablet ? 30 : 25))
+                            } else if let url = design.afterImageURL {
+                                // URL'den yükle
+                                AsyncImage(url: URL(string: url)) { image in
+                                    image
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 300)
-                                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                                } else if let imageData = design.afterImageData,
-                                          let image = UIImage(data: imageData) {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 300)
-                                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                                } else if let url = design.afterImageURL {
-                                    // URL'den yükle
-                                    AsyncImage(url: URL(string: url)) { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                    } placeholder: {
-                                        ZStack {
-                                            Rectangle()
-                                                .fill(Color.gray.opacity(0.2))
-                                            ProgressView()
-                                                .scaleEffect(0.8)
-                                        }
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                                .fill(Constants.Colors.cardBackground)
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: isTablet ? 30 : 25))
+                                } placeholder: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: isTablet ? 30 : 25)
+                                            .fill(Color.gray.opacity(0.2))
+                                        ProgressView()
+                                            .scaleEffect(isTablet ? 1.2 : 0.8)
                                     }
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 300)
-                                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                                    .frame(maxWidth: isTablet ? 900 : .infinity)
+                                    .frame(height: isTablet ? 350 : 300)
                                 }
                             }
                         }
                     }
-                    .padding(.horizontal)
-                    .padding(.top, 20)
+                    .padding(.horizontal, isTablet ? 40 : 20)
+                    .padding(.top, isTablet ? 30 : 20)
                     
                     // Design Info
-                    VStack(alignment: .leading, spacing: 16) {
-                        VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: isTablet ? 24 : 16) {
+                        VStack(alignment: .leading, spacing: isTablet ? 12 : 8) {
                             Text("room_type".localized(with: languageManager.languageUpdateTrigger))
-                                .font(.subheadline)
+                                .font(isTablet ? .title3 : .subheadline)
+                                .fontWeight(.medium)
                                 .foregroundColor(.gray)
                             Text(design.room.localizedName)
-                                .font(.headline)
+                                .font(isTablet ? .title2 : .headline)
+                                .fontWeight(.semibold)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                         
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: isTablet ? 12 : 8) {
                             Text("style".localized(with: languageManager.languageUpdateTrigger))
-                                .font(.subheadline)
+                                .font(isTablet ? .title3 : .subheadline)
+                                .fontWeight(.medium)
                                 .foregroundColor(.gray)
                             Text(design.style.localizedName)
-                                .font(.headline)
+                                .font(isTablet ? .title2 : .headline)
+                                .fontWeight(.semibold)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                         
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: isTablet ? 12 : 8) {
                             Text("description".localized(with: languageManager.languageUpdateTrigger))
-                                .font(.subheadline)
+                                .font(isTablet ? .title3 : .subheadline)
+                                .fontWeight(.medium)
                                 .foregroundColor(.gray)
                             Text(design.style.localizedDescription)
-                                .font(.body)
+                                .font(isTablet ? .title3 : .body)
                                 .foregroundColor(colorScheme == .dark ? .white.opacity(0.9) : .black.opacity(0.8))
                         }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(20)
+                    .frame(maxWidth: isTablet ? 900 : .infinity, alignment: .leading)
+                    .padding(isTablet ? 32 : 20)
                     .background(Constants.Colors.cardBackground)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .clipShape(RoundedRectangle(cornerRadius: isTablet ? 25 : 20))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: isTablet ? 25 : 20)
                             .stroke(Constants.Colors.cardBorder, lineWidth: 1)
                     )
                     .shadow(color: colorScheme == .dark ? .clear : .black.opacity(0.08), radius: 15, x: 0, y: 5)
-                    .padding(.horizontal)
+                    .padding(.horizontal, isTablet ? 40 : 20)
                     
                     Spacer()
-                        .frame(height: 32)
+                        .frame(height: isTablet ? 40 : 32)
                     
                     // Action Buttons
-                    VStack(spacing: 16) {
-                        HStack(spacing: 16) {
+                    VStack(spacing: isTablet ? 20 : 16) {
+                        HStack(spacing: isTablet ? 20 : 16) {
                             // SHARE Button - Her zaman göster
                             Button {
                                 print("Share butonuna tıklandı")
@@ -200,17 +229,17 @@ struct DesignDetailView: View {
                                     await shareDesign()
                                 }
                             } label: {
-                                HStack(spacing: 8) {
+                                HStack(spacing: isTablet ? 12 : 8) {
                                     Image(systemName: "square.and.arrow.up")
-                                        .font(.system(size: 16))
+                                        .font(.system(size: isTablet ? 20 : 16))
                                     Text("share".localized(with: languageManager.languageUpdateTrigger))
-                                        .font(.system(size: 16, weight: .medium))
+                                        .font(.system(size: isTablet ? 18 : 16, weight: .medium))
                                 }
                                 .foregroundColor(colorScheme == .dark ? .black : .white)
-                                .frame(height: 48)
-                                .frame(maxWidth: .infinity)
+                                .frame(height: isTablet ? 56 : 48)
+                                .frame(maxWidth: isTablet ? 300 : .infinity)
                                 .background(colorScheme == .dark ? Color.white : Color.black)
-                                .cornerRadius(24)
+                                .cornerRadius(isTablet ? 28 : 24)
                             }
                             .disabled(design.afterImage == nil && design.afterImageData == nil && design.afterImageURL == nil)
                             .opacity((design.afterImage != nil || design.afterImageData != nil || design.afterImageURL != nil) ? 1.0 : 0.5)
@@ -223,34 +252,34 @@ struct DesignDetailView: View {
                                         onSave?()
                                         dismiss()
                                     } label: {
-                                        HStack(spacing: 8) {
+                                        HStack(spacing: isTablet ? 12 : 8) {
                                             Image(systemName: "square.and.arrow.down")
-                                                .font(.system(size: 16))
-                                    Text("save".localized(with: languageManager.languageUpdateTrigger))
-                                        .font(.system(size: 16, weight: .medium))
+                                                .font(.system(size: isTablet ? 20 : 16))
+                                            Text("save".localized(with: languageManager.languageUpdateTrigger))
+                                                .font(.system(size: isTablet ? 18 : 16, weight: .medium))
                                         }
                                         .foregroundColor(.white)
-                                        .frame(height: 48)
-                                        .frame(maxWidth: .infinity)
+                                        .frame(height: isTablet ? 56 : 48)
+                                        .frame(maxWidth: isTablet ? 300 : .infinity)
                                         .background(Constants.Colors.proBackground)
-                                        .cornerRadius(24)
+                                        .cornerRadius(isTablet ? 28 : 24)
                                     }
                                 } else {
                                     // Already saved - Delete butonu
                                     Button {
                                         showDeleteAlert = true
                                     } label: {
-                                        HStack(spacing: 8) {
+                                        HStack(spacing: isTablet ? 12 : 8) {
                                             Image(systemName: "trash")
-                                                .font(.system(size: 16))
+                                                .font(.system(size: isTablet ? 20 : 16))
                                             Text("delete".localized(with: languageManager.languageUpdateTrigger))
-                                                .font(.system(size: 16, weight: .medium))
+                                                .font(.system(size: isTablet ? 18 : 16, weight: .medium))
                                         }
                                         .foregroundColor(.white)
-                                        .frame(height: 48)
-                                        .frame(maxWidth: .infinity)
+                                        .frame(height: isTablet ? 56 : 48)
+                                        .frame(maxWidth: isTablet ? 300 : .infinity)
                                         .background(Color.red)
-                                        .cornerRadius(24)
+                                        .cornerRadius(isTablet ? 28 : 24)
                                     }
                                 }
                             } else {
@@ -258,34 +287,34 @@ struct DesignDetailView: View {
                                 Button {
                                     showDeleteAlert = true
                                 } label: {
-                                    HStack(spacing: 8) {
+                                    HStack(spacing: isTablet ? 12 : 8) {
                                         Image(systemName: "trash")
-                                            .font(.system(size: 16))
+                                            .font(.system(size: isTablet ? 20 : 16))
                                         Text("delete".localized(with: languageManager.languageUpdateTrigger))
-                                            .font(.system(size: 16, weight: .medium))
+                                            .font(.system(size: isTablet ? 18 : 16, weight: .medium))
                                     }
                                     .foregroundColor(.white)
-                                    .frame(height: 48)
-                                    .frame(maxWidth: .infinity)
+                                    .frame(height: isTablet ? 56 : 48)
+                                    .frame(maxWidth: isTablet ? 300 : .infinity)
                                     .background(Color.red)
-                                    .cornerRadius(24)
+                                    .cornerRadius(isTablet ? 28 : 24)
                                 }
                             }
                         }
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 32)
+                    .padding(.horizontal, isTablet ? 40 : 20)
+                    .padding(.bottom, isTablet ? 40 : 32)
                 }
             }
         }
         .navigationBarHidden(true)
         .background(colorScheme == .dark ? Color.black : Color.white)
-        .confirmationDialog("delete_design".localized(with: languageManager.languageUpdateTrigger), isPresented: $showDeleteAlert, titleVisibility: .visible) {
+        .alert("delete_design".localized(with: languageManager.languageUpdateTrigger), isPresented: $showDeleteAlert) {
             Button("delete_design_confirm".localized(with: languageManager.languageUpdateTrigger), role: .destructive) {
                 homeViewModel.removeDesign(design)
                 dismiss()
             }
-            Button("cancel".localized(with: languageManager.languageUpdateTrigger), role: .cancel) {}
+            Button("cancel".localized(with: languageManager.languageUpdateTrigger), role: .cancel) { }
         } message: {
             Text("delete_design_message".localized(with: languageManager.languageUpdateTrigger))
         }
@@ -316,6 +345,7 @@ struct DesignDetailView: View {
     
     private func shareDesign() async {
         var activityItems: [Any] = []
+        var fallbackURLString: String? = nil
         
         if let image = design.afterImage {
             activityItems.append(image)
@@ -323,13 +353,19 @@ struct DesignDetailView: View {
                   let image = UIImage(data: imageData) {
             activityItems.append(image)
         } else if let url = design.afterImageURL {
+            fallbackURLString = url
             if let image = await loadImageFromURL(url) {
                 activityItems.append(image)
             }
         }
         
+        // Fallback: if image couldn't be loaded, try sharing the URL itself
+        if activityItems.isEmpty, let urlString = fallbackURLString, let url = URL(string: urlString) {
+            activityItems.append(url)
+        }
+        
         if activityItems.isEmpty {
-            print("Hiçbir image bulunamadı!")
+            print("Hiçbir image ya da URL bulunamadı, share sheet açılmadı.")
             return
         }
         
@@ -338,11 +374,30 @@ struct DesignDetailView: View {
             applicationActivities: nil
         )
         
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first,
-           let rootVC = window.rootViewController {
-            activityVC.popoverPresentationController?.sourceView = rootVC.view
-            rootVC.present(activityVC, animated: true)
+        await MainActor.run {
+            guard let windowScene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }) else {
+                print("Share: aktif windowScene bulunamadı")
+                return
+            }
+            guard let window = windowScene.windows.first(where: { $0.isKeyWindow }) ?? windowScene.windows.first else {
+                print("Share: window bulunamadı")
+                return
+            }
+            guard var topVC = window.rootViewController else {
+                print("Share: rootViewController yok")
+                return
+            }
+            while let presented = topVC.presentedViewController {
+                topVC = presented
+            }
+            if let popover = activityVC.popoverPresentationController {
+                popover.sourceView = topVC.view
+                popover.sourceRect = CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
+                popover.permittedArrowDirections = []
+            }
+            topVC.present(activityVC, animated: true)
         }
     }
 }

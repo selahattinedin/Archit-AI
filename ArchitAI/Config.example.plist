@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>STABILITY_AI_API_KEY</key>
+	<string>YOUR_STABILITY_AI_API_KEY_HERE</string>
+	<key>REVENUECAT_API_KEY</key>
+	<string>YOUR_REVENUECAT_API_KEY_HERE</string>
+	<key>STABILITY_AI_BASE_URL</key>
+	<string>https://api.stability.ai/v1</string>
+	<key>DEFAULT_ENGINE</key>
+	<string>stable-diffusion-xl-1024-v1-0</string>
+	<key>DEFAULT_STEPS</key>
+	<integer>25</integer>
+	<key>DEFAULT_CFG_SCALE</key>
+	<real>6.5</real>
+</dict>
+</plist>

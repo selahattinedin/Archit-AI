@@ -25,11 +25,11 @@ struct LanguageSettingsSection: View {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 12)
                                         .fill(language == languageManager.selectedLanguage ? 
-                                             (colorScheme == .dark ? Color.white : Color.black) : Color.clear)
+                                             (colorScheme == .dark ? Color.white : Color.white) : Color.clear)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12)
                                                 .stroke(language == languageManager.selectedLanguage ? 
-                                                       (colorScheme == .dark ? Color.black : Color.white) : Color.gray.opacity(0.3), lineWidth: 1)
+                                                       (colorScheme == .dark ? Color.black : Color.black) : Color.gray.opacity(0.3), lineWidth: 1)
                                         )
                                     
                                     Button {
@@ -42,7 +42,7 @@ struct LanguageSettingsSection: View {
                                             Text(language.displayName)
                                                 .font(.system(size: 16, weight: .medium))
                                                 .foregroundColor(language == languageManager.selectedLanguage ? 
-                                                               (colorScheme == .dark ? .black : .white) : .primary)
+                                                               (colorScheme == .dark ? .black : .black) : .primary)
                                                 .multilineTextAlignment(.center)
                                         }
                                         .padding(.horizontal, 20)
@@ -63,11 +63,11 @@ struct LanguageSettingsSection: View {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(language == languageManager.selectedLanguage ? 
-                                             (colorScheme == .dark ? Color.white : Color.black) : Color.clear)
+                                             (colorScheme == .dark ? Color.white : Color.white) : Color.clear)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 8)
                                                 .stroke(language == languageManager.selectedLanguage ? 
-                                                       (colorScheme == .dark ? Color.black : Color.white) : Color.gray.opacity(0.3), lineWidth: 1)
+                                                       (colorScheme == .dark ? Color.black : Color.black) : Color.gray.opacity(0.3), lineWidth: 1)
                                         )
                                     
                                     Button {
@@ -80,7 +80,7 @@ struct LanguageSettingsSection: View {
                                             Text(language.displayName)
                                                 .font(.system(size: 12, weight: .medium))
                                                 .foregroundColor(language == languageManager.selectedLanguage ? 
-                                                               (colorScheme == .dark ? .black : .white) : .primary)
+                                                               (colorScheme == .dark ? .black : .black) : .primary)
                                         }
                                         .padding(.horizontal, 12)
                                         .padding(.vertical, 8)

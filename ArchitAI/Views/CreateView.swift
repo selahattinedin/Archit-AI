@@ -83,7 +83,41 @@ struct CreateView: View {
                         design: design,
                         isFromCreate: true,
                         onSave: {
-                            viewModel.onComplete(design)
+                            print("💾 CreateView: Save butonuna basıldı - \(design.title)")
+                            
+                            // Hemen History tab'ına geç
+                            NotificationCenter.default.post(name: Notification.Name("SwitchToHistoryTab"), object: nil)
+                            print("💾 CreateView: SwitchToHistoryTab notification gönderildi")
+                            
+                            // Optimistic insert: History'de anında göster
+                            if let userID = authService.currentUserId,
+                               let before = design.beforeImage,
+                               let after = design.afterImage {
+                                let localDesign = Design(
+                                    id: design.id,
+                                    title: design.title,
+                                    style: design.style,
+                                    room: design.room,
+                                    beforeImage: before,
+                                    afterImage: after,
+                                    userID: userID,
+                                    createdAt: design.createdAt
+                                )
+                                homeViewModel.addDesign(localDesign)
+                            }
+                            
+                            // Arka planda kaydet
+                            Task {
+                                if let userID = authService.currentUserId {
+                                    await homeViewModel.saveDesignToFirebase(design: design, userID: userID)
+                                    // Kaydetme tamamlandıktan sonra History'yi güncelle
+                                    await homeViewModel.loadDesignsFromFirebase(userID: userID)
+                                }
+                                
+                                // Design created notification gönder
+                                NotificationCenter.default.post(name: Notification.Name("DesignCreated"), object: nil)
+                                print("💾 CreateView: DesignCreated notification gönderildi")
+                            }
                         },
                         onClose: {
                             withAnimation {

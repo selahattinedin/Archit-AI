@@ -7,6 +7,11 @@ class FirebaseStorageService: ObservableObject {
     private let storage = Storage.storage()
     private let db = Firestore.firestore()
     
+    // MARK: - Helper for nested document reference only
+    private func nestedDesignRef(userID: String, designID: String) -> DocumentReference {
+        return db.collection("users").document(userID).collection("designs").document(designID)
+    }
+    
     // Resim yükleme
     func uploadImage(_ image: UIImage, path: String) async throws -> String {
         print("🖼️ Firebase Storage: Resim yükleniyor - \(path)")
@@ -62,10 +67,56 @@ class FirebaseStorageService: ObservableObject {
         
         print("✅ Firebase Storage: Resim başarıyla silindi - \(path)")
     }
+
+    // MARK: - Kullanıcının tüm Storage dosyalarını sil (designs/{userId}/**)
+    func deleteAllUserFiles(userID: String) async {
+        let rootRef = storage.reference().child("designs/\(userID)")
+        await deleteRecursively(reference: rootRef)
+    }
+
+    // Recursively delete all files and subfolders under a reference
+    private func deleteRecursively(reference: StorageReference) async {
+        do {
+            let result = try await listAllAsync(reference: reference)
+            // Delete all items (files)
+            for item in result.items {
+                do {
+                    try await item.delete()
+                    print("✅ Firebase Storage: Silindi -> \(item.fullPath)")
+                } catch {
+                    print("⚠️ Firebase Storage: Silinemedi -> \(item.fullPath) - \(error.localizedDescription)")
+                }
+            }
+            // Recurse into prefixes (folders)
+            for prefix in result.prefixes {
+                await deleteRecursively(reference: prefix)
+            }
+        } catch {
+            print("⚠️ Firebase Storage: listAll hatası -> \(reference.fullPath) - \(error.localizedDescription)")
+        }
+    }
+
+    // Async wrapper for listAll
+    private func listAllAsync(reference: StorageReference) async throws -> StorageListResult {
+        try await withCheckedThrowingContinuation { continuation in
+            reference.listAll { result, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else if let result = result {
+                    continuation.resume(returning: result)
+                } else {
+                    continuation.resume(throwing: NSError(domain: "FirebaseStorageService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unknown listAll error"]))
+                }
+            }
+        }
+    }
     
-    // Design'ı Firestore'a kaydetme
+    // Design'ı Firestore'a kaydetme (yalnızca nested path)
     func saveDesign(_ design: Design, userID: String) async throws {
         print("📝 Firestore: Design kaydediliyor - \(design.id.uuidString)")
+        print("📝 Firestore: Design title - \(design.title)")
+        print("📝 Firestore: Design userID - \(design.userID ?? "nil")")
+        print("📝 Firestore: Target userID - \(userID)")
         
         let designData: [String: Any] = [
             "id": design.id.uuidString,
@@ -89,17 +140,20 @@ class FirebaseStorageService: ObservableObject {
         ]
         
         print("📊 Firestore: Design data hazırlandı")
-        try await db.collection("designs").document(design.id.uuidString).setData(designData)
-        print("✅ Firestore: Design başarıyla kaydedildi")
+        print("📊 Firestore: userID field - \(designData["userID"] ?? "nil")")
+        
+        try await nestedDesignRef(userID: userID, designID: design.id.uuidString).setData(designData)
+        print("✅ Firestore: Design başarıyla kaydedildi (nested) - Document ID: \(design.id.uuidString)")
     }
     
-    // Design'ı Firestore'dan silme
+    // Design'ı Firestore'dan silme (yalnızca nested)
     func deleteDesign(_ design: Design) async throws {
         print("🗑️ Firebase: Design siliniyor - \(design.id.uuidString)")
         
-        // Firestore'dan sil
-        try await db.collection("designs").document(design.id.uuidString).delete()
-        print("✅ Firestore: Design silindi")
+        if let userID = design.userID {
+            try? await nestedDesignRef(userID: userID, designID: design.id.uuidString).delete()
+        }
+        print("✅ Firestore: Design silindi (nested)")
         
         // Storage'dan resimleri sil - URL'den path çıkar
         if let beforeImageURL = design.beforeImageURL, !beforeImageURL.isEmpty {
@@ -137,66 +191,28 @@ class FirebaseStorageService: ObservableObject {
         return decodedPath
     }
     
-    // Kullanıcının tüm design'larını getirme - İyileştirilmiş
+    // Kullanıcının tüm design'larını getirme - Yalnızca nested path
     func fetchUserDesigns(userID: String) async throws -> [Design] {
         print("🔍 Firestore: Designs aranıyor - UserID: \(userID)")
         
         do {
-            // Firebase query ile designs'ları getir
-            let snapshot = try await db.collection("designs")
-                .whereField("userID", isEqualTo: userID)
-                .order(by: "createdAt", descending: true) // En yeni önce
-                .limit(to: 50) // Performans için limit
-                .getDocuments()
-            
-            print("📄 Firestore: \(snapshot.documents.count) design bulundu")
-            
+            print("🔍 Firestore: Nested path sorgulanıyor users/\(userID)/designs")
+            let subSnap = try await db.collection("users").document(userID).collection("designs").order(by: "createdAt", descending: true).getDocuments()
             var designs: [Design] = []
-            
-            for document in snapshot.documents {
+            for document in subSnap.documents {
                 do {
                     let design = try parseDesignFromDocument(document)
                     designs.append(design)
                 } catch {
-                    print("⚠️ Firestore: Design parse edilemedi - \(document.documentID) - Hata: \(error)")
-                    continue // Bu design'ı atla, diğerlerine devam et
+                    print("⚠️ Firestore: Nested parse edilemedi - \(document.documentID) - Hata: \(error)")
                 }
             }
-            
-            print("✅ Firestore: \(designs.count) design başarıyla yüklendi")
-            return designs
+            print("✅ Firestore: \(designs.count) design başarıyla yüklendi ve sıralandı")
+            return designs.sorted { $0.createdAt > $1.createdAt }
             
         } catch {
-            // Index hatası için özel handling
-            if error.localizedDescription.contains("index") ||
-               error.localizedDescription.contains("FAILED_PRECONDITION") {
-                print("⚠️ Firestore Index hatası, basit query deneniyor...")
-                
-                // Fallback: Index olmadan sadece userID ile filtrele
-                let snapshot = try await db.collection("designs")
-                    .whereField("userID", isEqualTo: userID)
-                    .getDocuments()
-                
-                var designs: [Design] = []
-                
-                for document in snapshot.documents {
-                    do {
-                        let design = try parseDesignFromDocument(document)
-                        designs.append(design)
-                    } catch {
-                        continue
-                    }
-                }
-                
-                // Client-side sorting
-                designs.sort { $0.createdAt > $1.createdAt }
-                
-                print("✅ Firestore Fallback: \(designs.count) design yüklendi ve sıralandı")
-                return designs
-                
-            } else {
-                throw error
-            }
+            print("❌ Firestore: Query hatası - \(error.localizedDescription)")
+            throw error
         }
     }
     
@@ -280,7 +296,7 @@ class FirebaseStorageService: ObservableObject {
         return design
     }
     
-    // Design'ı güncelleme
+    // Design'ı güncelleme (yalnızca nested)
     func updateDesign(_ design: Design) async throws {
         print("📝 Firestore: Design güncelleniyor - \(design.id.uuidString)")
         
@@ -289,8 +305,10 @@ class FirebaseStorageService: ObservableObject {
             "updatedAt": Date()
         ]
         
-        try await db.collection("designs").document(design.id.uuidString).updateData(designData)
-        print("✅ Firestore: Design başarıyla güncellendi")
+        if let userID = design.userID {
+            try? await nestedDesignRef(userID: userID, designID: design.id.uuidString).updateData(designData)
+        }
+        print("✅ Firestore: Design başarıyla güncellendi (nested)")
     }
 }
 

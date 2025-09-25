@@ -4,10 +4,11 @@
 "cancel" = "Отмена";
 "back" = "Назад";
 "done" = "Готово";
+"ok" = "ОК";
 "delete" = "Удалить";
-"delete_design" = "Удалить дизайн";
+"delete_design" = "Удалить Дизайн";
 "delete_design_message" = "Вы уверены, что хотите удалить этот дизайн? Это действие нельзя отменить.";
-"delete_design_confirm" = "Удалить дизайн";
+"delete_design_confirm" = "Удалить Дизайн";
 "share" = "Поделиться";
 "save" = "Сохранить";
 "error" = "Ошибка";
@@ -23,7 +24,7 @@
 "settings" = "Настройки";
 
 // Home View
-"archit_ai" = "Archit AI";
+"archit_ai" = "archit ai";
 
 // Design Cards
 "room_design_title" = "Дизайн Комнаты";
@@ -95,7 +96,7 @@
 
 // Account
 "account" = "Аккаунт";
-"delete_account" = "Удалить аккаунт";
+"delete_account" = "Удалить Аккаунт";
 "delete_account_message" = "Вы уверены, что хотите удалить свой аккаунт? Это действие нельзя отменить.";
 "delete_account_error" = "Произошла ошибка при удалении вашего аккаунта. Пожалуйста, попробуйте позже.";
 
@@ -110,6 +111,13 @@
 "continue_with_annual" = "Продолжить с годовым планом";
 "no_offers" = "В настоящее время предложения недоступны.";
 "loading_offers" = "Загрузка предложений...";
+"refresh" = "Обновить";
+"annual" = "Годовой";
+"weekly" = "Еженедельный";
+"annual_continue" = "Продолжить с Годовым";
+"weekly_continue" = "Продолжить с Еженедельным";
+"paywall_subtitle_annual" = "Полный доступ ко всем функциям на год";
+"paywall_subtitle_weekly" = "Оценивайте Премиум каждую неделю";
 
 // Legal & Support
 "legal" = "Правовая информация";
@@ -139,6 +147,8 @@
 "room_study_room" = "Кабинет";
 "room_garden" = "Сад";
 "room_balcony" = "Балкон";
+"room_pantry" = "Кладовая";
+"room_laundry_room" = "Прачечная";
 "room_entertainment" = "Развлечения";
 "room_entryway" = "Прихожая";
 "room_home_gym" = "Домашний спортзал";
@@ -155,6 +165,8 @@
 "room_study_room_desc" = "Создайте сфокусированную учебную среду";
 "room_garden_desc" = "Спроектируйте ваш наружный оазис";
 "room_balcony_desc" = "Трансформируйте ваше наружное пространство";
+"room_pantry_desc" = "Оптимизируйте пространство для хранения продуктов";
+"room_laundry_room_desc" = "Организуйте прачечную и хозяйственную зону";
 "room_entertainment_desc" = "Постройте ваше развлекательное пространство";
 "room_entryway_desc" = "Создайте организованное входное пространство";
 "room_home_gym_desc" = "Создайте ваше фитнес-убежище";
@@ -186,6 +198,9 @@
 "style_loft" = "Лофт";
 "style_luxury" = "Роскошь";
 "style_turkish" = "Турецкий";
+"style_eighty_style" = "Стиль 80-х";
+"style_rustic" = "Рустик";
+"style_tropic" = "Тропик";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Натуральные материалы с чистыми современными линиями";
@@ -202,3 +217,20 @@
 "style_loft_desc" = "Городская жизнь с высокими потолками и открытыми пространствами";
 "style_luxury_desc" = "Роскошный дизайн с премиум отделкой";
 "style_turkish_desc" = "Традиционный турецкий дизайн с современными акцентами";
+"style_eighty_style_desc" = "Яркие цвета, неон, ретро геометрические узоры";
+"style_rustic_desc" = "Теплое натуральное дерево, камень, уютные текстуры";
+"style_tropic_desc" = "Пышная зелень, яркие цвета, естественный свет, тропические текстуры";
+
+// Photo Action Sheet
+"choose_photo" = "Выбрать фото";
+"take_photo" = "Сделать фото";
+"choose_from_library" = "Выбрать из галереи";
+"remove_photo" = "Удалить фото";
+
+// Premium Status Labels
+"weekly_premium" = "Премиум (еженедельно)";
+"yearly_premium" = "Премиум (ежегодно)";
+"premium_active" = "Премиум активен";
+"not_premium" = "Не премиум";
+"cancel" = "Отмена";
+"restore_purchases" = "Восстановить покупки";

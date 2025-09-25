@@ -4,6 +4,7 @@
 "cancel" = "キャンセル";
 "back" = "戻る";
 "done" = "完了";
+"ok" = "OK";
 "delete" = "削除";
 "delete_design" = "デザインを削除";
 "delete_design_message" = "このデザインを削除してもよろしいですか？この操作は元に戻せません。";
@@ -23,7 +24,7 @@
 "settings" = "設定";
 
 // Home View
-"archit_ai" = "Archit AI";
+"archit_ai" = "archit ai";
 
 // Design Cards
 "room_design_title" = "ルームデザイン";
@@ -110,6 +111,13 @@
 "continue_with_annual" = "年間で続行";
 "no_offers" = "現在利用可能なオファーはありません。";
 "loading_offers" = "オファーを読み込み中...";
+"refresh" = "更新";
+"annual" = "年間";
+"weekly" = "週間";
+"annual_continue" = "年間で続行";
+"weekly_continue" = "週間で続行";
+"paywall_subtitle_annual" = "すべての機能に1年間フルアクセス";
+"paywall_subtitle_weekly" = "プレミアムを毎週体験";
 
 // Legal & Support
 "legal" = "法的";
@@ -139,6 +147,8 @@
 "room_study_room" = "スタディルーム";
 "room_garden" = "ガーデン";
 "room_balcony" = "バルコニー";
+"room_pantry" = "パントリー";
+"room_laundry_room" = "ランドリールーム";
 "room_entertainment" = "エンターテイメント";
 "room_entryway" = "エントランス";
 "room_home_gym" = "ホームジム";
@@ -155,6 +165,8 @@
 "room_study_room_desc" = "集中した学習環境を作成";
 "room_garden_desc" = "屋外のオアシスをデザイン";
 "room_balcony_desc" = "屋外エリアを変身";
+"room_pantry_desc" = "食品収納スペースを最適化";
+"room_laundry_room_desc" = "ランドリーとユーティリティエリアを整理";
 "room_entertainment_desc" = "エンターテイメントスペースを構築";
 "room_entryway_desc" = "整理されたエントランススペースを作成";
 "room_home_gym_desc" = "フィットネスの聖域を作成";
@@ -186,6 +198,9 @@
 "style_loft" = "ロフト";
 "style_luxury" = "ラグジュアリー";
 "style_turkish" = "トルコ";
+"style_eighty_style" = "80's スタイル";
+"style_rustic" = "ラスティック";
+"style_tropic" = "トロピック";
 
 // Style Descriptions
 "style_organic_modern_desc" = "クリーンなモダンラインと自然素材";
@@ -202,3 +217,21 @@
 "style_loft_desc" = "高い天井とオープンスペースの都市生活";
 "style_luxury_desc" = "プレミアム仕上げの豪華なデザイン";
 "style_turkish_desc" = "モダンなタッチを持つ伝統的トルコデザイン";
+"style_eighty_style_desc" = "鮮やかな色、ネオン、レトロな幾何学模様";
+"style_rustic_desc" = "温かみのある木材、石、心地よいテクスチャ";
+"style_tropic_desc" = "豊かな緑、鮮やかな色、自然光、トロピカルな質感";
+
+// Photo Action Sheet
+"choose_photo" = "写真を選択";
+"take_photo" = "写真を撮る";
+"choose_from_library" = "ライブラリから選択";
+"remove_photo" = "写真を削除";
+
+// Premium Status Labels
+"weekly_premium" = "プレミアム（週次）";
+"yearly_premium" = "プレミアム（年次）";
+"premium_active" = "プレミアム有効";
+"not_premium" = "プレミアムではない";
+"cancel" = "キャンセル";
+
+"restore_purchases" = "購入の復元";

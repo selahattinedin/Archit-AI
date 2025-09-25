@@ -2,13 +2,14 @@ import SwiftUI
 
 struct PaywallNoOffersView: View {
     @ObservedObject var viewModel: PaywallViewModel
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         VStack(spacing: 12) {
-            Text("No offers available at the moment.")
+            Text("no_offers".localized(with: languageManager.languageUpdateTrigger))
                 .foregroundColor(.white)
-            Button("Refresh") { viewModel.refreshOfferings() }
-                .foregroundColor(Constants.Colors.PremiumOrange)
+            Button("refresh".localized(with: languageManager.languageUpdateTrigger)) { viewModel.refreshOfferings() }
+                .foregroundColor(Constants.Colors.PremiumRed)
         }
         .padding(.top, 10)
     }

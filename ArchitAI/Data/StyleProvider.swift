@@ -87,6 +87,25 @@ final class StyleProvider {
                 image: "turkish",
                 tags: ["traditional", "cultural", "warm"]
             )
+            ,
+            DesignStyle(
+                name: "style_rustic",
+                description: "style_rustic_desc",
+                image: "rustic",
+                tags: ["wood", "natural", "cozy"]
+            ),
+            DesignStyle(
+                name: "style_eighty_style",
+                description: "style_eighty_style_desc",
+                image: "eighty_style",
+                tags: ["retro", "colorful", "bold"]
+            ),
+            DesignStyle(
+                name: "style_tropic",
+                description: "style_tropic_desc",
+                image: "tropic",
+                tags: ["tropical", "vibrant", "natural"]
+            )
         ]
     }()
 }

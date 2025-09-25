@@ -7,19 +7,12 @@ struct PhotoSelectionStepView: View {
     @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Main Content without scroll
+        ScrollView(showsIndicators: false) {
             VStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 24) {
-                // Photo Upload Section
                 PhotoUploadView(selectedImage: $selectedPhoto)
                     .padding(.horizontal)
                 
-                Spacer()
-            }
-            .padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
-            
-            // Fixed Button at bottom
-            VStack(spacing: 0) {
+                // Continue Button inside scrollable area
                 ContinueButton(
                     title: "continue".localized(with: languageManager.languageUpdateTrigger),
                     isEnabled: selectedPhoto != nil,
@@ -27,7 +20,9 @@ struct PhotoSelectionStepView: View {
                 )
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
+                .padding(.bottom, 20)
             }
+            .padding(.top, UIDevice.current.userInterfaceIdiom == .pad ? 40 : 20)
         }
     }
 }

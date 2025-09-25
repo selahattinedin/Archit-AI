@@ -64,7 +64,6 @@ struct RoomSelectionStepView: View {
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
-                        .frame(height: 40)
                         .cornerRadius(12)
                         .opacity(colorScheme == .dark ? 0.8 : 0.6)
                     }
@@ -72,25 +71,20 @@ struct RoomSelectionStepView: View {
                     Image(room.icon)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 40)
                         .clipped()
                         .cornerRadius(12)
                         .foregroundColor(colorScheme == .dark ? .white : .primary)
                         .shadow(color: colorScheme == .dark ? .black.opacity(0.3) : .clear, radius: 2, x: 0, y: 1)
-
+                }
+                .frame(height: 40)
+                .overlay(alignment: .topTrailing) {
                     if isSelected {
-                        VStack {
-                            HStack {
-                                Spacer()
-                                Image(systemName: "checkmark")
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .padding(8)
-                                    .background(Circle().fill(.orange))
-                                    .padding(8)
-                            }
-                            Spacer()
-                        }
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(8)
+                            .background(Circle().fill(.orange))
+                            .padding(8)
                     }
                 }
 

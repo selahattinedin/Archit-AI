@@ -2,6 +2,8 @@ import SwiftUI
 import FirebaseCore
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseAuth
+import FirebaseAuth
 import RevenueCat
 
 @main
@@ -13,7 +15,7 @@ struct ArchitAIApp: App {
     @State private var showLaunchPaywall = false
     
     init() {
-        // Firebase'i başlat
+        // Firebase'i başlat (yalnızca gerçek Firebase)
         if let path = Bundle.main.path(forResource: "GoogleService", ofType: "plist"),
            let options = FirebaseOptions(contentsOfFile: path) {
             FirebaseApp.configure(options: options)
@@ -21,11 +23,23 @@ struct ArchitAIApp: App {
             FirebaseApp.configure()
         }
 
-        // RevenueCat yapılandırması
-        RevenueCatService.shared.configure(apiKey: "appl_RxSWuInldKmQzaJMcCooqPsZJEo")
+        // Emülatör bağlantıları kaldırıldı – her zaman prod Firebase'e bağlanır
+
+        // RevenueCat yapılandırması - API anahtarı Config.plist'ten okunur
+        let revenueCatAPIKey = getRevenueCatAPIKey()
+        RevenueCatService.shared.configure(apiKey: revenueCatAPIKey)
         
         // Dil ayarlarını başlangıçta yükle
         setupInitialLanguage()
+    }
+    
+    private func getRevenueCatAPIKey() -> String {
+        guard let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+              let plist = NSDictionary(contentsOfFile: path),
+              let apiKey = plist["REVENUECAT_API_KEY"] as? String else {
+            fatalError("REVENUECAT_API_KEY not found in Config.plist")
+        }
+        return apiKey
     }
     
     private func setupInitialLanguage() {
@@ -74,4 +88,6 @@ struct ArchitAIApp: App {
             window.overrideUserInterfaceStyle = .unspecified
         }
     }
+
+    // Emülatör/konfig yardımcıları kaldırıldı
 }

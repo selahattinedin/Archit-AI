@@ -7,11 +7,11 @@ struct Room: Identifiable, Codable, Hashable {
     let description: String
     
     var localizedName: String {
-        return name.localized(with: LanguageManager.shared.languageUpdateTrigger)
+        return name.localized
     }
     
     var localizedDescription: String {
-        return description.localized(with: LanguageManager.shared.languageUpdateTrigger)
+        return description.localized
     }
     let category: RoomCategory
     let gradientColors: [String]

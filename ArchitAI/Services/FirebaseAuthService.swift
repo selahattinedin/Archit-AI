@@ -25,6 +25,15 @@ class FirebaseAuthService: ObservableObject {
                 }
             }
         }
+
+        // Uygulama başlarken kullanıcı yoksa anonim giriş yap
+        Task { [weak self] in
+            guard let self = self else { return }
+            let current = Auth.auth().currentUser
+            if current == nil {
+                await self.signInAnonymously()
+            }
+        }
     }
     
     // Anonymous authentication
@@ -85,32 +94,66 @@ class FirebaseAuthService: ObservableObject {
         guard let user = Auth.auth().currentUser else {
             throw NSError(domain: "FirebaseAuthService", code: -1, userInfo: [NSLocalizedDescriptionKey: "No user logged in"])
         }
-        
-        // Delete user data from Firestore if needed
-        if let userId = currentUserId {
-            let db = Firestore.firestore()
-            // Delete user's designs
-            let designDocs = try await db.collection("designs").whereField("userId", isEqualTo: userId).getDocuments().documents
-            for document in designDocs {
-                try await document.reference.delete()
+
+        guard let userId = currentUserId else {
+            throw NSError(domain: "FirebaseAuthService", code: -2, userInfo: [NSLocalizedDescriptionKey: "Missing user id"])
+        }
+
+        let db = Firestore.firestore()
+        let storageService = FirebaseStorageService()
+        let storage = Storage.storage()
+
+        // 1) Delete all designs for this user (Firestore + Storage images via URLs)
+        do {
+            let userDesigns = try await storageService.fetchUserDesigns(userID: userId)
+            for design in userDesigns {
+                try? await storageService.deleteDesign(design)
             }
-            // Delete user document
-            try await db.collection("users").document(userId).delete()
+        } catch {
+            print("⚠️ DeleteAccount: fetchUserDesigns error - \(error.localizedDescription)")
         }
-        
-        // Delete user's storage data if needed
-        if let userId = currentUserId {
-            let storage = Storage.storage()
-            let userStorageRef = storage.reference().child("users/\(userId)")
-            try await userStorageRef.delete()
+
+        // 2) Extra safety: delete designs collection docs by userId variations
+        do {
+            let snapshots = try await db.collection("designs").whereField("userID", isEqualTo: userId).getDocuments()
+            for doc in snapshots.documents {
+                try? await doc.reference.delete()
+            }
+        } catch {
+            print("⚠️ DeleteAccount: delete designs by userID error - \(error.localizedDescription)")
         }
-        
-        // Finally delete the user account
+        do {
+            let snapshots = try await db.collection("designs").whereField("userId", isEqualTo: userId).getDocuments()
+            for doc in snapshots.documents {
+                try? await doc.reference.delete()
+            }
+        } catch {
+            print("⚠️ DeleteAccount: delete designs by userId error - \(error.localizedDescription)")
+        }
+
+        // 3) Delete nested users/{uid}/designs docs then user doc
+        do {
+            let subDesigns = try? await db.collection("users").document(userId).collection("designs").getDocuments()
+            if let docs = subDesigns?.documents {
+                for doc in docs { try? await doc.reference.delete() }
+            }
+            try? await db.collection("users").document(userId).delete()
+        }
+
+        // 4) Delete any remaining storage files under designs/{uid}/... (recursive)
+        do {
+            let storageServiceForDelete = FirebaseStorageService()
+            await storageServiceForDelete.deleteAllUserFiles(userID: userId)
+        }
+
+        // 5) Logout from RevenueCat (if configured)
+        RevenueCatService.shared.logout()
+
+        // 6) Finally delete auth user
         try await user.delete()
-        
-        DispatchQueue.main.async {
-            self.currentUser = nil
-            self.isAuthenticated = false
-        }
+
+        // 7) Reset local flags and immediately re-create anonymous user to keep UI functional
+        UserDefaults.standard.removeObject(forKey: "didShowInitialPaywall")
+        await self.signInAnonymously()
     }
 }

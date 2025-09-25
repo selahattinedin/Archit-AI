@@ -4,6 +4,7 @@ struct MainTabView: View {
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var createViewModel: CreateDesignViewModel
     @EnvironmentObject var authService: FirebaseAuthService
+    @EnvironmentObject var purchases: RevenueCatService
     @State private var selectedTab = 0
     @State private var viewRefreshTrigger = false
     @Environment(\.colorScheme) var colorScheme
@@ -12,10 +13,11 @@ struct MainTabView: View {
     init() {
         let homeVM = HomeViewModel()
         _homeViewModel = StateObject(wrappedValue: homeVM)
-        _createViewModel = StateObject(wrappedValue: CreateDesignViewModel(onComplete: { [weak homeVM] design in
-            Task { @MainActor in
-                homeVM?.addDesign(design)
-            }
+        _createViewModel = StateObject(wrappedValue: CreateDesignViewModel(onComplete: { design in
+            print("💾 MainTabView: onComplete çağrıldı - \(design.title)")
+            homeVM.addDesign(design)
+            print("💾 MainTabView: Design eklendi - \(design.title)")
+            print("💾 MainTabView: Mevcut designs count: \(homeVM.designs.count)")
         }))
         
 
@@ -81,6 +83,7 @@ struct MainTabView: View {
             CreateView(viewModel: createViewModel, tabBarHidden: .constant(false))
                 .environmentObject(authService)
                 .environmentObject(homeViewModel)
+                .environmentObject(purchases)
                 .tabItem {
                     Image(systemName: "plus.circle.fill")
                     Text("create".localized(with: languageManager.languageUpdateTrigger))
@@ -106,6 +109,7 @@ struct MainTabView: View {
                 selectedTab = 1
             }
         }
+        // Create tab'da kal; premium kontrolünü sadece Transform aşamasında yapacağız
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("UserIDChanged"))) { notification in
             if let userID = notification.object as? String {
                 homeViewModel.setUserID(userID)

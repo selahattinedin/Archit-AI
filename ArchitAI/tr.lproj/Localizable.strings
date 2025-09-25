@@ -4,6 +4,7 @@
 "cancel" = "İptal";
 "back" = "Geri";
 "done" = "Tamam";
+"ok" = "Tamam";
 "delete" = "Sil";
 "delete_design" = "Tasarımı Sil";
 "delete_design_message" = "Bu tasarımı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.";
@@ -109,6 +110,13 @@
 "continue_with_annual" = "Yıllık ile Devam Et";
 "no_offers" = "Şu anda mevcut teklif yok.";
 "loading_offers" = "Teklifler yükleniyor...";
+"refresh" = "Yenile";
+"annual" = "Yıllık";
+"weekly" = "Haftalık";
+"annual_continue" = "Yıllık ile Devam Et";
+"weekly_continue" = "Haftalık ile Devam Et";
+"paywall_subtitle_annual" = "Tüm Özelliklere Yıl Boyu Erişim";
+"paywall_subtitle_weekly" = "Premium’u Haftalık Deneyimle";
 
 // Legal & Support
 "legal" = "Yasal";
@@ -140,6 +148,8 @@
 "room_balcony" = "Balkon";
 "room_entertainment" = "Eğlence Odası";
 "room_entryway" = "Giriş";
+"room_pantry" = "Kiler";
+"room_laundry_room" = "Çamaşır Odası";
 "room_home_gym" = "Ev Spor Salonu";
 "room_library" = "Kütüphane";
 
@@ -156,6 +166,8 @@
 "room_balcony_desc" = "Dış mekan alanınızı dönüştürün";
 "room_entertainment_desc" = "Eğlence alanınızı oluşturun";
 "room_entryway_desc" = "Düzenli bir giriş alanı yaratın";
+"room_pantry_desc" = "Gıda depolama alanınızı optimize edin";
+"room_laundry_room_desc" = "Çamaşır ve utility alanınızı düzenleyin";
 "room_home_gym_desc" = "Fitness sığınağınızı yaratın";
 "room_library_desc" = "Okuma sığınağınızı tasarlayın";
 
@@ -185,6 +197,9 @@
 "style_loft" = "Loft";
 "style_luxury" = "Lüks";
 "style_turkish" = "Türk";
+"style_eighty_style" = "80's Style";
+"style_rustic" = "Rustik";
+"style_tropic" = "Tropik";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Doğal malzemeler ve modern çizgiler";
@@ -201,3 +216,20 @@
 "style_loft_desc" = "Yüksek tavanlı ve açık alanlı kentsel yaşam";
 "style_luxury_desc" = "Premium bitişlerle gösterişli tasarım";
 "style_turkish_desc" = "Modern dokunuşlarla geleneksel Türk tasarımı";
+"style_eighty_style_desc" = "Cesur renkler, neon dokunuşlar, retro geometrik desenler";
+"style_rustic_desc" = "Sıcak doğal ahşap, taş, rahat dokular";
+"style_tropic_desc" = "Gür yeşillik, canlı renkler, doğal ışık, tropik dokular";
+
+// Photo Action Sheet
+"choose_photo" = "Fotoğraf Seç";
+"take_photo" = "Fotoğraf Çek";
+"choose_from_library" = "Galeriden Seç";
+"remove_photo" = "Fotoğrafı Kaldır";
+
+// Premium Status Labels
+"weekly_premium" = "Haftalık Premium";
+"yearly_premium" = "Yıllık Premium";
+"premium_active" = "Premium Aktif";
+"not_premium" = "Premium Değil";
+"cancel" = "Vazgeç";
+"restore_purchases" = "Satın Alımları Geri Yükle";

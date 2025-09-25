@@ -4,6 +4,7 @@ import RevenueCat
 struct PaywallContinueButton: View {
     let package: Package
     @ObservedObject var viewModel: PaywallViewModel
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         Button(action: { viewModel.purchaseSelectedPackage() }) {
@@ -14,11 +15,9 @@ struct PaywallContinueButton: View {
                     .foregroundColor(.white)
                 
                 // Text
-                Text("Continue with \(viewModel.packageTitle(for: package))")
+                Text("continue".localized(with: languageManager.languageUpdateTrigger))
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.white)
-                
-                Spacer()
                 
                 // Arrow
                 Image(systemName: "chevron.right")
@@ -28,6 +27,7 @@ struct PaywallContinueButton: View {
             .padding(.vertical, 20)
             .padding(.horizontal, 24)
             .frame(maxWidth: .infinity)
+            .multilineTextAlignment(.center)
             .background(
                 LinearGradient(
                     gradient: Gradient(colors: [

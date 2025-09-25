@@ -8,12 +8,8 @@ struct HistoryView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @StateObject private var languageManager = LanguageManager.shared
     
-    private var isIPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
-    
     private var isTablet: Bool {
-        horizontalSizeClass == .regular && isIPad
+        horizontalSizeClass == .regular
     }
     
     var body: some View {
@@ -70,42 +66,47 @@ struct HistoryView: View {
                     .padding(.horizontal, isTablet ? 40 : 20)
                     .padding(.vertical, isTablet ? 60 : 40)
                 } else if homeViewModel.designs.isEmpty {
-                    VStack(spacing: isTablet ? 40 : 24) {
-                        Spacer()
-                        
-                        VStack(spacing: isTablet ? 24 : 16) {
-                            Image(systemName: "photo.stack")
-                                .font(.system(size: isTablet ? 120 : 80))
-                                .foregroundColor(.gray)
-                                .opacity(0.8)
-                            
-                            VStack(spacing: isTablet ? 16 : 12) {
-                                Text("no_designs".localized(with: languageManager.languageUpdateTrigger))
-                                    .font(.system(size: isTablet ? 32 : 24, weight: .semibold))
-                                    .foregroundColor(Constants.Colors.textPrimary)
-                                
-                                Text("create_first_design".localized(with: languageManager.languageUpdateTrigger))
-                                    .font(.system(size: isTablet ? 22 : 18))
-                                    .foregroundColor(Constants.Colors.textSecondary)
-                                    .multilineTextAlignment(.center)
-                                    .padding(.horizontal, isTablet ? 60 : 30)
+                    if homeViewModel.isSaving {
+                        // Show placeholder while saving (empty list case)
+                        ScrollView {
+                            LazyVStack(spacing: 16) {
+                                PlaceholderHistoryCard(isTablet: isTablet)
+                                PlaceholderHistoryCard(isTablet: isTablet)
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 8)
                         }
-                        
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.horizontal, isTablet ? 40 : 20)
-                    .padding(.vertical, isTablet ? 60 : 40)
-                    .onAppear {
-                        print("📱 Empty state showing - designs count: \(homeViewModel.designs.count)")
-                        print("📱 isTablet: \(isTablet)")
-                        print("📱 isIPad: \(isIPad)")
-                        print("📱 horizontalSizeClass: \(horizontalSizeClass)")
+                    } else {
+                        VStack(spacing: 20) {
+                            Spacer()
+                            
+                            VStack(spacing: 16) {
+                                Image(systemName: "photo.stack")
+                                    .font(.system(size: 60))
+                                    .foregroundColor(.gray)
+                                    .opacity(0.6)
+                                
+                                Text("no_designs".localized(with: languageManager.languageUpdateTrigger))
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundColor(.gray)
+                            }
+                            
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .onAppear {
+                            print("\u{1F4F1} Empty state showing - designs count: \(homeViewModel.designs.count)")
+                            print("\u{1F4F1} isTablet: \(isTablet)")
+                        }
                     }
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 16) {
+                            // Show a single placeholder at top while saving (non-empty list)
+                            if homeViewModel.isSaving {
+                                PlaceholderHistoryCard(isTablet: isTablet)
+                            }
+                            
                             ForEach(homeViewModel.designs) { design in
                                 DesignHistoryCard(design: design)
                                     .onTapGesture {
@@ -152,6 +153,10 @@ struct HistoryView: View {
         }
         .onAppear {
             selectedDesign = nil
+            print("\u{1F4F1} HistoryView onAppear - designs count: \(homeViewModel.designs.count)")
+            print("\u{1F4F1} HistoryView onAppear - isLoading: \(homeViewModel.isLoading)")
+            print("\u{1F4F1} HistoryView onAppear - errorMessage: \(homeViewModel.errorMessage ?? "nil")")
+            
             // Otomatik yenileme
             if let userID = authService.currentUserId {
                 Task {
@@ -160,7 +165,15 @@ struct HistoryView: View {
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .init("DesignCreated"))) { _ in
-            // Yeni tasarım oluşturulduğunda otomatik yenile
+            print("\u{1F4F1} HistoryView: DesignCreated notification alındı")
+            print("\u{1F4F1} HistoryView: Mevcut designs count: \(homeViewModel.designs.count)")
+            
+            // Önce local designs'ı kontrol et
+            print("\u{1F4F1} HistoryView: Local designs yükleniyor...")
+            homeViewModel.loadDesigns()
+            print("\u{1F4F1} HistoryView: Local designs yüklendi - count: \(homeViewModel.designs.count)")
+            
+            // Sonra Firebase'den de yükle
             if let userID = authService.currentUserId {
                 Task {
                     await homeViewModel.loadDesignsFromFirebase(userID: userID)
@@ -317,6 +330,57 @@ struct HistoryView: View {
                 return formatTime(minutes, "minute".localized(with: languageManager.languageUpdateTrigger), "minutes".localized(with: languageManager.languageUpdateTrigger))
             }
             return formatTime(1, "minute".localized(with: languageManager.languageUpdateTrigger), "minutes".localized(with: languageManager.languageUpdateTrigger))
+        }
+    }
+    
+    // Placeholder skeleton card
+    struct PlaceholderHistoryCard: View {
+        let isTablet: Bool
+        @Environment(\.colorScheme) var colorScheme
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(spacing: 12) {
+                    Circle()
+                        .fill(Constants.Colors.cardBackground)
+                        .frame(width: 40, height: 40)
+                        .overlay(Circle().fill(Color.gray.opacity(0.15)))
+                    
+                    VStack(alignment: .leading, spacing: 6) {
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color.gray.opacity(0.2))
+                            .frame(width: 120, height: 14)
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color.gray.opacity(0.15))
+                            .frame(width: 80, height: 12)
+                    }
+                    
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(Color.gray.opacity(0.15))
+                        .frame(width: 60, height: 12)
+                }
+                
+                HStack(spacing: 12) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(height: 120)
+                        .frame(maxWidth: .infinity)
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(height: 120)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .padding(20)
+            .background(Constants.Colors.cardBackground)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Constants.Colors.cardBorder, lineWidth: 1)
+            )
+            .shadow(color: colorScheme == .dark ? .clear : .black.opacity(0.08), radius: 15, x: 0, y: 5)
+            .redacted(reason: .placeholder)
         }
     }
     

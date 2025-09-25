@@ -3,6 +3,7 @@ import SwiftUI
 struct PaywallHeroSection: View {
     @State private var showAfterDesign = false
     @State private var isGlowing = false
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -32,7 +33,7 @@ struct PaywallHeroSection: View {
                             .foregroundColor(.white)
                             .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
                         
-                        Text("PREMIUM")
+                        Text("premium".localized(with: languageManager.languageUpdateTrigger))
                             .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .medium))
                             .foregroundColor(.white)
                             .tracking(3)
@@ -55,7 +56,7 @@ struct PaywallHeroSection: View {
                                     .stroke(Color.white.opacity(0.2), lineWidth: 1)
                             )
                             .overlay(
-                                Text("Before")
+                                Text("before".localized(with: languageManager.languageUpdateTrigger))
                                     .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .bold))
                                     .foregroundColor(.white)
                                     .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18)
@@ -83,7 +84,7 @@ struct PaywallHeroSection: View {
                                     .stroke(Constants.Colors.PremiumRed.opacity(0.5), lineWidth: 2)
                             )
                             .overlay(
-                                Text("After")
+                                Text("after".localized(with: languageManager.languageUpdateTrigger))
                                     .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18, weight: .bold))
                                     .foregroundColor(.white)
                                     .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 24 : 18)
@@ -96,12 +97,11 @@ struct PaywallHeroSection: View {
                             .opacity(showAfterDesign ? 1 : 0)
                             .scaleEffect(showAfterDesign ? 1.0 : 0.9)
                             .animation(.easeInOut(duration: 1.0), value: showAfterDesign)
-                            .shadow(color: Constants.Colors.PremiumRed.opacity(0.45), radius: 20, x: 0, y: 12)
                     }
                     .padding(.horizontal, 2) // Sağdan ve soldan padding'i çok az yaptım
                     
                     // Kısa Açıklama - Daha şık
-                    Text("Transform your space with AI")
+                    Text("transform_space".localized(with: languageManager.languageUpdateTrigger))
                             .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 26 : 20, weight: .semibold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)

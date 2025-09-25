@@ -55,6 +55,7 @@ struct HomeView: View {
     @State private var showPaywall = false
     @State private var scrollOffset: CGFloat = 0
     @State private var refreshID = UUID() // View'ı yenilemek için
+    @AppStorage("didShowInitialPaywall") private var didShowInitialPaywall: Bool = false
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
@@ -229,6 +230,18 @@ struct HomeView: View {
                     await authService.signInAnonymously()
                 }
             }
+            // Premium değilse ilk açılışta paywall göster (yalnızca bir kez)
+            if !purchases.isPro && !didShowInitialPaywall {
+                showPaywall = true
+                didShowInitialPaywall = true
+            }
+        }
+        .onReceive(purchases.$isPro) { isPro in
+            // Bilgiler sonradan güncellenirse ve premium değilse paywall'ı bir kez göster
+            if !isPro && !didShowInitialPaywall {
+                showPaywall = true
+                didShowInitialPaywall = true
+            }
         }
         .onChange(of: authService.currentUserId) { userID in
             // User ID değiştiğinde HomeViewModel'i güncelle
@@ -237,6 +250,10 @@ struct HomeView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("LanguageChanged"))) { _ in
             // Dil değiştiğinde view'ı yeniden yükle
             refreshID = UUID()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("ShowPaywallFromCreateTab"))) { _ in
+            // Create tab'dan gelen paywall isteği
+            showPaywall = true
         }
         .id(refreshID) // View'ı yenilemek için
     }

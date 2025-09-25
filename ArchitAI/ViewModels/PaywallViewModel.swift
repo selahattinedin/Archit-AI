@@ -79,6 +79,10 @@ final class PaywallViewModel: ObservableObject {
         purchasesService.fetchOfferings()
     }
     
+    func restorePurchases() {
+        purchasesService.restorePurchases { _ in }
+    }
+
     func dismissPaywall() {
         print("🔵 PaywallViewModel: dismissPaywall() called")
         shouldDismiss = true
@@ -105,8 +109,8 @@ final class PaywallViewModel: ObservableObject {
     
     func packageTitle(for package: Package) -> String {
         switch package.packageType {
-        case .annual: return "Annual"
-        case .weekly: return "Weekly"
+        case .annual: return "annual".localized
+        case .weekly: return "weekly".localized
         default: return package.storeProduct.localizedTitle
         }
     }

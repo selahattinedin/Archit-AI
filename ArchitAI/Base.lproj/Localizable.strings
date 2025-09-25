@@ -23,7 +23,7 @@
 "settings" = "Settings";
 
 // Home View
-"archit_ai" = "Archit AI";
+"archit_ai" = "archit ai";
 
 // Design Cards
 "room_design_title" = "Room Design";
@@ -186,6 +186,9 @@
 "style_loft" = "Loft";
 "style_luxury" = "Luxury";
 "style_turkish" = "Turkish";
+"style_rustic" = "Rustic";
+"style_eighty_style" = "80's Style";
+"style_tropic" = "Tropic";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Natural materials with clean modern lines";
@@ -202,3 +205,19 @@
 "style_loft_desc" = "Urban living with high ceilings and open spaces";
 "style_luxury_desc" = "Opulent design with premium finishes";
 "style_turkish_desc" = "Traditional Turkish design with modern touches";
+"style_rustic_desc" = "Warm natural wood, stone, cozy textures";
+"style_eighty_style_desc" = "Bold colors, neon accents, retro geometric patterns";
+"style_tropic_desc" = "Lush greenery, vibrant colors, natural light, tropical textures";
+
+// Photo Action Sheet
+"choose_photo" = "Choose Photo";
+"take_photo" = "Take Photo";
+"choose_from_library" = "Choose from Library";
+"remove_photo" = "Remove Photo";
+
+// Premium Status Labels
+"weekly_premium" = "Weekly Premium";
+"yearly_premium" = "Yearly Premium";
+"premium_active" = "Premium Active";
+"not_premium" = "Not Premium";
+"cancel" = "Cancel";

@@ -5,6 +5,7 @@ struct CreateDesignView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = CreateDesignViewModel(onComplete: { _ in })
     @EnvironmentObject var purchases: RevenueCatService
+    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         NavigationView {
@@ -33,7 +34,7 @@ struct CreateDesignView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("cancel".localized(with: languageManager.languageUpdateTrigger)) {
                         dismiss()
                     }
                 }

@@ -11,6 +11,7 @@ class HomeViewModel: ObservableObject {
     @Published var isShowingSettings = false
     @Published var designs: [Design] = []
     @Published var isLoading = false
+    @Published var isSaving = false
     @Published var errorMessage: String?
     
     private let storageService = FirebaseStorageService()
@@ -38,16 +39,26 @@ class HomeViewModel: ObservableObject {
     }
     
     func addDesign(_ design: Design) {
+        print("💾 HomeViewModel: Design ekleniyor - \(design.title)")
+        print("💾 HomeViewModel: Mevcut designs sayısı: \(designs.count)")
+        print("💾 HomeViewModel: Current userID: \(currentUserID ?? "nil")")
+        print("💾 HomeViewModel: Design userID: \(design.userID ?? "nil")")
+        
         designs.insert(design, at: 0) // En yeni tasarım en üstte
+        
+        print("💾 HomeViewModel: Design eklendi - Yeni designs sayısı: \(designs.count)")
         
         // Local storage'a kaydet
         saveDesigns()
         
-        // Firebase'e kaydet
-        if let userID = currentUserID {
+        // Firebase'e kaydet - her zaman design'daki userID'yi kullan
+        if let userID = design.userID {
+            print("💾 HomeViewModel: Firebase'e kaydediliyor - UserID: \(userID)")
             Task {
                 await saveDesignToFirebase(design: design, userID: userID)
             }
+        } else {
+            print("⚠️ HomeViewModel: Design'da userID yok, Firebase'e kaydedilemiyor")
         }
     }
     
@@ -55,6 +66,12 @@ class HomeViewModel: ObservableObject {
     @MainActor
     func saveDesignToFirebase(design: Design, userID: String) async {
         print("🚀 HomeViewModel: Firebase'e design kaydediliyor...")
+        print("🚀 HomeViewModel: Design ID: \(design.id.uuidString)")
+        print("🚀 HomeViewModel: Design Title: \(design.title)")
+        print("🚀 HomeViewModel: Design UserID: \(design.userID ?? "nil")")
+        print("🚀 HomeViewModel: Target UserID: \(userID)")
+        
+        isSaving = true
         
         do {
             // Resimleri Firebase Storage'a yükle
@@ -64,16 +81,20 @@ class HomeViewModel: ObservableObject {
             print("📤 HomeViewModel: Before image yükleniyor - \(beforeImagePath)")
             guard let beforeImageData = design.beforeImageData,
                   let beforeImage = UIImage(data: beforeImageData) else {
+                print("❌ HomeViewModel: Before image data eksik")
                 throw NSError(domain: "DesignError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Before image data is missing"])
             }
             let beforeImageURL = try await storageService.uploadImage(beforeImage, path: beforeImagePath)
+            print("✅ HomeViewModel: Before image yüklendi - \(beforeImageURL)")
             
             print("📤 HomeViewModel: After image yükleniyor - \(afterImagePath)")
             guard let afterImageData = design.afterImageData,
                   let afterImage = UIImage(data: afterImageData) else {
+                print("❌ HomeViewModel: After image data eksik")
                 throw NSError(domain: "DesignError", code: 2, userInfo: [NSLocalizedDescriptionKey: "After image data is missing"])
             }
             let afterImageURL = try await storageService.uploadImage(afterImage, path: afterImagePath)
+            print("✅ HomeViewModel: After image yüklendi - \(afterImageURL)")
             
             // Design'ı güncelle - URL'leri ekle
             let updatedDesign = Design(
@@ -88,6 +109,7 @@ class HomeViewModel: ObservableObject {
             )
             
             print("💾 HomeViewModel: Design Firestore'a kaydediliyor...")
+            print("💾 HomeViewModel: Updated Design UserID: \(updatedDesign.userID ?? "nil")")
             // Design'ı Firestore'a kaydet
             try await storageService.saveDesign(updatedDesign, userID: userID)
             
@@ -96,6 +118,8 @@ class HomeViewModel: ObservableObject {
             errorMessage = error.localizedDescription
             print("❌ HomeViewModel: Design Firebase'e kaydedilirken hata - \(error.localizedDescription)")
         }
+        
+        isSaving = false
     }
     
     func removeDesign(_ design: Design) {
@@ -123,11 +147,17 @@ class HomeViewModel: ObservableObject {
     }
     
     func loadDesigns() {
+        print("💾 HomeViewModel: Local designs yükleniyor...")
+        print("💾 HomeViewModel: User specific key: \(userSpecificKey)")
+        
         guard let data = userDefaults.data(forKey: userSpecificKey),
               let decodedDesigns = try? JSONDecoder().decode([Design].self, from: data) else {
+            print("💾 HomeViewModel: Local designs bulunamadı veya decode edilemedi")
             return
         }
+        
         designs = decodedDesigns
+        print("💾 HomeViewModel: Local designs yüklendi - count: \(designs.count)")
     }
     
     private func saveDesigns() {
@@ -160,7 +190,16 @@ class HomeViewModel: ObservableObject {
         
         do {
             let firebaseDesigns = try await storageService.fetchUserDesigns(userID: userID)
-            designs = firebaseDesigns
+            
+            // Eğer Firebase'den design geliyorsa, onları kullan
+            if !firebaseDesigns.isEmpty {
+                designs = firebaseDesigns
+                print("💾 HomeViewModel: Firebase'den \(firebaseDesigns.count) design yüklendi")
+            } else {
+                // Firebase'den design gelmiyorsa, local designs'ı koru
+                print("💾 HomeViewModel: Firebase'den design gelmedi, local designs korunuyor - count: \(designs.count)")
+            }
+            
             isLoading = false
         } catch {
             // Index hatası için özel mesaj

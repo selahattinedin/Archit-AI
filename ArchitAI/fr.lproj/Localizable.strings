@@ -4,10 +4,11 @@
 "cancel" = "Annuler";
 "back" = "Retour";
 "done" = "Terminé";
+"ok" = "OK";
 "delete" = "Supprimer";
-"delete_design" = "Supprimer le design";
+"delete_design" = "Supprimer Le Design";
 "delete_design_message" = "Êtes-vous sûr de vouloir supprimer ce design ? Cette action ne peut pas être annulée.";
-"delete_design_confirm" = "Supprimer le design";
+"delete_design_confirm" = "Supprimer Le Design";
 "share" = "Partager";
 "save" = "Enregistrer";
 "error" = "Erreur";
@@ -23,7 +24,7 @@
 "settings" = "Paramètres";
 
 // Home View
-"archit_ai" = "Archit AI";
+"archit_ai" = "archit ai";
 
 // Design Cards
 "room_design_title" = "Design de Pièce";
@@ -95,7 +96,7 @@
 
 // Account
 "account" = "Compte";
-"delete_account" = "Supprimer le compte";
+"delete_account" = "Supprimer Le Compte";
 "delete_account_message" = "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action ne peut pas être annulée.";
 "delete_account_error" = "Une erreur s'est produite lors de la suppression de votre compte. Veuillez réessayer plus tard.";
 
@@ -110,6 +111,13 @@
 "continue_with_annual" = "Continuer avec l'abonnement annuel";
 "no_offers" = "Aucune offre disponible actuellement.";
 "loading_offers" = "Chargement des offres...";
+"refresh" = "Actualiser";
+"annual" = "Annuel";
+"weekly" = "Hebdomadaire";
+"annual_continue" = "Continuer avec Annuel";
+"weekly_continue" = "Continuer avec Hebdomadaire";
+"paywall_subtitle_annual" = "Accès complet à toutes les fonctionnalités pendant un an";
+"paywall_subtitle_weekly" = "Découvrez Premium chaque semaine";
 
 // Legal & Support
 "legal" = "Légal";
@@ -139,6 +147,8 @@
 "room_study_room" = "Bureau d'étude";
 "room_garden" = "Jardin";
 "room_balcony" = "Balcon";
+"room_pantry" = "Garde-manger";
+"room_laundry_room" = "Buanderie";
 "room_entertainment" = "Divertissement";
 "room_entryway" = "Entrée";
 "room_home_gym" = "Gym à domicile";
@@ -155,6 +165,8 @@
 "room_study_room_desc" = "Créez un environnement d'étude concentré";
 "room_garden_desc" = "Concevez votre oasis extérieure";
 "room_balcony_desc" = "Transformez votre espace extérieur";
+"room_pantry_desc" = "Optimisez votre espace de stockage alimentaire";
+"room_laundry_room_desc" = "Organisez votre espace buanderie et utilitaire";
 "room_entertainment_desc" = "Construisez votre espace de divertissement";
 "room_entryway_desc" = "Créez un espace d'entrée organisé";
 "room_home_gym_desc" = "Créez votre sanctuaire fitness";
@@ -186,6 +198,9 @@
 "style_loft" = "Loft";
 "style_luxury" = "Luxe";
 "style_turkish" = "Turc";
+"style_eighty_style" = "Style 80's";
+"style_rustic" = "Rustique";
+"style_tropic" = "Tropical";
 
 // Style Descriptions
 "style_organic_modern_desc" = "Matériaux naturels avec des lignes modernes épurées";
@@ -202,3 +217,20 @@
 "style_loft_desc" = "Vie urbaine avec de hauts plafonds et des espaces ouverts";
 "style_luxury_desc" = "Design opulent avec des finitions premium";
 "style_turkish_desc" = "Design turc traditionnel avec des accents modernes";
+"style_eighty_style_desc" = "Couleurs vives, néon, motifs géométriques rétro";
+"style_rustic_desc" = "Bois naturel chaleureux, pierre, textures cosy";
+"style_tropic_desc" = "Verdure luxuriante, couleurs vives, lumière naturelle, textures tropicales";
+
+// Photo Action Sheet
+"choose_photo" = "Choisir une photo";
+"take_photo" = "Prendre une photo";
+"choose_from_library" = "Choisir depuis la bibliothèque";
+"remove_photo" = "Supprimer la photo";
+
+// Premium Status Labels
+"weekly_premium" = "Premium (Hebdomadaire)";
+"yearly_premium" = "Premium (Annuel)";
+"premium_active" = "Premium actif";
+"not_premium" = "Non premium";
+"cancel" = "Annuler";
+"restore_purchases" = "Restaurer les achats";

@@ -39,9 +39,22 @@
 		3097589C2E49D7F200429B8E /* ArchitAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchitAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		301BCC012E7D574E00DA4DA5 /* Exceptions for "ArchitAI" folder in "ArchitAI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3097589B2E49D7F200429B8E /* ArchitAI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3097589E2E49D7F200429B8E /* ArchitAI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				301BCC012E7D574E00DA4DA5 /* Exceptions for "ArchitAI" folder in "ArchitAI" target */,
+			);
 			path = ArchitAI;
 			sourceTree = "<group>";
 		};
@@ -343,15 +356,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"ArchitAI/Preview Content\"";
 				DEVELOPMENT_TEAM = 75TSHHWFW3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = ArchitAI;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to take photos.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Permission is needed to save your images.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access is needed to your photos.";
+				INFOPLIST_FILE = ArchitAI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Archit AI";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required to take photos of your room so the app can generate AI-based design suggestions.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Photo library access is required to save your redesigned room images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access is required so you can select existing room photos to redesign with AI.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -381,15 +396,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"ArchitAI/Preview Content\"";
 				DEVELOPMENT_TEAM = 75TSHHWFW3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = ArchitAI;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to take photos.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Permission is needed to save your images.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access is needed to your photos.";
+				INFOPLIST_FILE = ArchitAI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Archit AI";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required to take photos of your room so the app can generate AI-based design suggestions.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Photo library access is required to save your redesigned room images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access is required so you can select existing room photos to redesign with AI.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
